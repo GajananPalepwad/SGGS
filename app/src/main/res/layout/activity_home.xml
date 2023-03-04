@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".home">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/homebackground" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:elevation="12dp"
+                    android:innerRadius="0dp"
+                    android:shape="ring"
+                    android:thicknessRatio="1.9"
+                    app:cardCornerRadius="40dp">
+
+                    <ImageView
+                        android:id="@+id/profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:src="@drawable/googleg_standard_color_18"></ImageView>
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="220dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:scaleType="centerCrop">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:text="Name"
+                        android:layout_gravity="center"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:text="Email"
+                        android:textColor="#000000" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button2"
+                android:layout_width="330dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="#04DBE6"
+                android:onClick="timeTable"
+                android:text="Time Table"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/textviewboarder"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#D7000000"
+                android:text="Click on above button to see the Time Table of upcoming exam "
+                android:textAlignment="center" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/scanner"
+                android:layout_width="330dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="#EC1F14"
+                android:text="Admit Card"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/textviewboarder"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#D7000000"
+                android:text="Click on above button to see the Admit card \n(Hall ticket) of upcoming exam "
+                android:textAlignment="center" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/result"
+                android:layout_width="330dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="#78F226"
+                android:onClick="Result"
+                android:text="Recent Result"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/textviewboarder"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#D7000000"
+                android:text="Click on above button to see the result of previous exam "
+                android:textAlignment="center" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="330dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="#04DAE5"
+                android:onClick="Notice"
+                android:text="Send notice"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/textviewboarder"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#D7000000"
+                android:text="Click on above button to send thenotic to students. "
+                android:textAlignment="center" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/logout"
+                android:layout_width="330dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="#EB1F14"
+                android:onClick="logout"
+                android:text="sign out"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/textviewboarder"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#D7000000"
+                android:text="Click on above button to sigh out from the account"
+                android:textAlignment="center" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="330dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="#151C36"
+                android:onClick="aboutUs"
+                android:text="About us"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/textviewboarder"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#D7000000"
+                android:text="Click on above button to know about us"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="web"
+        android:text="Made with Team SWAG"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="163dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

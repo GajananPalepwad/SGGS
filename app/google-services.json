@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "810452009516",
+    "firebase_url": "https://sggs-scanner-default-rtdb.firebaseio.com",
+    "project_id": "sggs-scanner",
+    "storage_bucket": "sggs-scanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810452009516:android:efa70222b1b913a2210789",
+        "android_client_info": {
+          "package_name": "com.sggs.sggs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810452009516-96ro3mnj35ceovmqpmtofou39sgbi0k7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sggs.sggs",
+            "certificate_hash": "7e724b06e8c1771ceee0952d9ffacae79b4d549b"
+          }
+        },
+        {
+          "client_id": "810452009516-csim0ps73hlkjt8e4atdg9h2dc37hj8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdNOF_RywRwB1XrSOKOAdMYVT-Tq8p2Sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810452009516-0acdsdtmqclf8m1ah8h84knt0f850341.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
