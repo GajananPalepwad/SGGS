@@ -104,6 +104,7 @@
                 android:backgroundTint="#0E1D3A"
                 android:drawableStart="@android:drawable/ic_menu_search"
                 android:ems="10"
+                android:textColor="@color/white"
                 android:hint=" Search Anything"
                 android:inputType="text"
                 android:padding="8dp"
