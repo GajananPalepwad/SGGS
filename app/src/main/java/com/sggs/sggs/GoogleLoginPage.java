@@ -27,7 +27,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class GoogleLoginPage extends AppCompatActivity {
 
     private GoogleSignInClient client;
-
     Button googleBtn;
     public ProgressBar progressBar;
 
@@ -37,6 +36,8 @@ public class GoogleLoginPage extends AppCompatActivity {
         setContentView(R.layout.activity_google_login_page);
         progressBar = findViewById(R.id.prg);
         progressBar.setVisibility(View.INVISIBLE);
+        googleBtn = findViewById(R.id.button3);
+
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct!=null){
             Intent intent = new Intent(GoogleLoginPage.this, LoginToHome.class);
@@ -44,7 +45,7 @@ public class GoogleLoginPage extends AppCompatActivity {
             startActivity(intent);
         }
 
-        googleBtn = findViewById(R.id.button3);
+
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         client = GoogleSignIn.getClient(this, options);

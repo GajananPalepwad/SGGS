@@ -7,86 +7,174 @@
     android:orientation="vertical"
     tools:context=".home">
 
-    <ImageView
+
+
+    <TextView
+        android:id="@+id/textView9"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        android:layout_height="50dp"
+        android:background="#060F20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/homebackground" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:backgroundTint="#060F20"
+        android:visibility="visible"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:elevation="12dp"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:thicknessRatio="1.9"
+                app:cardCornerRadius="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/googleg_standard_color_18" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:text="Name"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView2"
+                app:layout_constraintStart_toEndOf="@+id/cardView2"
+                app:layout_constraintTop_toTopOf="@+id/cardView2"
+                app:layout_constraintVertical_bias="0.09" />
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="#FDDF00"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="1dp"
+                android:paddingBottom="2dp"
+                android:text="Email"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="@+id/name"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/roundbutton"
+                android:backgroundTint="#0E1D3A"
+                android:drawableStart="@android:drawable/ic_menu_search"
+                android:ems="10"
+                android:hint=" Search Anything"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColorHint="#6B7B99"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView9"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/rename" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:visibility="visible"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="200dp">
 
-                android:layout_marginBottom="15dp"
-                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Your Attendance"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
-                    android:elevation="12dp"
-                    android:innerRadius="0dp"
-                    android:shape="ring"
-                    android:thicknessRatio="1.9"
-                    app:cardCornerRadius="40dp">
 
-                    <ImageView
-                        android:id="@+id/profile"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center"
-                        android:src="@drawable/googleg_standard_color_18"></ImageView>
-                </androidx.cardview.widget.CardView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:divider="@null"
+                    android:foregroundGravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <LinearLayout
-                    android:layout_width="220dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:scaleType="centerCrop">
-
-                    <TextView
-                        android:id="@+id/name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:text="Name"
-                        android:layout_gravity="center"
-                        android:textColor="#000000"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:text="Email"
-                        android:textColor="#000000" />
-                </LinearLayout>
-            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button2"
@@ -105,11 +193,11 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/textviewboarder"
-                android:padding="10dp"
-                android:textColor="@color/white"
                 android:backgroundTint="#D7000000"
+                android:padding="10dp"
                 android:text="Click on above button to see the Time Table of upcoming exam "
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/scanner"
@@ -128,11 +216,11 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/textviewboarder"
-                android:padding="10dp"
-                android:textColor="@color/white"
                 android:backgroundTint="#D7000000"
+                android:padding="10dp"
                 android:text="Click on above button to see the Admit card \n(Hall ticket) of upcoming exam "
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -152,11 +240,11 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/textviewboarder"
-                android:padding="10dp"
-                android:textColor="@color/white"
                 android:backgroundTint="#D7000000"
+                android:padding="10dp"
                 android:text="Click on above button to see the result of previous exam "
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -175,11 +263,11 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/textviewboarder"
-                android:padding="10dp"
-                android:textColor="@color/white"
                 android:backgroundTint="#D7000000"
+                android:padding="10dp"
                 android:text="Click on above button to send thenotic to students. "
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/logout"
@@ -198,11 +286,11 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/textviewboarder"
-                android:padding="10dp"
-                android:textColor="@color/white"
                 android:backgroundTint="#D7000000"
+                android:padding="10dp"
                 android:text="Click on above button to sigh out from the account"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
 
             <androidx.appcompat.widget.AppCompatButton
@@ -221,15 +309,14 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/textviewboarder"
-                android:padding="10dp"
-                android:textColor="@color/white"
                 android:backgroundTint="#D7000000"
+                android:padding="10dp"
                 android:text="Click on above button to know about us"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@color/white" />
 
         </LinearLayout>
     </ScrollView>
-
 
     <TextView
         android:id="@+id/textView3"
@@ -243,13 +330,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="163dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
