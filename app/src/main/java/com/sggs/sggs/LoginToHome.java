@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 public class LoginToHome extends AppCompatActivity {
-    TextView email;
+    EditText email;
+    Button signupBtn;
 
 
     GoogleSignInOptions gso;
@@ -27,7 +31,8 @@ public class LoginToHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_to_home);
-        email=findViewById(R.id.textView5);
+        email = findViewById(R.id.email);
+        signupBtn = findViewById(R.id.signupBtn);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gsc = GoogleSignIn.getClient(this,gso);
@@ -40,14 +45,22 @@ public class LoginToHome extends AppCompatActivity {
             email.setText(personEmail);
         }
 
+        signupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginToHome.this, home.class);
+                startActivity(intent);
+            }
+        });
+
         if(personEmail.charAt(0)=='t'
                 && personEmail.charAt(1)=='e'
                 && personEmail.charAt(2)=='s'
                 && personEmail.charAt(3)=='t'
                 ){
-            finish();
-            Intent intent = new Intent(LoginToHome.this, home.class);
-            startActivity(intent);
+//            finish();
+//            Intent intent = new Intent(LoginToHome.this, home.class);
+//            startActivity(intent);
         }
 
         else if(personEmail.charAt(personEmail.length()-1)!='n'
@@ -63,10 +76,10 @@ public class LoginToHome extends AppCompatActivity {
                 && personEmail.charAt(personEmail.length()-11)!='@'){signOut();}
 
             else if(personEmail.charAt(0)=='2'){
-
-                finish();
-                Intent intent = new Intent(LoginToHome.this, HomeForStudents.class);
-                startActivity(intent);
+//
+//                finish();
+//                Intent intent = new Intent(LoginToHome.this, HomeForStudents.class);
+//                startActivity(intent);
             }
 
             else if(personEmail.charAt(0)!='2' && personEmail.charAt(personEmail.length()-1)=='n'
@@ -81,9 +94,9 @@ public class LoginToHome extends AppCompatActivity {
                     && personEmail.charAt(personEmail.length()-10)=='s'
                     && personEmail.charAt(personEmail.length()-11)=='@'){
 
-                finish();
-                Intent intent = new Intent(LoginToHome.this, home.class);
-                startActivity(intent);
+//                finish();
+//                Intent intent = new Intent(LoginToHome.this, home.class);
+//                startActivity(intent);
             }
             else{
                 signOut();

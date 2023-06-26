@@ -80,7 +80,7 @@ public class home extends AppCompatActivity {
         });
 
         subjectList = new ArrayList<>();
-        adapter = new SubjectAdapter(subjectList);
+        adapter = new SubjectAdapter(subjectList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -124,7 +124,7 @@ public class home extends AppCompatActivity {
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.setLayoutManager(new GridLayoutManager(home.this, 3));
-        adapter = new SubjectAdapter(subjectList);
+        adapter = new SubjectAdapter(subjectList, this);
         recyclerView.setAdapter(adapter);
 
 

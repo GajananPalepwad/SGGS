@@ -4,16 +4,171 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8A28BAFF"
     tools:context=".LoginToHome">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageMessFood"
+                android:layout_width="match_parent"
+                android:layout_height="650dp"
+                android:layout_marginTop="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="matrix"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                app:srcCompat="@drawable/rectanglewhite" />
+
+            <TextView
+                android:id="@+id/signUpText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="64dp"
+                android:elevation="1dp"
+                android:fontFamily="@font/rubik_bold"
+                android:text="Sign Up"
+                android:textColor="#060F20"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageMessFood" />
+
+            <EditText
+                android:id="@+id/fullname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/textviewbackground"
+                android:backgroundTint="#FFC9D3"
+                android:elevation="7dp"
+                android:fontFamily="sans-serif"
+                android:hint="Full Name"
+                android:inputType="text"
+                android:paddingHorizontal="20dp"
+                android:textAlignment="textStart"
+                android:textColorHint="#75040303"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/signUpText" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="25dp"
+                android:focusable="false"
+                android:background="@drawable/textviewbackground"
+                android:backgroundTint="#FFF3AF"
+                android:elevation="7dp"
+                android:fontFamily="sans-serif"
+                android:hint="College Email"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="20dp"
+                android:textAlignment="textStart"
+                android:textColorHint="#75040303"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fullname" />
+
+            <EditText
+                android:id="@+id/regnum"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+
+                android:layout_marginHorizontal="30dp"
+
+                android:layout_marginTop="25dp"
+                android:background="@drawable/textviewbackground"
+                android:backgroundTint="#FFEBC5"
+                android:elevation="7dp"
+                android:fontFamily="sans-serif"
+                android:hint="Registration Number"
+                android:inputType="none"
+                android:paddingHorizontal="20dp"
+                android:textAlignment="textStart"
+                android:textColorHint="#75040303"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/email" />
+
+            <EditText
+                android:id="@+id/mobile_num"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/textviewbackground"
+                android:backgroundTint="#C9F5FF"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif"
+                android:hint="Mobile Number"
+                android:inputType="number"
+                android:paddingHorizontal="20dp"
+                android:textAlignment="textStart"
+                android:textColorHint="#75040303"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/regnum" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/signupBtn"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/textviewbackground"
+                android:backgroundTint="#060F20"
+                android:elevation="7dp"
+                android:text="sign up"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mobile_num" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="30dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/topcornerround"
+                android:clipToOutline="true"
+                android:elevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/college_logo" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account already exist?"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:elevation="7dp"
+                app:layout_constraintStart_toStartOf="@+id/mobile_num"
+                app:layout_constraintTop_toBottomOf="@+id/signupBtn" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
