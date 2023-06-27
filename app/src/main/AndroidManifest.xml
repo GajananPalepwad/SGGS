@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".CourseSelecter"
+            android:exported="false" />
+        <activity
             android:name=".BackLogResult"
             android:exported="false" />
         <activity
@@ -41,7 +44,6 @@
         <activity
             android:name=".AboutUs"
             android:exported="false" />
-
         <activity
             android:name=".NotificationSender"
             android:exported="false" />
@@ -88,7 +90,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9690208356370050~1242284507"/>
+            android:value="ca-app-pub-9690208356370050~1242284507" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

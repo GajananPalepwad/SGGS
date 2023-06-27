@@ -37,7 +37,7 @@ public class home extends AppCompatActivity {
 
     Button scanner;
     TextView name, email;
-    ImageView profile;
+    ImageView profile, notificationBtn;
     String personEmail;
     GoogleSignInClient gsc;
     GoogleSignInOptions gso;
@@ -55,7 +55,7 @@ public class home extends AppCompatActivity {
         email = findViewById(R.id.email);
         profile = findViewById(R.id.profile);
         recyclerView = findViewById(R.id.recyclerView);
-
+        notificationBtn = findViewById(R.id.notificationBtn);
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -75,6 +75,14 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(home.this, Scanner.class);
+                startActivity(intent);
+            }
+        });
+
+        notificationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this, CourseSelecter.class);
                 startActivity(intent);
             }
         });
