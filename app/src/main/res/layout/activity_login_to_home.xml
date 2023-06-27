@@ -132,7 +132,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="45dp"
                 android:background="@drawable/textviewbackground"
-                android:backgroundTint="#060F20"
+                android:backgroundTint="#0E2146"
                 android:elevation="7dp"
                 android:text="sign up"
                 android:textColor="@color/white"
