@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,7 +28,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class GoogleLoginPage extends AppCompatActivity {
 
     private GoogleSignInClient client;
-    Button googleBtn;
+    TextView regBtn;
 //    public ProgressBar progressBar;
 
     @Override
@@ -36,7 +37,7 @@ public class GoogleLoginPage extends AppCompatActivity {
         setContentView(R.layout.activity_google_login_page);
 //        progressBar = findViewById(R.id.prg);
 //        progressBar.setVisibility(View.INVISIBLE);
-        googleBtn = findViewById(R.id.button3);
+        regBtn = findViewById(R.id.reg);
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct!=null){
@@ -49,7 +50,7 @@ public class GoogleLoginPage extends AppCompatActivity {
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         client = GoogleSignIn.getClient(this, options);
-        googleBtn.setOnClickListener(new View.OnClickListener() {
+        regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = client.getSignInIntent();
