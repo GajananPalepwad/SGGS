@@ -5,9 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8A28BAFF"
-    tools:context=".LoginToHome">
+    tools:context=".SignUpPage">
+
+
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -24,10 +27,60 @@
                 android:adjustViewBounds="true"
                 android:scaleType="matrix"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3"
                 app:srcCompat="@drawable/rectanglewhite" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:background="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageMessFood" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/textviewbackground"
+                android:backgroundTint="#DCFFC9"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="20dp"
+                android:textAlignment="textStart"
+                android:textColorHint="#75040303"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mobile_num" />
+
+
+            <EditText
+                android:id="@+id/passwordConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/textviewbackground"
+                android:backgroundTint="#C9DBFF"
+                android:elevation="5dp"
+                android:fontFamily="sans-serif"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:paddingHorizontal="20dp"
+                android:textAlignment="textStart"
+                android:textColorHint="#75040303"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <TextView
                 android:id="@+id/signUpText"
@@ -72,10 +125,10 @@
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="25dp"
-                android:focusable="false"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#FFF3AF"
                 android:elevation="7dp"
+                android:focusable="false"
                 android:fontFamily="sans-serif"
                 android:hint="College Email"
                 android:inputType="textEmailAddress"
@@ -125,10 +178,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/regnum" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/signupBtn"
+                android:id="@+id/continueBtn"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#0E2146"
                 android:elevation="7dp"
@@ -136,7 +189,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mobile_num" />
+                app:layout_constraintTop_toBottomOf="@+id/passwordConfirm" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -154,15 +207,14 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Account already exist?"
-                android:textStyle="bold"
+                android:layout_width="148dp"
+                android:layout_height="15dp"
                 android:layout_marginTop="20dp"
                 android:elevation="7dp"
-                app:layout_constraintStart_toStartOf="@+id/mobile_num"
-                app:layout_constraintTop_toBottomOf="@+id/signupBtn" />
-
+                android:text="Account already exist?"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/passwordConfirm"
+                app:layout_constraintTop_toBottomOf="@+id/continueBtn" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

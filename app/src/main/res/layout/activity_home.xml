@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".home">
+    tools:context=".Home">
 
 
     <ScrollView
@@ -97,7 +97,7 @@
                             app:layout_constraintVertical_bias="0.09" />
 
                         <TextView
-                            android:id="@+id/email"
+                            android:id="@+id/tvReg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -129,7 +129,7 @@
                             android:textColor="@color/white"
                             android:textColorHint="#6B7B99"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/imageView9"
+                            app:layout_constraintEnd_toStartOf="@+id/notificationBtn"
                             app:layout_constraintStart_toStartOf="parent" />
 
                         <ImageView

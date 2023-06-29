@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
     Spinner branchSpinner, yearSpinner, divisionSpinner, semSpinner, electiveSpinner1, electiveSpinner2, electiveSpinner3;
     LinearLayout elect;
     CardView cardEle1, cardEle2, cardEle3;
-    TextView textView;
+    ImageView back;
     boolean ele1Present , ele2Present , ele3Present;
 
     @Override
@@ -50,7 +51,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
         setContentView(R.layout.activity_course_selecter);
         elect = findViewById(R.id.elective);
         elect.setVisibility(View.GONE);
-//        textView = findViewById(R.id.textView5);
+        back = findViewById(R.id.back);
         cardEle1 = findViewById(R.id.card1);
         cardEle2 = findViewById(R.id.card2);
         cardEle3 = findViewById(R.id.card3);
@@ -61,6 +62,9 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
         electiveSpinner1 = findViewById(R.id.subjectSelector1);
         electiveSpinner2 = findViewById(R.id.subjectSelector2);
         electiveSpinner3 = findViewById(R.id.subjectSelector3);
+
+        back.setOnClickListener(v -> onBackPressed());
+
         makeYearArray();
         makeSemArray();
         chooseBranch();

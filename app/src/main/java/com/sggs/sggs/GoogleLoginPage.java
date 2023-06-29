@@ -5,11 +5,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,24 +25,38 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class GoogleLoginPage extends AppCompatActivity {
 
     private GoogleSignInClient client;
     TextView regBtn;
-//    public ProgressBar progressBar;
+    EditText emailInput;
+    EditText passwordInput;
+    Button signinBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_login_page);
-//        progressBar = findViewById(R.id.prg);
-//        progressBar.setVisibility(View.INVISIBLE);
+        emailInput = findViewById(R.id.emailInput);
+        passwordInput = findViewById(R.id.password);
+        signinBtn = findViewById(R.id.signinBtn);
         regBtn = findViewById(R.id.reg);
+
+        signinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkLogin();
+            }
+        });
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct!=null){
-            Intent intent = new Intent(GoogleLoginPage.this, LoginToHome.class);
+            Intent intent = new Intent(GoogleLoginPage.this, SignUpPage.class);
             finish();
             startActivity(intent);
         }
@@ -76,7 +91,7 @@ public class GoogleLoginPage extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                    // progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
-                                        Intent intent = new Intent(getApplicationContext(), LoginToHome.class);
+                                        Intent intent = new Intent(getApplicationContext(), SignUpPage.class);
                                         startActivity(intent);
 
                                     } else {
@@ -90,6 +105,54 @@ public class GoogleLoginPage extends AppCompatActivity {
                 }
 
             }
+    }
+
+    private void checkLogin(){
+
+        String email = emailInput.getText().toString();
+        String password = passwordInput.getText().toString();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Match input with database
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference studentLoginRef = db.collection("StudentLogin");
+
+        studentLoginRef
+                .whereEqualTo("email", email)
+                .whereEqualTo("password", password)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task.getResult();
+                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                            // Input matches database
+                            DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
+                            SharedPreferences sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
+                            SharedPreferences.Editor preferences = sharedPreferences.edit();
+
+                            preferences.putString("email",email);
+                            preferences.putString("fullName",documentSnapshot.getString("fullName"));
+                            preferences.putString("regNum",documentSnapshot.getString("regNum"));
+                            preferences.putString("mobileNum",documentSnapshot.getString("mobileNum"));
+                            preferences.putString("img",documentSnapshot.getString("img"));
+                            preferences.apply();
+
+                            Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(GoogleLoginPage.this, Home.class);
+                            startActivity(intent);
+                        } else {
+                            // Input does not match database
+                            Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // Error occurred while querying the database
+                        Toast.makeText(this, "Error occurred while logging in", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     public void feedback(View view){

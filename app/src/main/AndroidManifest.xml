@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
             android:name=".CourseSelecter"
             android:exported="false" />
         <activity
@@ -36,7 +39,7 @@
             android:name=".HomeForStudents"
             android:exported="false" />
         <activity
-            android:name=".LoginToHome"
+            android:name=".SignUpPage"
             android:exported="false" />
         <activity
             android:name=".TimeTable"
@@ -60,7 +63,7 @@
             android:name=".Scanner"
             android:exported="false" />
         <activity
-            android:name=".home"
+            android:name=".Home"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -94,7 +97,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>
