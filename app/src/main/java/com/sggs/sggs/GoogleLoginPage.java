@@ -28,14 +28,14 @@ public class GoogleLoginPage extends AppCompatActivity {
 
     private GoogleSignInClient client;
     Button googleBtn;
-    public ProgressBar progressBar;
+//    public ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_login_page);
-        progressBar = findViewById(R.id.prg);
-        progressBar.setVisibility(View.INVISIBLE);
+//        progressBar = findViewById(R.id.prg);
+//        progressBar.setVisibility(View.INVISIBLE);
         googleBtn = findViewById(R.id.button3);
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
@@ -61,7 +61,7 @@ public class GoogleLoginPage extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        progressBar.setVisibility(View.VISIBLE);
+//        progressBar.setVisibility(View.VISIBLE);
 
             if (requestCode == 1234) {
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);

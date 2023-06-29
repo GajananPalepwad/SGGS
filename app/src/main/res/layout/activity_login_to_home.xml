@@ -90,9 +90,7 @@
                 android:id="@+id/regnum"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-
                 android:layout_marginHorizontal="30dp"
-
                 android:layout_marginTop="25dp"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#FFEBC5"
