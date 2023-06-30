@@ -58,7 +58,21 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         int randomNumber = random.nextInt(5) + 1;
 
         Subject subject = subjectList.get(position);
-        holder.subject.setText(subject.getSubjectName());
+
+        String subName = subject.getSubjectName();
+        String[] words = subName.split(" ");
+        StringBuilder result = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                result.append(word.charAt(0));
+            }
+        }
+
+        String abbreviation = result.toString();
+
+        holder.subject.setText(abbreviation);
+
         holder.marks.setText(String.valueOf(subject.getMarks()+"%"));
         holder.progressBar.setProgress(subject.getMarks());
         holder.progressBar.setMax(100);

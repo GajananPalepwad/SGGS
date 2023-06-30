@@ -33,7 +33,7 @@ import java.util.Map;
 
 public class Home extends AppCompatActivity {
 
-    Button scanner;
+    Button scanner, addCourse;
     TextView name, tvReg;
     ImageView profile, notificationBtn;
     String personEmail;
@@ -55,6 +55,8 @@ public class Home extends AppCompatActivity {
         profile = findViewById(R.id.profile);
         recyclerView = findViewById(R.id.recyclerView);
         notificationBtn = findViewById(R.id.notificationBtn);
+        addCourse = findViewById(R.id.addCourseBtn);
+
 
 
 
@@ -67,12 +69,17 @@ public class Home extends AppCompatActivity {
         profile.setImageResource(selectedImageResource);
 
 
+        profile.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, Profile.class);
+            startActivity(intent);
+        });
+
         scanner.setOnClickListener(v -> {
             Intent intent = new Intent(Home.this, Scanner.class);
             startActivity(intent);
         });
 
-        notificationBtn.setOnClickListener(v -> {
+        addCourse.setOnClickListener(v -> {
             Intent intent = new Intent(Home.this, CourseSelecter.class);
             startActivity(intent);
         });
@@ -82,12 +89,14 @@ public class Home extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Students")
-                .document("CSE")
-                .collection("SY")
-                .document("A")
-                .collection(personEmail)
+                .document(sharedPreferences.getString("branch",""))
+                .collection(sharedPreferences.getString("year",""))
+                .document(sharedPreferences.getString("division",""))
+                .collection(sharedPreferences.getString("regNum",""))
                 .document("Attendance")
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
@@ -101,7 +110,9 @@ public class Home extends AppCompatActivity {
                             int v = Integer.parseInt(value);
                             subjectList.add(new Subject(key, v));
                         }
-
+                        if(subjectList.size()!=0){
+                            addCourse.setVisibility(View.GONE);
+                        }
                         adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(Home.this, "Document does not exist", Toast.LENGTH_SHORT).show();
@@ -118,6 +129,7 @@ public class Home extends AppCompatActivity {
         adapter = new SubjectAdapter(subjectList, this);
         recyclerView.setAdapter(adapter);
 
+        int i = adapter.getItemCount();
 
 
 
