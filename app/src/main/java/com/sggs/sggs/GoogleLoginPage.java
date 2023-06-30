@@ -139,6 +139,10 @@ public class GoogleLoginPage extends AppCompatActivity {
                             preferences.putString("regNum",documentSnapshot.getString("regNum"));
                             preferences.putString("mobileNum",documentSnapshot.getString("mobileNum"));
                             preferences.putString("img",documentSnapshot.getString("img"));
+                            preferences.putString("branch",documentSnapshot.getString("branch"));
+                            preferences.putString("year",documentSnapshot.getString("year"));
+                            preferences.putString("division",documentSnapshot.getString("division"));
+                            preferences.putString("semester",documentSnapshot.getString("sem"));
                             preferences.apply();
 
                             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();

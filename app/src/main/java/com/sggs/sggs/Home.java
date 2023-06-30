@@ -2,6 +2,7 @@ package com.sggs.sggs;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,13 +43,20 @@ public class Home extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Subject> subjectList;
     SubjectAdapter adapter;
+
+    CardView notes, examSection, timeTable, Events, calenarCard, qBank;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
+        preferences = sharedPreferences.edit();
+
+        notes = findViewById(R.id.notes);
+
         scanner = findViewById(R.id.scanner);
         name = findViewById(R.id.name);
         tvReg = findViewById(R.id.tvReg);
@@ -62,7 +70,6 @@ public class Home extends AppCompatActivity {
 
         String personName = sharedPreferences.getString("fullName","");
         personEmail = sharedPreferences.getString("email","");
-        String personImg = "";
         name.setText(personName);
         tvReg.setText(sharedPreferences.getString("regNum",""));
         int selectedImageResource = getResources().getIdentifier(sharedPreferences.getString("img",""), "drawable", getPackageName());
@@ -84,12 +91,19 @@ public class Home extends AppCompatActivity {
             startActivity(intent);
         });
 
+        notes.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, NotesSubjectList.class);
+            intent.putExtra("subjectList", subjectList);
+            startActivity(intent);
+        });
+
+
+
+
         subjectList = new ArrayList<>();
         adapter = new SubjectAdapter(subjectList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
-
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Students")
@@ -109,6 +123,7 @@ public class Home extends AppCompatActivity {
                             String value = entry.getValue().toString();
                             int v = Integer.parseInt(value);
                             subjectList.add(new Subject(key, v));
+
                         }
                         if(subjectList.size()!=0){
                             addCourse.setVisibility(View.GONE);

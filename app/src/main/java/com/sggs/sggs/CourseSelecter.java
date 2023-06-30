@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.MetadataChanges;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -400,15 +401,27 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
         sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
 
-
         Map<String, Object> data = new HashMap<>();
 
         for (int i = 0; i < subjects.size(); i++) {
             String key = subjects.get(i);
             data.put(key, 100);
+            // add in teacher attendance list
+            addDocumentToCollection(selectedBranch,selectedYear,selectedDivision,key,sharedPreferences.getString("regNum",""));
         }
 
+        Map<String, Object> dataP = new HashMap<>();
+        dataP.put("branch", selectedBranch);
+        dataP.put("year", selectedYear);
+        dataP.put("division", selectedDivision);
+        dataP.put("sem", selectedSem);
+
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        DocumentReference docRef1 = firestore.collection("StudentLogin").document(sharedPreferences.getString("email",""));
+        docRef1.update(dataP);
+
+
+
         DocumentReference docRef = firestore.collection("Students").
                 document(selectedBranch).
                 collection(selectedYear).
@@ -423,6 +436,13 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
                     preferences.putString("division",selectedDivision);
                     preferences.putString("semester",selectedSem);
                     preferences.apply();
+
+                    for (int i = 0; i < subjects.size(); i++) {
+                        String key = subjects.get(i);
+                        // add in teacher attendance list
+                        addDocumentToCollection(selectedBranch,selectedYear,selectedDivision,key,sharedPreferences.getString("regNum",""));
+                    }
+
                     Toast.makeText(this, "Selection Successful", Toast.LENGTH_SHORT).show();
 
                 })
@@ -430,6 +450,28 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 });
     }
+
+
+
+    private static void addDocumentToCollection(String selectedBranch,String selectedYear, String selectedDivision, String subject, String reg) {
+
+        String dataKey = "exampleKey";
+        String dataValue = "exampleValue";
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        DocumentReference documentReference = firestore.collection("Teachers").
+                document(selectedBranch).
+                collection(selectedYear).
+                document(selectedDivision).
+                collection(subject).
+                document(reg);
+
+        Map<String, Object> documentData = new HashMap<>();
+        documentData.put(dataKey, dataValue);
+
+        documentReference.set(documentData, SetOptions.merge());
+    }
+
+
 
     private void showConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
