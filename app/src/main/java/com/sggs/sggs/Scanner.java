@@ -45,7 +45,9 @@ public class Scanner extends AppCompatActivity {
         options.setPrompt("        Scanning.....\n\n\n\n\n\n\n\nVolume up to flash on\n\n");
         options.setBeepEnabled(true);
         options.setOrientationLocked(true);
+        options.setBarcodeImageEnabled(true);
         options.setCaptureActivity(CaptureAct.class);
+
         barLaucher.launch(options);
     }
 
@@ -54,38 +56,7 @@ public class Scanner extends AppCompatActivity {
 
         if (result.getContents() != null) {
             String data = result.getContents();
-            String mobileNo = "";
-
-            int j = 0;
-
-            for (int i = 0; i < data.length(); i++) {
-                if (data.charAt(i) == '0' ||
-                        data.charAt(i) == '1' ||
-                        data.charAt(i) == '2' ||
-                        data.charAt(i) == '3' ||
-                        data.charAt(i) == '4' ||
-                        data.charAt(i) == '5' ||
-                        data.charAt(i) == '6' ||
-                        data.charAt(i) == '7' ||
-                        data.charAt(i) == '8' ||
-                        data.charAt(i) == '9') {
-                    mobileNo = mobileNo + data.charAt(i);
-                    j++;
-                }
-                if (j == 10) {
-                    break;
-                }
-            }
-
-            if (mobileNo.length() == 10) {
-                Intent intent = new Intent(Scanner.this, Result.class);
-                intent.putExtra("dataname", data);
-                startActivity(intent);
-            } else {
-                Toast.makeText(Scanner.this, "PLEASE SCAN SGGS ID ONLY", Toast.LENGTH_LONG).show();
-                onBackPressed();
-            }
-
+            Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
 
         }
     });

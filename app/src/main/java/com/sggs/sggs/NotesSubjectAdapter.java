@@ -2,7 +2,10 @@ package com.sggs.sggs;
 
 
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -17,20 +20,37 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.sggs.sggs.Subject;
 import com.sggs.sggs.R;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapter.SubjectViewHolder> {
 
     private ArrayList<Subject> subjectList;
     private Context context;
+    private String branch, year, sem;
 
-    public NotesSubjectAdapter(ArrayList<Subject> subjectList, Context context) {
+    public NotesSubjectAdapter(ArrayList<Subject> subjectList,
+                               Context context,
+                               String branch,
+                               String year,
+                               String sem) {
         this.subjectList = subjectList;
         this.context = context;
+        this.branch = branch;
+        this.year = year;
+        this.sem = sem;
     }
 
     @NonNull
@@ -53,10 +73,28 @@ public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapte
                 result.append(word.charAt(0));
             }
         }
-
         String abbreviation = result.toString();
 
         holder.textSubjectName.setText(abbreviation);
+
+        CollectionReference collectionRef = FirebaseFirestore.getInstance()
+                .collection("Notes")
+                .document(branch)
+                .collection(year)
+                .document(sem)
+                .collection(subName);
+
+        collectionRef.get()
+                .addOnSuccessListener(querySnapshot -> {
+                    holder.count.setText(String.valueOf(querySnapshot.size()));
+                });
+
+
+
+
+
+
+
         int randomColor = generateRandomColor();
         holder.card.setBackgroundTintList(ColorStateList.valueOf(randomColor));
 
@@ -82,13 +120,13 @@ public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapte
     static class SubjectViewHolder extends RecyclerView.ViewHolder {
         TextView textSubjectName;
         ImageView card;
-//        TextView textMarks;
+        TextView count;
 
         SubjectViewHolder(@NonNull View itemView) {
             super(itemView);
             textSubjectName = itemView.findViewById(R.id.subject);
             card = itemView.findViewById(R.id.icon2);
-//            textMarks = itemView.findViewById(R.id.textMarks);
+            count = itemView.findViewById(R.id.number_of_notes);
         }
     }
 }

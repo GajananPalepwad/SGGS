@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -43,6 +49,7 @@ public class Home extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Subject> subjectList;
     SubjectAdapter adapter;
+    private static final int MY_REQUEST_CODE = 100;
 
     CardView notes, examSection, timeTable, Events, calenarCard, qBank;
     SharedPreferences sharedPreferences;
@@ -65,6 +72,7 @@ public class Home extends AppCompatActivity {
         notificationBtn = findViewById(R.id.notificationBtn);
         addCourse = findViewById(R.id.addCourseBtn);
 
+        checkForAppUpdate();
 
 
 
@@ -105,6 +113,8 @@ public class Home extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
+        try {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Students")
                 .document(sharedPreferences.getString("branch",""))
@@ -136,6 +146,7 @@ public class Home extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(Home.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
                 });
+        }catch (Exception ignored){}
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -145,7 +156,6 @@ public class Home extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         int i = adapter.getItemCount();
-
 
 
 
@@ -199,4 +209,50 @@ public class Home extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {}
+
+    private void checkForAppUpdate(){
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
+
+// Returns an intent object that you use to check for an update.
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+
+// Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    // This example applies an immediate update. To apply a flexible update
+                    // instead, pass in AppUpdateType.FLEXIBLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                // Request the update.
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                            appUpdateInfo,
+                            // an activity result launcher registered via registerForActivityResult
+                            AppUpdateType.IMMEDIATE,
+                            // Or pass 'AppUpdateType.FLEXIBLE' to newBuilder() for
+                            this,
+                            // flexible updates.
+                            MY_REQUEST_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    throw new RuntimeException(e);
+                }
+            }else{
+              //  Toast.makeText(this, "NOT", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // handle callback
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != MY_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+                Toast.makeText(this, requestCode + "\n" + resultCode, Toast.LENGTH_SHORT).show();
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+            }
+        }
+    }
+
 }

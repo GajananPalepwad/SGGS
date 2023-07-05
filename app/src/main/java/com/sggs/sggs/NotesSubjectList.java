@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,11 +23,11 @@ public class NotesSubjectList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_subject_list);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
         subjectList = (ArrayList<Subject>)getIntent().getSerializableExtra("subjectList");
         ImageView back = findViewById(R.id.back);
         back.setOnClickListener(v -> onBackPressed());
-        Toast.makeText(this, ""+subjectList, Toast.LENGTH_SHORT).show();
+
 
         recyclerView = findViewById(R.id.subList);
         recyclerView.setLayoutManager(new GridLayoutManager(NotesSubjectList.this, 2 ));
@@ -34,7 +35,13 @@ public class NotesSubjectList extends AppCompatActivity {
         // Get the ArrayList<Subject> from the intent or wherever you have it
         ArrayList<Subject> subjectList = getIntent().getParcelableArrayListExtra("subjectList");
 
-        subjectAdapter = new NotesSubjectAdapter(subjectList, this);
+        subjectAdapter = new NotesSubjectAdapter(
+                subjectList,
+                this,
+                sharedPreferences.getString("branch",""),
+                sharedPreferences.getString("year",""),
+                sharedPreferences.getString("semester","")
+        );
         recyclerView.setAdapter(subjectAdapter);
 
     }

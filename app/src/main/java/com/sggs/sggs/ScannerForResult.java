@@ -43,6 +43,7 @@ public class ScannerForResult extends AppCompatActivity {
             ScanOptions options = new ScanOptions();
             options.setPrompt("        Scanning.....\n\n\n\n\n\n\n\nVolume up to flash on\n\n");
             options.setBeepEnabled(true);
+            options.setBarcodeImageEnabled(true);
             options.setOrientationLocked(true);
             options.setCaptureActivity(CaptureAct.class);
             barLaucher.launch(options);
