@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class Home extends AppCompatActivity {
 
-    Button scanner, addCourse;
+    Button addCourse;
     TextView name, tvReg;
     ImageView profile, notificationBtn;
     String personEmail;
@@ -58,8 +58,6 @@ public class Home extends AppCompatActivity {
         preferences = sharedPreferences.edit();
 
         notes = findViewById(R.id.notes);
-
-        scanner = findViewById(R.id.scanner);
         name = findViewById(R.id.name);
         tvReg = findViewById(R.id.tvReg);
         profile = findViewById(R.id.profile);
@@ -67,6 +65,7 @@ public class Home extends AppCompatActivity {
         notificationBtn = findViewById(R.id.notificationBtn);
         addCourse = findViewById(R.id.addCourseBtn);
         timeTable = findViewById(R.id.classTime);
+        examSection = findViewById(R.id.examSection);
 
         checkForAppUpdate();
 
@@ -85,10 +84,6 @@ public class Home extends AppCompatActivity {
             startActivity(intent);
         });
 
-        scanner.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, Scanner.class);
-            startActivity(intent);
-        });
 
         addCourse.setOnClickListener(v -> {
             Intent intent = new Intent(Home.this, CourseSelecter.class);
@@ -106,6 +101,10 @@ public class Home extends AppCompatActivity {
             startActivity(intent);
         });
 
+        examSection.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, ExamSection.class);
+            startActivity(intent);
+        });
 
 
 
@@ -152,48 +151,25 @@ public class Home extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setLayoutManager(new GridLayoutManager(home.this, 3));
         adapter = new SubjectAdapter(subjectList, this);
         recyclerView.setAdapter(adapter);
 
 
 
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
     }
 
 
-
-    public void timeTable(View view){
-        Intent intent = new Intent(Home.this, TimeTable.class);
-        startActivity(intent);
-    }
     public void web(View view){
         Uri uri = Uri.parse("https://swagdev.vercel.app/");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 
-    public void Result(View view){
-        Intent intent = new Intent(Home.this,ScannerForResult.class);
-        startActivity(intent);
-    }
 
     public void logout(View view){
         signOut();
     }
-    public void Notice(View view){
-        Intent intent = new Intent(Home.this,NotificationSender.class);
-        startActivity(intent);
-    }
 
-    public void aboutUs(View view){
-        Intent intent = new Intent(Home.this,AboutUs.class);
-        startActivity(intent);
-    }
 
     public void signOut(){
         gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -207,8 +183,6 @@ public class Home extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {}
 
     private void checkForAppUpdate(){
         AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);

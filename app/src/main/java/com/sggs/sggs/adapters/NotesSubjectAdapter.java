@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.CollectionReference;
@@ -20,6 +21,8 @@ import com.sggs.sggs.R;
 import com.sggs.sggs.model.Subject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapter.SubjectViewHolder> {
@@ -27,6 +30,7 @@ public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapte
     private ArrayList<Subject> subjectList;
     private Context context;
     private String branch, year, sem;
+    private List<Integer> colorList;
 
     public NotesSubjectAdapter(ArrayList<Subject> subjectList,
                                Context context,
@@ -38,6 +42,20 @@ public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapte
         this.branch = branch;
         this.year = year;
         this.sem = sem;
+
+        colorList = new ArrayList<>();
+        colorList.add(R.color.color1);
+        colorList.add(R.color.color2);
+        colorList.add(R.color.color3);
+        colorList.add(R.color.color4);
+        colorList.add(R.color.color5);
+        colorList.add(R.color.color6);
+        colorList.add(R.color.color7);
+        colorList.add(R.color.color8);
+        colorList.add(R.color.color9);
+        colorList.add(R.color.color10);
+
+        Collections.shuffle(colorList);
     }
 
     @NonNull
@@ -77,27 +95,14 @@ public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapte
                 });
 
 
+        int colorResId = colorList.get(position % colorList.size());
 
+        int color = ContextCompat.getColor(context, colorResId);
 
-
-
-
-        int randomColor = generateRandomColor();
-        holder.card.setBackgroundTintList(ColorStateList.valueOf(randomColor));
+        holder.card.setBackgroundTintList(ColorStateList.valueOf(color));
 
     }
 
-    private int generateRandomColor() {
-        Random random = new Random();
-
-        // Generate random RGB values between 0 and 255
-        int red = random.nextInt(256);
-        int green = random.nextInt(256);
-        int blue = random.nextInt(256);
-
-        // Create a color from the RGB values
-        return Color.rgb(red, green, blue);
-    }
 
     @Override
     public int getItemCount() {

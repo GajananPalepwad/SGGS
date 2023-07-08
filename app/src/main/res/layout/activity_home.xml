@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:scrollbars="none"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -205,15 +205,15 @@
                     android:id="@+id/examSection"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
+                    android:layout_marginVertical="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="#01B4B3"
                     app:cardCornerRadius="20dp"
                     app:cardElevation="4dp"
-                    android:layout_marginVertical="10dp"
                     app:layout_constraintEnd_toStartOf="@+id/center"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" >
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -288,7 +288,7 @@
                     app:cardElevation="4dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/center"
-                    app:layout_constraintTop_toTopOf="parent" >
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -422,7 +422,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
                 </androidx.cardview.widget.CardView>
 
 
@@ -501,7 +500,6 @@
                 </androidx.cardview.widget.CardView>
 
 
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/events"
                     android:layout_width="0dp"
@@ -572,8 +570,6 @@
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
                 </androidx.cardview.widget.CardView>
@@ -659,7 +655,6 @@
                     android:id="@+id/center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -668,155 +663,16 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button2"
-                android:layout_width="330dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/roundbutton"
-                android:backgroundTint="#04DBE6"
-                android:onClick="timeTable"
-                android:text="Time Table"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/textviewboarder"
-                android:backgroundTint="#D7000000"
-                android:padding="10dp"
-                android:text="Click on above button to see the Time Table of upcoming exam "
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/scanner"
-                android:layout_width="330dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/roundbutton"
-                android:backgroundTint="#EC1F14"
-                android:text="Admit Card"
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/textviewboarder"
-                android:backgroundTint="#D7000000"
-                android:padding="10dp"
-                android:text="Click on above button to see the Admit card \n(Hall ticket) of upcoming exam "
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/result"
-                android:layout_width="330dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/roundbutton"
-                android:backgroundTint="#78F226"
-                android:onClick="Result"
-                android:text="Recent Result"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/textviewboarder"
-                android:backgroundTint="#D7000000"
-                android:padding="10dp"
-                android:text="Click on above button to see the result of previous exam "
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="330dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/roundbutton"
-                android:backgroundTint="#04DAE5"
-                android:onClick="Notice"
-                android:text="Send notice"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/textviewboarder"
-                android:backgroundTint="#D7000000"
-                android:padding="10dp"
-                android:text="Click on above button to send thenotic to students. "
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/logout"
-                android:layout_width="330dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/roundbutton"
-                android:backgroundTint="#EB1F14"
-                android:onClick="logout"
-                android:text="sign out"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/textviewboarder"
-                android:backgroundTint="#D7000000"
-                android:padding="10dp"
-                android:text="Click on above button to sigh out from the account"
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="330dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/roundbutton"
-                android:backgroundTint="#151C36"
-                android:onClick="aboutUs"
-                android:text="About us"
-                android:textColor="@color/white" />
-
-            <TextView
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/textviewboarder"
-                android:backgroundTint="#D7000000"
-                android:padding="10dp"
-                android:text="Click on above button to know about us"
-                android:textAlignment="center"
-                android:textColor="@color/white" />
-
         </LinearLayout>
     </ScrollView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView15"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:onClick="web"
-        android:text="Made with Team SWAG"
+        android:text="Made by Team SWAG"
         android:textAlignment="center"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"

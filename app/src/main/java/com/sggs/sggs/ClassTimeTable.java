@@ -6,13 +6,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sggs.sggs.adapters.TimeTableAdapter;
-import com.sggs.sggs.model.Subject;
 import com.sggs.sggs.model.TimeTableModel;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,64 +30,124 @@ public class ClassTimeTable extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor preferences;
 
+    private Button buttonMonday, buttonTuesday, buttonWednesday, buttonThursday, buttonFriday;
+    ImageView back;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_time_table);
+
+        buttonMonday = findViewById(R.id.mon);
+        buttonTuesday = findViewById(R.id.tue);
+        buttonWednesday = findViewById(R.id.wed);
+        buttonThursday = findViewById(R.id.thu);
+        buttonFriday = findViewById(R.id.fri);
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> onBackPressed());
 
         sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
         preferences = sharedPreferences.edit();
 
         subjectList = new ArrayList<>();
         recyclerView = findViewById(R.id.timeList);
+        chooseWeekDay(getWeekDay());
+
+        buttonMonday.setOnClickListener(view -> showTimetable("Mon"));
+        buttonTuesday.setOnClickListener(view -> showTimetable("Tue"));
+        buttonWednesday.setOnClickListener(view -> showTimetable("Wed"));
+        buttonThursday.setOnClickListener(view -> showTimetable("Thu"));
+        buttonFriday.setOnClickListener(view -> showTimetable("Fri"));
+
+
+
+
+    }
+
+    private void chooseWeekDay(String weekDay){
+        switch (weekDay){
+            case "TUESDAY":
+                showTimetable("Tue");
+                break;
+            case "WEDNESDAY":
+                showTimetable("Wed");
+                break;
+            case "THURSDAY":
+                showTimetable("Thu");
+                break;
+            case "FRIDAY":
+                showTimetable("Fri");
+                break;
+            default:
+                showTimetable("Mon");
+                break;
+        }
+    }
+
+
+
+    private String getWeekDay(){
+        LocalDate currentDate = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentDate = LocalDate.now();
+        }
+        DayOfWeek currentDayOfWeek = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentDayOfWeek = currentDate.getDayOfWeek();
+        }
+
+        return currentDayOfWeek.name();
+    }
+
+
+    private void showTimetable(String weekDay){
 
         subjectList = new ArrayList<>();
         adapter = new TimeTableAdapter(subjectList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
         try{
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("TimeTable")
-                .document(sharedPreferences.getString("branch",""))
-                .collection(sharedPreferences.getString("year",""))
-                .document(sharedPreferences.getString("division",""))
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        Map<String, Object> documentData = documentSnapshot.getData();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("TimeTable")
+                    .document(sharedPreferences.getString("branch",""))
+                    .collection(sharedPreferences.getString("year",""))
+                    .document(sharedPreferences.getString("division",""))
+                    .collection("WeekDay")
+                    .document(weekDay)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            Map<String, Object> documentData = documentSnapshot.getData();
 
-                        // Access the data in the document
-                        for (Map.Entry<String, Object> entry : documentData.entrySet()) {
-                            String key = entry.getKey();
-                            String value = entry.getValue().toString();
-                            subjectList.add(new TimeTableModel(key, value));
-                        }
-
-                        Collections.sort(subjectList, new Comparator<TimeTableModel>() {
-                            @Override
-                            public int compare(TimeTableModel o1, TimeTableModel o2) {
-                                String[] parts1 = o1.getTimeNteacher().split("\\(");
-                                String[] parts2 = o2.getTimeNteacher().split("\\(");
-                                String time1 = parts1[0].trim();
-                                String time2 = parts2[0].trim();
-                                return time1.compareTo(time2);
+                            // Access the data in the document
+                            for (Map.Entry<String, Object> entry : documentData.entrySet()) {
+                                String key = entry.getKey();
+                                String value = entry.getValue().toString();
+                                subjectList.add(new TimeTableModel(key,value));
                             }
-                        });
+
+                            subjectList.sort((o1, o2) -> {
+                                String time1 = o1.getTime();
+                                String time2 = o2.getTime();
+                                return time1.compareTo(time2);
+                            });
 
 
-                        adapter.notifyDataSetChanged();
-                    } else {
-                        Toast.makeText(ClassTimeTable.this, "Document does not exist", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(ClassTimeTable.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
-                });
-    }catch (Exception ignored){}
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(ClassTimeTable.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(ClassTimeTable.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
+                    });
+        }catch (Exception ignored){}
 
 
 
     }
+
+
 }

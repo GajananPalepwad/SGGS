@@ -1,15 +1,12 @@
 package com.sggs.sggs.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +16,6 @@ import com.sggs.sggs.model.TimeTableModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.ViewHolder> {
@@ -78,13 +74,14 @@ public class TimeTableAdapter extends RecyclerView.Adapter<TimeTableAdapter.View
 
         TimeTableModel timeTable = timeList.get(position);
 
-        String[] parts = timeTable.getTimeNteacher().split("\\(");
-        String time = parts[0].trim();
+        String[] parts = timeTable.getSubjectNteacher().split("\\(");
+        String subjectString = parts[0].trim();
         String teacherName = parts[1].split("\\)")[0].trim();
-
-        holder.subject.setText(timeTable.getSubjectName());
+        holder.time.setText(timeTable.getTime());
+        holder.subject.setText(subjectString);
         holder.teacher.setText(teacherName);
-        holder.time.setText(time);
+
+
 
         int colorResId = colorList.get(position % colorList.size());
 

@@ -1,6 +1,7 @@
 package com.sggs.sggs.adapters;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +18,32 @@ import com.sggs.sggs.R;
 import com.sggs.sggs.model.Subject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHolder> {
 
     private static ArrayList<Subject> subjectList;
     private static Context context;
-
+    private List<Integer> colorList;
     public SubjectAdapter(ArrayList<Subject> subjectList, Context context) {
         this.subjectList = subjectList;
         this.context = context;
+
+        colorList = new ArrayList<>();
+        colorList.add(R.color.color1);
+        colorList.add(R.color.color2);
+        colorList.add(R.color.color3);
+        colorList.add(R.color.color4);
+        colorList.add(R.color.color5);
+        colorList.add(R.color.color6);
+        colorList.add(R.color.color7);
+        colorList.add(R.color.color8);
+        colorList.add(R.color.color9);
+        colorList.add(R.color.color10);
+
+        Collections.shuffle(colorList);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -42,6 +59,8 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
             marks = itemView.findViewById(R.id.marks);
             card = itemView.findViewById(R.id.cardColor);
             itemView.setOnClickListener(this);
+
+
         }
 
         @Override
@@ -82,9 +101,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Random random = new Random();
-        int randomNumber = random.nextInt(5) + 1;
-
         Subject subject = subjectList.get(position);
 
         String subName = subject.getSubjectName();
@@ -105,23 +121,12 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         holder.progressBar.setProgress(subject.getMarks());
         holder.progressBar.setMax(100);
 
-        switch (randomNumber) {
-            case 1:
-                holder.card.setCardBackgroundColor(ContextCompat.getColor(context, R.color.color1));
-                break;
-            case 2:
-                holder.card.setCardBackgroundColor(ContextCompat.getColor(context, R.color.color2));
-                break;
-            case 3:
-                holder.card.setCardBackgroundColor(ContextCompat.getColor(context, R.color.color3));
-                break;
-            case 4:
-                holder.card.setCardBackgroundColor(ContextCompat.getColor(context, R.color.color4));
-                break;
-            case 5:
-                holder.card.setCardBackgroundColor(ContextCompat.getColor(context, R.color.color5));
-                break;
-        }
+        int colorResId = colorList.get(position % colorList.size());
+
+        int color = ContextCompat.getColor(context, colorResId);
+
+        holder.card.setBackgroundTintList(ColorStateList.valueOf(color));
+
     }
 
     @Override
