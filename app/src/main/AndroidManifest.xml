@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ClassTimeTable"
+            android:exported="false" />
+        <activity
             android:name=".NotesSubjectList"
             android:exported="false" />
         <activity
@@ -60,7 +63,7 @@
             android:name=".StudentResult"
             android:exported="false" />
         <activity
-            android:name=".Result"
+            android:name=".AdmitCard"
             android:exported="false" />
         <activity
             android:name=".Scanner"

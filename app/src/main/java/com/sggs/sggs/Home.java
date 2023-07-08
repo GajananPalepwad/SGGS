@@ -11,29 +11,24 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.sggs.sggs.adapters.SubjectAdapter;
+import com.sggs.sggs.model.Subject;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -71,6 +66,7 @@ public class Home extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         notificationBtn = findViewById(R.id.notificationBtn);
         addCourse = findViewById(R.id.addCourseBtn);
+        timeTable = findViewById(R.id.classTime);
 
         checkForAppUpdate();
 
@@ -102,6 +98,11 @@ public class Home extends AppCompatActivity {
         notes.setOnClickListener(v -> {
             Intent intent = new Intent(Home.this, NotesSubjectList.class);
             intent.putExtra("subjectList", subjectList);
+            startActivity(intent);
+        });
+
+        timeTable.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, ClassTimeTable.class);
             startActivity(intent);
         });
 
@@ -155,7 +156,6 @@ public class Home extends AppCompatActivity {
         adapter = new SubjectAdapter(subjectList, this);
         recyclerView.setAdapter(adapter);
 
-        int i = adapter.getItemCount();
 
 
 

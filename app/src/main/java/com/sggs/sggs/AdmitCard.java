@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 //This class is for admit card
-public class Result extends AppCompatActivity {
+public class AdmitCard extends AppCompatActivity {
     String data;
     Button back;
 
@@ -71,7 +71,7 @@ public class Result extends AppCompatActivity {
                     examname.setText(name);
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -91,7 +91,7 @@ public class Result extends AppCompatActivity {
                     namev.setText("Name: " + name);
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -110,7 +110,7 @@ public class Result extends AppCompatActivity {
                     regv.setText("Reg no: " + reg);
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -204,7 +204,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -226,7 +226,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -248,7 +248,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -270,7 +270,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -292,7 +292,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -314,7 +314,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -336,7 +336,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -358,7 +358,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -380,7 +380,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -402,7 +402,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -424,7 +424,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -446,7 +446,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -468,7 +468,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -490,7 +490,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -512,7 +512,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -534,7 +534,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -556,7 +556,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -578,7 +578,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -600,7 +600,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -622,7 +622,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -644,7 +644,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -666,7 +666,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -688,7 +688,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -710,7 +710,7 @@ public class Result extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -735,7 +735,7 @@ public class Result extends AppCompatActivity {
 //                    }
                 }
                 else {
-                    Toast.makeText(Result.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdmitCard.this, "PLEASE WAIT FOR ADMIT CARD", Toast.LENGTH_LONG).show();
                 }
             }
             @Override

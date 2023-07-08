@@ -2,14 +2,14 @@ package com.sggs.sggs;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.sggs.sggs.adapters.NotesSubjectAdapter;
+import com.sggs.sggs.model.Subject;
 
 import java.util.ArrayList;
 

@@ -1,14 +1,10 @@
-package com.sggs.sggs;
+package com.sggs.sggs.adapters;
 
 
-
-import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,23 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.sggs.sggs.Subject;
 import com.sggs.sggs.R;
+import com.sggs.sggs.model.Subject;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapter.SubjectViewHolder> {

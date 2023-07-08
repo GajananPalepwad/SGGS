@@ -1,4 +1,4 @@
-package com.sggs.sggs;
+package com.sggs.sggs.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
