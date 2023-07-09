@@ -25,7 +25,7 @@ public class ExamSection extends AppCompatActivity {
         back.setOnClickListener(v -> onBackPressed());
 
         admitCard.setOnClickListener(v -> {
-            Intent intent = new Intent(ExamSection.this, Scanner.class);
+            Intent intent = new Intent(ExamSection.this, AdmitCard.class);
             startActivity(intent);
         });
 
