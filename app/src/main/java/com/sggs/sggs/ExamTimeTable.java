@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class TimeTable extends AppCompatActivity {
+public class ExamTimeTable extends AppCompatActivity {
 
     WebView web;
     public ProgressBar progressBar;
@@ -63,7 +63,7 @@ public class TimeTable extends AppCompatActivity {
 
                 }
                 else {
-                    Toast.makeText(TimeTable.this, "PLEASE WAIT FOR TIMETABLE", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ExamTimeTable.this, "PLEASE WAIT FOR TIMETABLE", Toast.LENGTH_LONG).show();
                 }
             }
             @Override

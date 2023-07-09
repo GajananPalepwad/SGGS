@@ -9,13 +9,13 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.sggs.sggs.adapters.NotesSubjectAdapter;
-import com.sggs.sggs.model.Subject;
+import com.sggs.sggs.model.SubjectModel;
 
 import java.util.ArrayList;
 
 public class NotesSubjectList extends AppCompatActivity {
 
-    ArrayList<Subject> subjectList;
+    ArrayList<SubjectModel> subjectList;
     private RecyclerView recyclerView;
     private NotesSubjectAdapter subjectAdapter;
 
@@ -24,7 +24,7 @@ public class NotesSubjectList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_subject_list);
         SharedPreferences sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
-        subjectList = (ArrayList<Subject>)getIntent().getSerializableExtra("subjectList");
+        subjectList = (ArrayList<SubjectModel>)getIntent().getSerializableExtra("subjectList");
         ImageView back = findViewById(R.id.back);
         back.setOnClickListener(v -> onBackPressed());
 
@@ -33,7 +33,7 @@ public class NotesSubjectList extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(NotesSubjectList.this, 2 ));
 
         // Get the ArrayList<Subject> from the intent or wherever you have it
-        ArrayList<Subject> subjectList = getIntent().getParcelableArrayListExtra("subjectList");
+        ArrayList<SubjectModel> subjectList = getIntent().getParcelableArrayListExtra("subjectList");
 
         subjectAdapter = new NotesSubjectAdapter(
                 subjectList,

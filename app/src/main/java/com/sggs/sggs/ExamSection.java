@@ -30,7 +30,7 @@ public class ExamSection extends AppCompatActivity {
         });
 
         timetable.setOnClickListener(v -> {
-            Intent intent = new Intent(ExamSection.this, TimeTable.class);
+            Intent intent = new Intent(ExamSection.this, ExamTimeTable.class);
             startActivity(intent);
         });
 

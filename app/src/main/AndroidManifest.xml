@@ -24,6 +24,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".QuestionBank"
+            android:exported="false" />
+        <activity
+            android:name=".AcademicCalendar"
+            android:exported="false" />
+        <activity
+            android:name=".EventPage"
+            android:exported="false" />
+        <activity
+            android:name=".Notification"
+            android:exported="false" />
+        <activity
             android:name=".ExamSection"
             android:exported="false" />
         <activity
@@ -51,7 +63,7 @@
             android:name=".SignUpPage"
             android:exported="false" />
         <activity
-            android:name=".TimeTable"
+            android:name=".ExamTimeTable"
             android:exported="false" />
         <activity
             android:name=".AboutUs"

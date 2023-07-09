@@ -28,9 +28,10 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sggs.sggs.adapters.SubjectAdapter;
-import com.sggs.sggs.model.Subject;
+import com.sggs.sggs.model.SubjectModel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Map;
 
 public class Home extends AppCompatActivity {
@@ -42,11 +43,11 @@ public class Home extends AppCompatActivity {
     GoogleSignInClient gsc;
     GoogleSignInOptions gso;
     RecyclerView recyclerView;
-    ArrayList<Subject> subjectList;
+    ArrayList<SubjectModel> subjectList;
     SubjectAdapter adapter;
     private static final int MY_REQUEST_CODE = 100;
 
-    CardView notes, examSection, timeTable, Events, calenarCard, qBank;
+    CardView notes, examSection, timeTable, events, calendar, qBank;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor preferences;
 
@@ -66,6 +67,9 @@ public class Home extends AppCompatActivity {
         addCourse = findViewById(R.id.addCourseBtn);
         timeTable = findViewById(R.id.classTime);
         examSection = findViewById(R.id.examSection);
+        events = findViewById(R.id.events);
+        calendar = findViewById(R.id.calendar);
+        qBank = findViewById(R.id.Qbank);
 
         checkForAppUpdate();
 
@@ -106,7 +110,25 @@ public class Home extends AppCompatActivity {
             startActivity(intent);
         });
 
+        notificationBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, Notification.class);
+            startActivity(intent);
+        });
 
+        events.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, EventPage.class);
+            startActivity(intent);
+        });
+
+        calendar.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, AcademicCalendar.class);
+            startActivity(intent);
+        });
+
+        qBank.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, QuestionBank.class);
+            startActivity(intent);
+        });
 
         subjectList = new ArrayList<>();
         adapter = new SubjectAdapter(subjectList, this);
@@ -132,7 +154,7 @@ public class Home extends AppCompatActivity {
                             String key = entry.getKey();
                             String value = entry.getValue().toString();
                             int v = Integer.parseInt(value);
-                            subjectList.add(new Subject(key, v));
+                            subjectList.add(new SubjectModel(key, v));
 
                         }
                         if(subjectList.size()!=0){

@@ -2,29 +2,29 @@ package com.sggs.sggs.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Subject implements Parcelable {
+public class SubjectModel implements Parcelable {
     private String subjectName;
     private int marks;
 
-    public Subject(String subjectName, int marks) {
+    public SubjectModel(String subjectName, int marks) {
         this.subjectName = subjectName;
         this.marks = marks;
     }
 
-    protected Subject(Parcel in) {
+    protected SubjectModel(Parcel in) {
         subjectName = in.readString();
         marks = in.readInt();
     }
 
-    public static final Creator<Subject> CREATOR = new Creator<Subject>() {
+    public static final Creator<SubjectModel> CREATOR = new Creator<SubjectModel>() {
         @Override
-        public Subject createFromParcel(Parcel in) {
-            return new Subject(in);
+        public SubjectModel createFromParcel(Parcel in) {
+            return new SubjectModel(in);
         }
 
         @Override
-        public Subject[] newArray(int size) {
-            return new Subject[size];
+        public SubjectModel[] newArray(int size) {
+            return new SubjectModel[size];
         }
     };
 

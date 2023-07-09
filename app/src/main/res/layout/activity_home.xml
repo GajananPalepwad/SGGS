@@ -261,7 +261,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginVertical="3dp"
-                            android:text="Exam Releted\nStuff Here"
+                            android:text="Exam Releted\nStuff is Here"
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
                             android:textSize="12dp"
@@ -335,7 +335,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginVertical="3dp"
-                            android:text="Notes of Your\nclass Here"
+                            android:text="Notes of Your\nclass are Here"
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
                             android:textSize="12dp"
@@ -426,7 +426,7 @@
 
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/calender"
+                    android:id="@+id/calendar"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:layout_marginVertical="20dp"
@@ -636,7 +636,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginVertical="3dp"
-                            android:text="All Previous Years\nPapers Will Show Here"
+                            android:text="All Previous Year\nPapers Will Show Here"
                             android:textAlignment="center"
                             android:textColor="#FFFFFF"
                             android:textSize="12dp"

@@ -4,7 +4,6 @@ package com.sggs.sggs.adapters;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +17,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sggs.sggs.R;
-import com.sggs.sggs.model.Subject;
+import com.sggs.sggs.model.SubjectModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapter.SubjectViewHolder> {
 
-    private ArrayList<Subject> subjectList;
+    private ArrayList<SubjectModel> subjectList;
     private Context context;
     private String branch, year, sem;
     private List<Integer> colorList;
 
-    public NotesSubjectAdapter(ArrayList<Subject> subjectList,
+    public NotesSubjectAdapter(ArrayList<SubjectModel> subjectList,
                                Context context,
                                String branch,
                                String year,
@@ -67,7 +65,7 @@ public class NotesSubjectAdapter extends RecyclerView.Adapter<NotesSubjectAdapte
 
     @Override
     public void onBindViewHolder(@NonNull SubjectViewHolder holder, int position) {
-        Subject subject = subjectList.get(position);
+        SubjectModel subject = subjectList.get(position);
 
         String subName = subject.getSubjectName();
         String[] words = subName.split(" ");

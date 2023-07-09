@@ -61,7 +61,7 @@ public class HomeForStudents extends AppCompatActivity {
     }
 
     public void timeTable(View view){
-        Intent intent = new Intent(HomeForStudents.this, TimeTable.class);
+        Intent intent = new Intent(HomeForStudents.this, ExamTimeTable.class);
         startActivity(intent);
     }
     public void web(View view){

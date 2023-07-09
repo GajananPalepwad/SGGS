@@ -15,19 +15,18 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sggs.sggs.R;
-import com.sggs.sggs.model.Subject;
+import com.sggs.sggs.model.SubjectModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHolder> {
 
-    private static ArrayList<Subject> subjectList;
+    private static ArrayList<SubjectModel> subjectList;
     private static Context context;
     private List<Integer> colorList;
-    public SubjectAdapter(ArrayList<Subject> subjectList, Context context) {
+    public SubjectAdapter(ArrayList<SubjectModel> subjectList, Context context) {
         this.subjectList = subjectList;
         this.context = context;
 
@@ -69,7 +68,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 // Perform the desired action for the clicked item
-                Subject subject = subjectList.get(position);
+                SubjectModel subject = subjectList.get(position);
                 showConfirmationDialog(subject.getSubjectName());
             }
         }
@@ -101,7 +100,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Subject subject = subjectList.get(position);
+        SubjectModel subject = subjectList.get(position);
 
         String subName = subject.getSubjectName();
         String[] words = subName.split(" ");
