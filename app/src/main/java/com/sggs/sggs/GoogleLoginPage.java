@@ -117,40 +117,39 @@ public class GoogleLoginPage extends AppCompatActivity {
             return;
         }
 
-        // Match input with database
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference studentLoginRef = db.collection("StudentLogin");
 
-        studentLoginRef
-                .whereEqualTo("email", email)
-                .whereEqualTo("password", password)
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("StudentLogin").document(email)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        QuerySnapshot querySnapshot = task.getResult();
-                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                            // Input matches database
-                            DocumentSnapshot documentSnapshot = querySnapshot.getDocuments().get(0);
-                            SharedPreferences sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
-                            SharedPreferences.Editor preferences = sharedPreferences.edit();
+                        DocumentSnapshot document = task.getResult();
+                        if (document != null && document.exists()) {
 
-                            preferences.putString("email",email);
-                            preferences.putString("fullName",documentSnapshot.getString("fullName"));
-                            preferences.putString("regNum",documentSnapshot.getString("regNum"));
-                            preferences.putString("mobileNum",documentSnapshot.getString("mobileNum"));
-                            preferences.putString("img",documentSnapshot.getString("img"));
-                            preferences.putString("branch",documentSnapshot.getString("branch"));
-                            preferences.putString("year",documentSnapshot.getString("year"));
-                            preferences.putString("division",documentSnapshot.getString("division"));
-                            preferences.putString("semester",documentSnapshot.getString("sem"));
-                            preferences.apply();
+                            if(document.getString("password").equals(password)) {
+                                SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+                                SharedPreferences.Editor preferences = sharedPreferences.edit();
 
-                            Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(GoogleLoginPage.this, Home.class);
-                            startActivity(intent);
+                                preferences.putString("email", email);
+                                preferences.putString("fullName", document.getString("fullName"));
+                                preferences.putString("regNum", document.getString("regNum"));
+                                preferences.putString("mobileNum", document.getString("mobileNum"));
+                                preferences.putString("img", document.getString("img"));
+                                preferences.putString("branch", document.getString("branch"));
+                                preferences.putString("year", document.getString("year"));
+                                preferences.putString("division", document.getString("division"));
+                                preferences.putString("semester", document.getString("sem"));
+                                preferences.apply();
+
+                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(GoogleLoginPage.this, Home.class);
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             // Input does not match database
-                            Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Invalid email", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         // Error occurred while querying the database

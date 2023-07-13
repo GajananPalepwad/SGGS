@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -320,8 +321,26 @@ public class SignUpPage extends AppCompatActivity {
 
         signup.setOnClickListener(view -> {
             if(!selectedImage.isEmpty()) {
-                checkAndDataToFireStore();
-                bottomSheetDialog.dismiss();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("StudentLogin").document(email)
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document != null && document.exists()) {
+                                    Toast.makeText(this, "Account Already Exits", Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    // Input does not match database
+                                    checkAndDataToFireStore();
+                                    bottomSheetDialog.dismiss();
+                                }
+                            } else {
+                                // Error occurred while querying the database
+                                Toast.makeText(this, "Error occurred while logging in", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
             }else{
                 Toast.makeText(this, "Choose any Avatar", Toast.LENGTH_SHORT).show();
             }

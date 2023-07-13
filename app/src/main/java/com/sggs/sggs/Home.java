@@ -166,16 +166,22 @@ public class Home extends AppCompatActivity {
                         if(subjectList.size()!=0){
                             addCourse.setVisibility(View.GONE);
                         }
+                        loadingDialog.stopLoading();
                         adapter.notifyDataSetChanged();
                     } else {
+                        loadingDialog.stopLoading();
                         Toast.makeText(Home.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                     }
-                    loadingDialog.stopLoading();
+
                 })
                 .addOnFailureListener(e -> {
+                    loadingDialog.stopLoading();
                     Toast.makeText(Home.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
                 });
-        }catch (Exception ignored){}
+
+        }catch (Exception ignored){
+            loadingDialog.stopLoading();
+        }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
