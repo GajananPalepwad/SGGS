@@ -10,6 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -22,13 +23,11 @@ import com.google.firebase.database.ValueEventListener;
 public class ExamTimeTable extends AppCompatActivity {
 
     WebView web;
-    public ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
-        progressBar = findViewById(R.id.prg);
         web = findViewById(R.id.timtabe);
 
 
@@ -41,12 +40,10 @@ public class ExamTimeTable extends AppCompatActivity {
         web.setWebViewClient(new WebViewClient(){
             @Override public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                progressBar.setVisibility(View.VISIBLE);
                 setTitle("Loading...");
             }
             @Override public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                progressBar.setVisibility(View.GONE);
                 setTitle(view.getTitle());
             }
 
@@ -71,12 +68,7 @@ public class ExamTimeTable extends AppCompatActivity {
             }
         });
 
-        Button back=findViewById(R.id.back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        ImageView back=findViewById(R.id.back);
+        back.setOnClickListener(v -> onBackPressed());
     }
 }

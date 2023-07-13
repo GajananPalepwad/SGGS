@@ -8,22 +8,122 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="89dp"
-        android:layout_height="94dp"
+        android:layout_width="70dp"
+        android:layout_height="74dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logotranprent" />
 
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/round_boarder"
+        android:elevation="4dp"
+        android:src="@drawable/arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/signUpText" />
 
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.5">-->
+
+
+    <TextView
+        android:id="@+id/signUpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:elevation="1dp"
+        android:fontFamily="@font/rubik_bold"
+        android:text="Admit Card"
+        android:textColor="#0F254E"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="15dp"
+        android:backgroundTint="@color/color9"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/activity_vertical_margin">
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/_b3585c5_2131_4027_8f83_f715cc2ddadf_medium" />
+
+            <TextView
+                android:id="@+id/examname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="ADMIT CARD"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView12"
+                app:layout_constraintStart_toStartOf="@+id/imageView12"
+                app:layout_constraintTop_toBottomOf="@+id/imageView12" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:text="Name: "
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/examname" />
+
+
+            <TextView
+                android:id="@+id/regno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="10dp"
+                android:text="Reg no: "
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Status: "
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/regno" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 <!--        <LinearLayout-->
 <!--            android:layout_width="match_parent"-->
@@ -82,261 +182,14 @@
 <!--                    android:textColor="#000000" />-->
 
 
-<!--            </LinearLayout>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub1"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:paddingLeft="10dp"-->
-<!--                android:paddingTop="10dp"-->
-<!--                android:paddingRight="10dp"-->
-<!--                android:paddingBottom="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub2"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub3"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub4"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub5"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub6"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub7"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub8"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub9"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub10"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub11"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub12"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub13"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub14"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub15"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub16"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub17"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub18"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub19"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub20"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub21"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub22"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub23"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub24"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/sub25"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@drawable/textviewboarder"-->
-<!--                android:padding="10dp"-->
-<!--                android:textColor="#000000" />-->
-
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
-
-<!--    <ImageView-->
-<!--        android:id="@+id/imageView6"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="350dp"-->
-<!--        android:alpha="0.08"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:srcCompat="@drawable/sggs" />-->
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundbutton"
-        android:backgroundTint="#05DAE5"
-        android:text="back"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        app:cardCornerRadius="20dp"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView5"
-            tools:layout_editor_absoluteX="1dp" />
-
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@+id/cardView12" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

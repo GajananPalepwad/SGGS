@@ -28,6 +28,7 @@ import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sggs.sggs.adapters.SubjectAdapter;
+import com.sggs.sggs.loadingAnimation.LoadingDialog;
 import com.sggs.sggs.model.SubjectModel;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class Home extends AppCompatActivity {
     ArrayList<SubjectModel> subjectList;
     SubjectAdapter adapter;
     private static final int MY_REQUEST_CODE = 100;
-
+    LoadingDialog loadingDialog;
     CardView notes, examSection, timeTable, events, calendar, qBank;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor preferences;
@@ -55,6 +56,11 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        loadingDialog  = new LoadingDialog(this);
+        loadingDialog.startLoading();
+
+
         sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
         preferences = sharedPreferences.edit();
 
@@ -164,6 +170,7 @@ public class Home extends AppCompatActivity {
                     } else {
                         Toast.makeText(Home.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                     }
+                    loadingDialog.stopLoading();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(Home.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
