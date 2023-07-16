@@ -6,34 +6,31 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Vibrator;
 
 import androidx.core.app.NotificationCompat;
 
-
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
      NotificationManager mNotificationManager;
+     String title="", body="";
 
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
+        title = remoteMessage.getNotification().getTitle().toString();
+        body = remoteMessage.getNotification().getBody().toString();
 
-// playing audio and vibration when user se reques
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-        r.play();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            r.setLooping(false);
-        }
+
+
 
         // vibration
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -41,23 +38,41 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         v.vibrate(pattern, -1);
 
 
-        int resourceImage = getResources().getIdentifier(remoteMessage.getNotification().getIcon(), "drawable", getPackageName());
+        String icon = remoteMessage.getNotification().getIcon();
+        int resourceImage;
+        if (icon != null) {
+            resourceImage = getResources().getIdentifier(icon, "drawable", getPackageName());
+        } else {
+            // Provide a default icon resource ID if the icon is not specified
+            resourceImage = R.drawable.icon;
+        }
 
 
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CHANNEL_ID");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            builder.setSmallIcon(R.drawable.icontrans);
+
             builder.setSmallIcon(resourceImage);
         } else {
-//            builder.setSmallIcon(R.drawable.icon_kritikar);
+
             builder.setSmallIcon(resourceImage);
         }
 
-
-
         Intent resultIntent = new Intent(this, Home.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+
+        PendingIntent pendingIntent = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            pendingIntent = PendingIntent.getActivity
+                    (this, 1, resultIntent, PendingIntent.FLAG_MUTABLE);
+        }
+        else
+        {
+            pendingIntent = PendingIntent.getActivity
+                    (this, 1, resultIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+        }
+
 
 
         builder.setContentTitle(remoteMessage.getNotification().getTitle());
@@ -66,11 +81,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         builder.setStyle(new NotificationCompat.BigTextStyle().bigText(remoteMessage.getNotification().getBody()));
         builder.setAutoCancel(true);
         builder.setPriority(Notification.PRIORITY_MAX);
+        builder.setSmallIcon(R.drawable.icon);
+
 
         mNotificationManager =
                 (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
-
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
@@ -85,12 +100,17 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         }
 
 
-
-// notificationId is a unique int for each notification that you must define
+        // notificationId is a unique int for each notification that you must define
         mNotificationManager.notify(100, builder.build());
 
-
     }
+    private String getCurrentTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date currentDate = new Date(System.currentTimeMillis());
+        return dateFormat.format(currentDate);
+    }
+
+
 
 }
 

@@ -7,20 +7,36 @@
     tools:context=".AboutUs">
 
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ImageView
         android:id="@+id/back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="25dp"
+        android:background="@drawable/round_boarder"
+        android:elevation="4dp"
+        android:src="@drawable/arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/signUpText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/signUpText" />
+
+    <TextView
+        android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="back"
-        android:backgroundTint="#EA1F14"
-        android:background="@drawable/roundbutton"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="25dp"
+        android:elevation="1dp"
+        android:fontFamily="@font/rubik_bold"
+        android:text="About Us"
+        android:textColor="#0F254E"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 
     <ImageView
@@ -34,115 +50,118 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logotranprent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About us"
-        android:textColor="#000000"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.045" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="App Created by\nGajanan Palepwad\n\nSWAG Developer’s Club is a community where you convert your creative ideas into projects no matter if you have any prior knowledge about these fields, SWAG stands for SGGS Web App and Game Developer's Club. Here we will learn all of these things. We enhance your programming skills where your ideas come to reality Web App Game developers Club. This club will provide a proper environment for development.\n\nFounding members of SWAG are\n\nGajanan Palepwad\nYuvraj Darshankar\nSushil Bhoybar\nSanika Narwade\nIsha Haibatkar\n\nFollow us"
-        android:textAlignment="center"
-        android:textColor="#000000"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="40dp"
+        android:text="App Created by Gajanan Palepwad\n\nContributers : Vikramaditya Khupse, Vedant Pawar, Shantanu Pande, Sushil Bhoybar, Sneha Bichkunde\n\nSWAG Developer’s Club is a community where you convert your creative ideas into projects no matter if you have any prior knowledge about these fields or not, We think it necessary to offer students the option to study and build projects together. SWAG stands for SGGS Web App Game developers Club. This club will provide a proper environment for development."
+        android:textColor="@color/black"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.329" />
+        app:layout_constraintTop_toBottomOf="@+id/signUpText" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="10dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_screen_boy_reading_animation" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
-
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:onClick="web"
         android:text="Contact us\n\n+91 77570 85531\nswag@sggs.ac.in\nswagdev.sggs.ac.in"
         android:textAlignment="center"
         android:textColor="@color/black"
-
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
-        android:id="@+id/linkedin"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:onClick="linkdIn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.575"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.05"
-        app:srcCompat="@drawable/linkedin_black_icon_logo_ecc426c572_seeklogo_com" />
-
-    <ImageView
-        android:id="@+id/youtube"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:onClick="yuotube"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.05"
-        app:srcCompat="@drawable/pngwing_com" />
-
-    <ImageView
-        android:id="@+id/github"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:onClick="github"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.258"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.05"
-        app:srcCompat="@drawable/_5231" />
-
-    <ImageView
-        android:id="@+id/insta"
-        android:layout_width="39dp"
-        android:layout_height="39dp"
-        android:onClick="insta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.717"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.05"
-        app:srcCompat="@drawable/_ecec78673e4440004f09e77" />
-
-    <TextView
-        android:id="@+id/textView6"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/feedback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/linkedin"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_margin="5dp"
+            android:onClick="linkdIn"
+            app:srcCompat="@drawable/linkedin_icon" />
+
+        <ImageView
+            android:id="@+id/youtube"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_margin="5dp"
+            android:onClick="yuotube"
+            app:srcCompat="@drawable/youtube_logo" />
+
+        <ImageView
+            android:id="@+id/github"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_margin="5dp"
+            android:onClick="github"
+            app:srcCompat="@drawable/_5231" />
+
+        <ImageView
+            android:id="@+id/insta"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:layout_margin="5dp"
+            android:onClick="insta"
+            app:srcCompat="@drawable/instagram_logo" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
         android:onClick="feedback"
         android:text="feedback"
         android:textColor="#0E4CC6"
         android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linkedin" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

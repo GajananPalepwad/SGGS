@@ -26,32 +26,23 @@ public class NotificationSender extends AppCompatActivity {
         send=findViewById(R.id.send);
         back=findViewById(R.id.backn);
 
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               if(!title.getText().toString().isEmpty() && !context.getText().toString().isEmpty() ){
+        send.setOnClickListener(v -> {
+           if(!title.getText().toString().isEmpty() && !context.getText().toString().isEmpty() ){
 
-                   FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
-                           title.getText().toString(),
-                           context.getText().toString(),
-                           getApplicationContext(),
-                           NotificationSender.this);
-                   notificationsSender.SendNotifications();
-                   Toast.makeText(NotificationSender.this, "NOTIFIED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
-                   onDestroy();
+               FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
+                       title.getText().toString(),
+                       context.getText().toString(),
+                       getApplicationContext(),
+                       NotificationSender.this);
+               notificationsSender.SendNotifications();
+               Toast.makeText(NotificationSender.this, "NOTIFIED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
 
-               }else{
-                   Toast.makeText(NotificationSender.this, "PLEASE WRITE TITLE & MESSAGE", Toast.LENGTH_SHORT).show();
-               }
-            }
+           }else{
+               Toast.makeText(NotificationSender.this, "PLEASE WRITE TITLE & MESSAGE", Toast.LENGTH_SHORT).show();
+           }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        back.setOnClickListener(v -> onBackPressed());
 
     }
 }

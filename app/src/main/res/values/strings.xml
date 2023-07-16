@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SGGS</string>
+    <string name="app_name">SGGS Student</string>
     <string name="title_activity_login_for_teacher">LoginForTeacher</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

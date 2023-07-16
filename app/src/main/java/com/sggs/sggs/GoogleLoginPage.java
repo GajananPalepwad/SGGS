@@ -3,9 +3,12 @@ package com.sggs.sggs;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -26,9 +29,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GoogleLoginPage extends AppCompatActivity {
 
@@ -37,6 +46,8 @@ public class GoogleLoginPage extends AppCompatActivity {
     EditText emailInput;
     EditText passwordInput;
     Button signinBtn;
+
+    String tokenString="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +58,15 @@ public class GoogleLoginPage extends AppCompatActivity {
         signinBtn = findViewById(R.id.signinBtn);
         regBtn = findViewById(R.id.reg);
 
-        signinBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkLogin();
-            }
-        });
+        getToken();
+
+        int permissionState = ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS);
+        // If the permission is not granted, request it.
+        if (permissionState == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1);
+        }
+
+        signinBtn.setOnClickListener(v -> checkLogin());
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct!=null){
@@ -62,15 +76,21 @@ public class GoogleLoginPage extends AppCompatActivity {
         }
 
 
+        FirebaseMessaging.getInstance().subscribeToTopic("notification")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Devices subscribed successfully
+                    } else {
+                        // Failed to subscribe devices
+                    }
+                });
+
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         client = GoogleSignIn.getClient(this, options);
-        regBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = client.getSignInIntent();
-                startActivityForResult(i, 1234);
-            }
+        regBtn.setOnClickListener(v -> {
+            Intent i = client.getSignInIntent();
+            startActivityForResult(i, 1234);
         });
 
     }
@@ -86,17 +106,14 @@ public class GoogleLoginPage extends AppCompatActivity {
 
                     AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                     FirebaseAuth.getInstance().signInWithCredential(credential)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                   // progressBar.setVisibility(View.GONE);
-                                    if (task.isSuccessful()) {
-                                        Intent intent = new Intent(getApplicationContext(), SignUpPage.class);
-                                        startActivity(intent);
+                            .addOnCompleteListener(task1 -> {
+                               // progressBar.setVisibility(View.GONE);
+                                if (task1.isSuccessful()) {
+                                    Intent intent = new Intent(getApplicationContext(), SignUpPage.class);
+                                    startActivity(intent);
 
-                                    } else {
-                                        Toast.makeText(GoogleLoginPage.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
+                                } else {
+                                    Toast.makeText(GoogleLoginPage.this, task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -106,6 +123,32 @@ public class GoogleLoginPage extends AppCompatActivity {
 
             }
     }
+
+
+    private void getToken() {
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                tokenString = task.getResult();
+            } else {
+                // Handle the case when token retrieval fails
+                Toast.makeText(GoogleLoginPage.this, "Failed to retrieve token", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void sendNotification(){
+        FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+                tokenString,
+                "SGGS",
+                "Login Successful",
+                getApplicationContext(),
+                GoogleLoginPage.this
+        );
+
+        notificationsSender.SendNotifications();
+    }
+
+
 
     private void checkLogin(){
 
@@ -140,8 +183,8 @@ public class GoogleLoginPage extends AppCompatActivity {
                                 preferences.putString("division", document.getString("division"));
                                 preferences.putString("semester", document.getString("sem"));
                                 preferences.apply();
-
-                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                                sendNotification();
+//                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(GoogleLoginPage.this, Home.class);
                                 startActivity(intent);
                             }else{

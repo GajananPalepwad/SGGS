@@ -17,7 +17,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-class FcmNotificationsSender  {
+public class FcmNotificationsSender  {
 
     String userFcmToken;
     String title;
@@ -28,6 +28,7 @@ class FcmNotificationsSender  {
 
     private RequestQueue requestQueue;
     private final String postUrl = "https://fcm.googleapis.com/fcm/send";
+    private final String fcmServerKey ="AAAAvLK0Qiw:APA91bFDbMv8EPeoirrkrbzGZWbAaLm165Re-NVW2oKIqUJb1qWjQ0G5YJtaSWOc8rwnIm_E5ZB_zcV2Ge_JuLkpQwo9WirmBcRfYhOBpGGzLWe3HpPW16WFub2E54MTFv0S8e0Sc_6U";
 
     public FcmNotificationsSender(String userFcmToken, String title, String body, Context mContext, Activity mActivity) {
         this.userFcmToken = userFcmToken;
@@ -35,6 +36,7 @@ class FcmNotificationsSender  {
         this.body = body;
         this.mContext = mContext;
         this.mActivity = mActivity;
+
 
     }
 
@@ -47,7 +49,7 @@ class FcmNotificationsSender  {
             JSONObject notiObject = new JSONObject();
             notiObject.put("title", title);
             notiObject.put("body", body);
-            notiObject.put("icon", R.drawable.icon); // enter icon that exists in drawable only
+            notiObject.put("icon", "logo"); // enter icon that exists in drawable only
 
 
 
@@ -74,7 +76,7 @@ class FcmNotificationsSender  {
 
                     Map<String, String> header = new HashMap<>();
                     header.put("content-type", "application/json");
-                    header.put("authorization", "key=" + "AAAAvLK0Qiw:APA91bFDbMv8EPeoirrkrbzGZWbAaLm165Re-NVW2oKIqUJb1qWjQ0G5YJtaSWOc8rwnIm_E5ZB_zcV2Ge_JuLkpQwo9WirmBcRfYhOBpGGzLWe3HpPW16WFub2E54MTFv0S8e0Sc_6U");
+                    header.put("authorization", "key=" + fcmServerKey);
                     return header;
 
 

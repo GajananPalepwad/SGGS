@@ -14,7 +14,7 @@ import android.widget.ImageView;
 public class Profile extends AppCompatActivity {
 
     ImageView profile, back;
-    Button logout;
+    Button logout, aboutus;
     EditText name, email, reg, mobileNo;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor preferences;
@@ -39,9 +39,6 @@ public class Profile extends AppCompatActivity {
 
         logout = findViewById(R.id.logout);
         logout.setOnClickListener(v -> {
-
-
-
             preferences.putString("email","");
             preferences.putString("fullName","");
             preferences.putString("regNum","");
@@ -52,11 +49,16 @@ public class Profile extends AppCompatActivity {
             preferences.putString("division","");
             preferences.putString("semester","");
             preferences.apply();
-
             Intent intent = new Intent(Profile.this, GoogleLoginPage.class);
             startActivity(intent);
             finish();
 
+        });
+
+        aboutus = findViewById(R.id.aboutUs);
+        aboutus.setOnClickListener(v ->{
+            Intent intent = new Intent(Profile.this, AboutUs.class);
+            startActivity(intent);
         });
 
         setAll();
