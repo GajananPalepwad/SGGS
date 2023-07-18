@@ -28,6 +28,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.sggs.sggs.loadingAnimation.LoadingDialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,17 +44,20 @@ public class SignUpPage extends AppCompatActivity {
     String password ;
     String passwordConfirm;
     String selectedImage;
-
-
     private BottomSheetDialog bottomSheetDialog;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
+    LoadingDialog loadingDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_page);
+
+        loadingDialog = new LoadingDialog(this);
+
+
         ETemail = findViewById(R.id.email);
         continueBtn = findViewById(R.id.continueBtn);
         EditText fullnameEditText = findViewById(R.id.fullname);
@@ -75,83 +79,33 @@ public class SignUpPage extends AppCompatActivity {
             ETemail.setText(personEmail);
         }
 
-        continueBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fullname = fullnameEditText.getText().toString();
-                email = emailEditText.getText().toString();
-                regnum = regnumEditText.getText().toString();
-                mobileNum = mobileNumEditText.getText().toString();
-                password = passwordEditText.getText().toString();
-                passwordConfirm = passwordConfirmEditText.getText().toString();
-                String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        continueBtn.setOnClickListener(v -> {
 
-                if (!password.matches(passwordPattern)) {
-                    Toast.makeText(SignUpPage.this, "Password must contain at least one digit, one lowercase and uppercase letter, one special character, and have a minimum of 8 characters.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            fullname = fullnameEditText.getText().toString();
+            email = emailEditText.getText().toString();
+            regnum = regnumEditText.getText().toString();
+            mobileNum = mobileNumEditText.getText().toString();
+            password = passwordEditText.getText().toString();
+            passwordConfirm = passwordConfirmEditText.getText().toString();
+            String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
 
-                if (fullname.isEmpty() || email.isEmpty() || regnum.isEmpty() || mobileNum.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
-                    Toast.makeText(SignUpPage.this, "Please fill all details", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (!password.equals(passwordConfirm)) {
-                    Toast.makeText(SignUpPage.this, "Both password should match", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                showSettingsBottomSheetDialog();
+            if (!password.matches(passwordPattern)) {
+                Toast.makeText(SignUpPage.this, "Password must contain at least one digit, one lowercase and uppercase letter, one special character, and have a minimum of 8 characters.", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            if (fullname.isEmpty() || email.isEmpty() || regnum.isEmpty() || mobileNum.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
+                Toast.makeText(SignUpPage.this, "Please fill all details", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!password.equals(passwordConfirm)) {
+                Toast.makeText(SignUpPage.this, "Both password should match", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            showSettingsBottomSheetDialog();
         });
 
-        if(personEmail.charAt(0)=='t'
-                && personEmail.charAt(1)=='e'
-                && personEmail.charAt(2)=='s'
-                && personEmail.charAt(3)=='t'
-                ){
-//            finish();
-//            Intent intent = new Intent(LoginToHome.this, home.class);
-//            startActivity(intent);
-        }
-
-        else if(personEmail.charAt(personEmail.length()-1)!='n'
-                && personEmail.charAt(personEmail.length()-2)!='i'
-                && personEmail.charAt(personEmail.length()-3)!='.'
-                && personEmail.charAt(personEmail.length()-4)!='c'
-                && personEmail.charAt(personEmail.length()-5)!='a'
-                && personEmail.charAt(personEmail.length()-6)!='.'
-                && personEmail.charAt(personEmail.length()-7)!='s'
-                && personEmail.charAt(personEmail.length()-8)!='g'
-                && personEmail.charAt(personEmail.length()-9)!='g'
-                && personEmail.charAt(personEmail.length()-10)!='s'
-                && personEmail.charAt(personEmail.length()-11)!='@'){signOut();}
-
-            else if(personEmail.charAt(0)=='2'){
-//
-//                finish();
-//                Intent intent = new Intent(LoginToHome.this, HomeForStudents.class);
-//                startActivity(intent);
-            }
-
-            else if(personEmail.charAt(0)!='2' && personEmail.charAt(personEmail.length()-1)=='n'
-                    && personEmail.charAt(personEmail.length()-2)=='i'
-                    && personEmail.charAt(personEmail.length()-3)=='.'
-                    && personEmail.charAt(personEmail.length()-4)=='c'
-                    && personEmail.charAt(personEmail.length()-5)=='a'
-                    && personEmail.charAt(personEmail.length()-6)=='.'
-                    && personEmail.charAt(personEmail.length()-7)=='s'
-                    && personEmail.charAt(personEmail.length()-8)=='g'
-                    && personEmail.charAt(personEmail.length()-9)=='g'
-                    && personEmail.charAt(personEmail.length()-10)=='s'
-                    && personEmail.charAt(personEmail.length()-11)=='@'){
-
-//                finish();
-//                Intent intent = new Intent(LoginToHome.this, home.class);
-//                startActivity(intent);
-            }
-            else{
-                signOut();
-            }
     }
 
     @Override
@@ -321,6 +275,7 @@ public class SignUpPage extends AppCompatActivity {
 
         signup.setOnClickListener(view -> {
             if(!selectedImage.isEmpty()) {
+                loadingDialog.startLoading();
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 db.collection("StudentLogin").document(email)
                         .get()
@@ -339,6 +294,7 @@ public class SignUpPage extends AppCompatActivity {
                                 // Error occurred while querying the database
                                 Toast.makeText(this, "Error occurred while logging in", Toast.LENGTH_SHORT).show();
                             }
+                            loadingDialog.stopLoading();
                         });
 
             }else{

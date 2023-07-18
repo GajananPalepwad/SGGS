@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sggs.sggs.adapters.TimeTableAdapter;
+import com.sggs.sggs.loadingAnimation.LoadingDialog;
 import com.sggs.sggs.model.TimeTableModel;
 
 import java.time.DayOfWeek;
@@ -32,6 +33,7 @@ public class ClassTimeTable extends AppCompatActivity {
 
     private Button buttonMonday, buttonTuesday, buttonWednesday, buttonThursday, buttonFriday;
     ImageView back;
+    LoadingDialog loadingDialog;
 
 
     @Override
@@ -39,6 +41,8 @@ public class ClassTimeTable extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_time_table);
 
+        loadingDialog = new LoadingDialog(this);
+        loadingDialog.startLoading();
         buttonMonday = findViewById(R.id.mon);
         buttonTuesday = findViewById(R.id.tue);
         buttonWednesday = findViewById(R.id.wed);
@@ -54,11 +58,26 @@ public class ClassTimeTable extends AppCompatActivity {
         recyclerView = findViewById(R.id.timeList);
         chooseWeekDay(getWeekDay());
 
-        buttonMonday.setOnClickListener(view -> showTimetable("Mon"));
-        buttonTuesday.setOnClickListener(view -> showTimetable("Tue"));
-        buttonWednesday.setOnClickListener(view -> showTimetable("Wed"));
-        buttonThursday.setOnClickListener(view -> showTimetable("Thu"));
-        buttonFriday.setOnClickListener(view -> showTimetable("Fri"));
+        buttonMonday.setOnClickListener(view ->{
+            showTimetable("Mon");
+            loadingDialog.startLoading();
+        });
+        buttonTuesday.setOnClickListener(view -> {
+            showTimetable("Tue");
+            loadingDialog.startLoading();
+        });
+        buttonWednesday.setOnClickListener(view -> {
+            showTimetable("Wed");
+            loadingDialog.startLoading();
+        });
+        buttonThursday.setOnClickListener(view -> {
+            showTimetable("Thu");
+            loadingDialog.startLoading();
+        });
+        buttonFriday.setOnClickListener(view -> {
+            showTimetable("Fri");
+            loadingDialog.startLoading();
+        });
 
 
 
@@ -134,13 +153,14 @@ public class ClassTimeTable extends AppCompatActivity {
                                 return time1.compareTo(time2);
                             });
 
-
                             adapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(ClassTimeTable.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                         }
+                        loadingDialog.stopLoading();
                     })
                     .addOnFailureListener(e -> {
+                        loadingDialog.stopLoading();
                         Toast.makeText(ClassTimeTable.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
                     });
         }catch (Exception ignored){}

@@ -51,12 +51,13 @@ public class Home extends AppCompatActivity {
     CardView notes, examSection, timeTable, events, calendar, qBank;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor preferences;
+    int numberOfSubject=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        subjectList = new ArrayList<>();
         loadingDialog  = new LoadingDialog(this);
         loadingDialog.startLoading();
 
@@ -101,9 +102,10 @@ public class Home extends AppCompatActivity {
         });
 
         notes.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, NotesSubjectList.class);
-            intent.putExtra("subjectList", subjectList);
-            startActivity(intent);
+//            Intent intent = new Intent(Home.this, NotesSubjectList.class);
+//            intent.putExtra("subjectList", subjectList);
+//            startActivity(intent);
+            Toast.makeText(this, "Available soon", Toast.LENGTH_SHORT).show();
         });
 
         timeTable.setOnClickListener(v -> {
@@ -136,48 +138,63 @@ public class Home extends AppCompatActivity {
             startActivity(intent);
         });
 
-        subjectList = new ArrayList<>();
+        loadSubjectAttendance();
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(numberOfSubject==0){
+            loadSubjectAttendance();
+        }
+    }
+
+    private void loadSubjectAttendance(){
+
+
         adapter = new SubjectAdapter(subjectList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
         try {
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Students")
-                .document(sharedPreferences.getString("branch",""))
-                .collection(sharedPreferences.getString("year",""))
-                .document(sharedPreferences.getString("division",""))
-                .collection(sharedPreferences.getString("regNum",""))
-                .document("Attendance")
-                .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        Map<String, Object> documentData = documentSnapshot.getData();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("Students")
+                    .document(sharedPreferences.getString("branch",""))
+                    .collection(sharedPreferences.getString("year",""))
+                    .document(sharedPreferences.getString("division",""))
+                    .collection(sharedPreferences.getString("regNum",""))
+                    .document("Attendance")
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            Map<String, Object> documentData = documentSnapshot.getData();
 
-                        // Access the data in the document
-                        for (Map.Entry<String, Object> entry : documentData.entrySet()) {
-                            String key = entry.getKey();
-                            String value = entry.getValue().toString();
-                            int v = Integer.parseInt(value);
-                            subjectList.add(new SubjectModel(key, v));
+                            // Access the data in the document
+                            for (Map.Entry<String, Object> entry : documentData.entrySet()) {
+                                String key = entry.getKey();
+                                String value = entry.getValue().toString();
+                                int v = Integer.parseInt(value);
+                                subjectList.add(new SubjectModel(key, v));
 
+                            }
+                            if(subjectList.size()!=0){
+                                addCourse.setVisibility(View.GONE);
+                            }
+                            numberOfSubject = adapter.getItemCount();
+                            loadingDialog.stopLoading();
+                            adapter.notifyDataSetChanged();
+
+                        } else {
+                            loadingDialog.stopLoading();
                         }
-                        if(subjectList.size()!=0){
-                            addCourse.setVisibility(View.GONE);
-                        }
-                        loadingDialog.stopLoading();
-                        adapter.notifyDataSetChanged();
-                    } else {
-                        loadingDialog.stopLoading();
-                        Toast.makeText(Home.this, "Document does not exist", Toast.LENGTH_SHORT).show();
-                    }
 
-                })
-                .addOnFailureListener(e -> {
-                    loadingDialog.stopLoading();
-                    Toast.makeText(Home.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
-                });
+                    })
+                    .addOnFailureListener(e -> {
+                        loadingDialog.stopLoading();
+                        Toast.makeText(Home.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
+                    });
 
         }catch (Exception ignored){
             loadingDialog.stopLoading();
@@ -189,10 +206,7 @@ public class Home extends AppCompatActivity {
         adapter = new SubjectAdapter(subjectList, this);
         recyclerView.setAdapter(adapter);
 
-
-
     }
-
 
     public void web(View view){
         Uri uri = Uri.parse("https://swagdev.vercel.app/");

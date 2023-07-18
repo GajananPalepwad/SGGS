@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sggs.sggs.adapters.EventAdapter;
+import com.sggs.sggs.loadingAnimation.LoadingDialog;
 import com.sggs.sggs.model.EventModel;
 
 import java.text.ParseException;
@@ -27,11 +28,15 @@ public class EventPage extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor preferences;
     RecyclerView recyclerView;
+    LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_page);
+
+        loadingDialog = new LoadingDialog(this);
+        loadingDialog.startLoading();
 
         ImageView back = findViewById(R.id.back);
         back.setOnClickListener(v -> onBackPressed());
@@ -83,14 +88,15 @@ public class EventPage extends AppCompatActivity {
                                 return 0;
                             });
 
-
                             adapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(EventPage.this, "Document does not exist", Toast.LENGTH_SHORT).show();
                         }
+                        loadingDialog.stopLoading();
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(EventPage.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
+                        loadingDialog.stopLoading();
                     });
         } catch (Exception ignored) {}
 

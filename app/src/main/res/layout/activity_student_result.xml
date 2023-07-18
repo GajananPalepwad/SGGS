@@ -17,14 +17,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/sggs" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ImageView
         android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
-        android:backgroundTint="#04DBE6"
-        android:textColor="@color/white"
-        android:background="@drawable/roundbutton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/round_boarder"
+        android:elevation="4dp"
+        android:src="@drawable/arrow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
@@ -244,7 +243,7 @@
         android:id="@+id/cgpa1"
         android:layout_width="325dp"
         android:layout_height="wrap_content"
-        android:text="*Sequence of subject is same as sequence on admit card you can take reference from there.(Except Audit Subject)"
+        android:text="*Sequence of subject is same as sequence on admit card. You can take reference from there.(Except Audit Subject)"
         android:textColor="#AF0000"
         android:textSize="10sp"
         android:textStyle="bold"

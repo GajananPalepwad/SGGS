@@ -35,6 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.sggs.sggs.loadingAnimation.LoadingDialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,11 +49,16 @@ public class GoogleLoginPage extends AppCompatActivity {
     Button signinBtn;
 
     String tokenString="";
+    LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_login_page);
+
+        loadingDialog = new LoadingDialog(this);
+
+
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.password);
         signinBtn = findViewById(R.id.signinBtn);
@@ -66,7 +72,10 @@ public class GoogleLoginPage extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.POST_NOTIFICATIONS}, 1);
         }
 
-        signinBtn.setOnClickListener(v -> checkLogin());
+        signinBtn.setOnClickListener(v -> {
+            loadingDialog.startLoading();
+            checkLogin();
+        });
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if(acct!=null){
@@ -89,6 +98,7 @@ public class GoogleLoginPage extends AppCompatActivity {
                 .requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
         client = GoogleSignIn.getClient(this, options);
         regBtn.setOnClickListener(v -> {
+            loadingDialog.startLoading();
             Intent i = client.getSignInIntent();
             startActivityForResult(i, 1234);
         });
@@ -98,7 +108,8 @@ public class GoogleLoginPage extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 //        progressBar.setVisibility(View.VISIBLE);
-
+        loadingDialog.stopLoading();
+        loadingDialog.startLoading();
             if (requestCode == 1234) {
                 Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
                 try {
@@ -109,18 +120,36 @@ public class GoogleLoginPage extends AppCompatActivity {
                             .addOnCompleteListener(task1 -> {
                                // progressBar.setVisibility(View.GONE);
                                 if (task1.isSuccessful()) {
-                                    Intent intent = new Intent(getApplicationContext(), SignUpPage.class);
-                                    startActivity(intent);
+                                    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+                                    loadingDialog.stopLoading();
+                                    if(acct!=null) {
+                                        String emailString = acct.getEmail();
+                                        if (emailString.endsWith("@gmail.com")){
+                                            client.signOut().addOnCompleteListener(task2 -> {
+                                                Toast.makeText(GoogleLoginPage.this, "PLEASE LOGIN WITH SGGS EMAIL ONLY", Toast.LENGTH_SHORT).show();
+                                            });
+                                        }else{
+                                            Intent intent = new Intent(getApplicationContext(), SignUpPage.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+
+
+                                    }
 
                                 } else {
+                                    loadingDialog.stopLoading();
                                     Toast.makeText(GoogleLoginPage.this, task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
 
                 } catch (ApiException e) {
+                    loadingDialog.stopLoading();
                     e.printStackTrace();
                 }
 
+            }else {
+                loadingDialog.stopLoading();
             }
     }
 
@@ -187,17 +216,23 @@ public class GoogleLoginPage extends AppCompatActivity {
 //                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(GoogleLoginPage.this, Home.class);
                                 startActivity(intent);
+                                loadingDialog.stopLoading();
+                                finish();
                             }else{
                                 Toast.makeText(this, "Invalid password", Toast.LENGTH_SHORT).show();
+                                loadingDialog.stopLoading();
                             }
                         } else {
                             // Input does not match database
                             Toast.makeText(this, "Invalid email", Toast.LENGTH_SHORT).show();
+                            loadingDialog.stopLoading();
                         }
                     } else {
                         // Error occurred while querying the database
                         Toast.makeText(this, "Error occurred while logging in", Toast.LENGTH_SHORT).show();
+                        loadingDialog.stopLoading();
                     }
+
                 });
     }
 

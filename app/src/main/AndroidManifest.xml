@@ -73,9 +73,6 @@
             android:name=".NotificationSender"
             android:exported="false" />
         <activity
-            android:name=".ScannerForResult"
-            android:exported="false" />
-        <activity
             android:name=".StudentResult"
             android:exported="false" />
         <activity

@@ -29,6 +29,7 @@ import com.google.firebase.firestore.MetadataChanges;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
+import com.sggs.sggs.loadingAnimation.LoadingDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,15 +55,19 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
     CardView cardEle1, cardEle2, cardEle3;
     ImageView back;
     boolean ele1Present , ele2Present , ele3Present;
-    TextView textView;
+
     Button submit;
     SharedPreferences sharedPreferences;
+    LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_selecter);
-        textView = findViewById(R.id.textView);
+
+        loadingDialog = new LoadingDialog(this);
+        loadingDialog.startLoading();
+
         elect = findViewById(R.id.elective);
         elect.setVisibility(View.GONE);
         back = findViewById(R.id.back);
@@ -80,17 +85,40 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
         back.setOnClickListener(v -> onBackPressed());
         submit.setOnClickListener(v -> showConfirmationDialog());
-
+        showFYConfirmationDialog();
         makeYearArray();
         makeSemArray();
         chooseBranch();
 
     }
 
+    private void showFYConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Are you First Year?");
+        builder.setMessage("If you are FY, you don't need to select Branch and Year");
+
+        builder.setPositiveButton("YES", (dialog, which) -> {
+            // Call the logout function
+            selectedBranch = "FY";
+            selectedYear = "FY";
+            branchSpinner.setEnabled(false);
+            yearSpinner.setEnabled(false);
+            chooseDivision();
+            loadingDialog.startLoading();
+        });
+
+        builder.setNegativeButton("NO", ((dialog, which) -> {
+            dialog.dismiss();
+        }));
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+
     private void chooseBranch() {
-
-        branch.add("Select Branch");
-
+        branch.add("Choose Branch");
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         CollectionReference courseCollectionRef = firestore.collection("Course");
 
@@ -113,6 +141,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
                     } else {
                         Log.d("Fetch Error", "Error getting documents: " + task.getException());
                     }
+                    loadingDialog.stopLoading();
                 });
     }
 
@@ -185,6 +214,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
                     } else {
                         Log.d("Fetch Error", "Error getting documents: " + task.getException());
                     }
+                    loadingDialog.stopLoading();
                 });
     }
 
@@ -204,9 +234,11 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
             selectedYear = parent.getItemAtPosition(position).toString();
             if(!selectedYear.equals("Select Year")) {
                 chooseDivision();
+                loadingDialog.startLoading();
             }else {
                 division.clear();
             }
+
 
         } else if (viewId == R.id.divisionSelector) {
 
@@ -222,6 +254,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
             // Division spinner selection listener
             selectedSem = parent.getItemAtPosition(position).toString();
             electiveSelection();
+            loadingDialog.startLoading();
 
         } else if (viewId == R.id.subjectSelector1) {
 
@@ -233,7 +266,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
             subjects.add(selectedElective1);
             elec2.remove(selectedElective1);
             chooseElective2();
-            textView.setText( "Subjects: "+subjects);
+
         } else if (viewId == R.id.subjectSelector2) {
 
             // Division spinner selection listener
@@ -244,7 +277,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
             subjects.add(selectedElective2);
             elec3.remove(selectedElective2);
             chooseElective3();
-            textView.setText( "Subjects: "+subjects);
+
         } else if (viewId == R.id.subjectSelector3) {
 
             // Division spinner selection listener
@@ -253,19 +286,16 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
             }
             selectedElective3 = parent.getItemAtPosition(position).toString();
             subjects.add(selectedElective3);
-            textView.setText( "Subjects: "+subjects);
+
         }
 
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 
     private void makeYearArray(){
         year.add("Select Year");
-        year.add("FY");
         year.add("SY");
         year.add("TY");
         year.add("Btech");
@@ -385,14 +415,13 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
                                 elect.setVisibility(View.GONE);
                             }
 
-
                             chooseElective1();
-                            textView.setText( "Subjects: "+subjects);
 
                         }
                     } else {
                         Toast.makeText(this, "Error getting documents: " + task.getException(), Toast.LENGTH_SHORT).show();
                     }
+                    loadingDialog.stopLoading();
                 });
     }
 
@@ -405,7 +434,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
         for (int i = 0; i < subjects.size(); i++) {
             String key = subjects.get(i);
-            data.put(key, 100);
+            data.put(key, 0);
             // add in teacher attendance list
             addDocumentToCollection(selectedBranch,selectedYear,selectedDivision,key,sharedPreferences.getString("regNum",""));
         }
@@ -439,12 +468,10 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
                     for (int i = 0; i < subjects.size(); i++) {
                         String key = subjects.get(i);
-                        // add in teacher attendance list
                         addDocumentToCollection(selectedBranch,selectedYear,selectedDivision,key,sharedPreferences.getString("regNum",""));
                     }
 
-                    Toast.makeText(this, "Selection Successful", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(CourseSelecter.this, "Selection Successful", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -453,22 +480,21 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
 
 
-    private static void addDocumentToCollection(String selectedBranch,String selectedYear, String selectedDivision, String subject, String reg) {
+    private void addDocumentToCollection(String selectedBranch, String selectedYear, String selectedDivision, String subject, String reg) {
 
-        String dataKey = "exampleKey";
-        String dataValue = "exampleValue";
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = firestore.collection("Teachers").
-                document(selectedBranch).
-                collection(selectedYear).
-                document(selectedDivision).
-                collection(subject).
-                document(reg);
+        DocumentReference documentReference = firestore.collection("Teachers")
+                .document(selectedBranch)
+                .collection(selectedYear)
+                .document(selectedDivision)
+                .collection(subject)
+                .document(reg);
 
-        Map<String, Object> documentData = new HashMap<>();
-        documentData.put(dataKey, dataValue);
+        documentReference.set(new HashMap<>()).addOnSuccessListener(aVoid -> {
+            finish();
+            loadingDialog.startLoading();
+        });
 
-        documentReference.set(documentData, SetOptions.merge());
     }
 
 
@@ -485,6 +511,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
         builder.setPositiveButton("Confirm", (dialog, which) -> {
             // Call the logout function
             sendDataToFireStore();
+            loadingDialog.startLoading();
         });
 
         builder.setNegativeButton("Reselect", (dialog, which) -> {

@@ -37,7 +37,7 @@ public class ExamSection extends AppCompatActivity {
         });
 
         result.setOnClickListener(v -> {
-            Intent intent = new Intent(ExamSection.this,ScannerForResult.class);
+            Intent intent = new Intent(ExamSection.this,StudentResult.class);
             startActivity(intent);
         });
 

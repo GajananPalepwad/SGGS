@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,40 +48,16 @@ public class StudentResult extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_result);
-        Button back=findViewById(R.id.back);
+        ImageView back=findViewById(R.id.back);
         progressBar = findViewById(R.id.prg);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        Intent intent = getIntent();
-        data = intent.getStringExtra("dataname");
-        String mobileNo="";
-        int j=0;
-        for(int i=0;i<data.length();i++){
-            if(data.charAt(i)=='0'||
-                    data.charAt(i)=='1'||
-                    data.charAt(i)=='2'||
-                    data.charAt(i)=='3'||
-                    data.charAt(i)=='4'||
-                    data.charAt(i)=='5'||
-                    data.charAt(i)=='6'||
-                    data.charAt(i)=='7'||
-                    data.charAt(i)=='8'||
-                    data.charAt(i)=='9'){
-                mobileNo=mobileNo+data.charAt(i);
-                j++;
-            }
-            if(j==10){
-                break;
-            }
-        }
+        back.setOnClickListener(v -> onBackPressed());
 
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        data = sharedPreferences.getString("regNum","");
+        
         namev = findViewById(R.id.name);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet1 = ref.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Name");
+        DatabaseReference Sheet1 = ref.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Name");
         Sheet1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -99,7 +77,7 @@ public class StudentResult extends AppCompatActivity {
 
         regv = findViewById(R.id.regno);
         DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet2 = ref1.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Reg_No");
+        DatabaseReference Sheet2 = ref1.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Reg_No");
         Sheet2.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -118,7 +96,7 @@ public class StudentResult extends AppCompatActivity {
 
         branchv = findViewById(R.id.classs);
         DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet3 = ref2.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Branch");
+        DatabaseReference Sheet3 = ref2.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Branch");
         Sheet3.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -137,7 +115,7 @@ public class StudentResult extends AppCompatActivity {
 
         sem = findViewById(R.id.sem);
         DatabaseReference ref12 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet31 = ref12.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Sem");
+        DatabaseReference Sheet31 = ref12.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Sem");
         Sheet31.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -171,7 +149,7 @@ public class StudentResult extends AppCompatActivity {
         p7 = findViewById(R.id.p7);
         p8 = findViewById(R.id.p8);
         DatabaseReference ref112 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet311 = ref112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject1");
+        DatabaseReference Sheet311 = ref112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject1");
         Sheet311.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -189,7 +167,7 @@ public class StudentResult extends AppCompatActivity {
         });
 
         DatabaseReference ref1112 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet3111 = ref1112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject2");
+        DatabaseReference Sheet3111 = ref1112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject2");
         Sheet3111.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -207,7 +185,7 @@ public class StudentResult extends AppCompatActivity {
         });
 
         DatabaseReference ref11112 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet31111 = ref11112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject3");
+        DatabaseReference Sheet31111 = ref11112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject3");
         Sheet31111.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -225,7 +203,7 @@ public class StudentResult extends AppCompatActivity {
         });
 
         DatabaseReference ref111112 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet311111 = ref111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject4");
+        DatabaseReference Sheet311111 = ref111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject4");
         Sheet311111.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -243,7 +221,7 @@ public class StudentResult extends AppCompatActivity {
         });
 
         DatabaseReference ref1111112 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet3111111 = ref1111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject5");
+        DatabaseReference Sheet3111111 = ref1111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject5");
         Sheet3111111.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -261,7 +239,7 @@ public class StudentResult extends AppCompatActivity {
         });
 
         DatabaseReference ref11111112 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet31111111 = ref11111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject6");
+        DatabaseReference Sheet31111111 = ref11111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject6");
         Sheet31111111.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -279,7 +257,7 @@ public class StudentResult extends AppCompatActivity {
         });
 
         DatabaseReference ref111111112 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet311111111 = ref111111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject7");
+        DatabaseReference Sheet311111111 = ref111111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject7");
         Sheet311111111.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -297,7 +275,7 @@ public class StudentResult extends AppCompatActivity {
         });
 
         DatabaseReference ref1111111112 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet3111111111 = ref1111111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject8");
+        DatabaseReference Sheet3111111111 = ref1111111112.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject8");
         Sheet3111111111.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -315,7 +293,7 @@ public class StudentResult extends AppCompatActivity {
         });
 
         DatabaseReference ref22 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet22 = ref22.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject1_Pract");
+        DatabaseReference Sheet22 = ref22.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject1_Pract");
         Sheet22.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -333,7 +311,7 @@ public class StudentResult extends AppCompatActivity {
         });
 
         DatabaseReference ref222 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet222 = ref222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject2_Pract");
+        DatabaseReference Sheet222 = ref222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject2_Pract");
         Sheet222.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -352,7 +330,7 @@ public class StudentResult extends AppCompatActivity {
 
 
         DatabaseReference ref2222 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet2222 = ref2222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject3_Pract");
+        DatabaseReference Sheet2222 = ref2222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject3_Pract");
         Sheet2222.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -371,7 +349,7 @@ public class StudentResult extends AppCompatActivity {
 
 
         DatabaseReference ref22222 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet22222 = ref22222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject4_Pract");
+        DatabaseReference Sheet22222 = ref22222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject4_Pract");
         Sheet22222.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -390,7 +368,7 @@ public class StudentResult extends AppCompatActivity {
 
 
         DatabaseReference ref222222 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet222222 = ref222222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject5_Pract");
+        DatabaseReference Sheet222222 = ref222222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject5_Pract");
         Sheet222222.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -409,7 +387,7 @@ public class StudentResult extends AppCompatActivity {
 
 
         DatabaseReference ref2222222 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet2222222 = ref2222222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject6_Pract");
+        DatabaseReference Sheet2222222 = ref2222222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject6_Pract");
         Sheet2222222.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -428,7 +406,7 @@ public class StudentResult extends AppCompatActivity {
 
 
         DatabaseReference ref22222222 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet22222222 = ref22222222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject7_Pract");
+        DatabaseReference Sheet22222222 = ref22222222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject7_Pract");
         Sheet22222222.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -447,7 +425,7 @@ public class StudentResult extends AppCompatActivity {
 
 
         DatabaseReference ref222222222 = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference Sheet222222222 = ref222222222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(mobileNo).child("Subject8_Pract");
+        DatabaseReference Sheet222222222 = ref222222222.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc").child("Sheet1").child(data).child("Subject8_Pract");
         Sheet222222222.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

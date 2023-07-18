@@ -70,10 +70,6 @@ public class HomeForStudents extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void Result(View view){
-        Intent intent = new Intent(HomeForStudents.this,ScannerForResult.class);
-        startActivity(intent);
-    }
 
     public void logout(View view){
        signOut();

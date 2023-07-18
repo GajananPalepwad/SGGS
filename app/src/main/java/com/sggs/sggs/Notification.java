@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sggs.sggs.adapters.NotificationAdapter;
 import com.sggs.sggs.adapters.TimeTableAdapter;
+import com.sggs.sggs.loadingAnimation.LoadingDialog;
 import com.sggs.sggs.model.NotificationModel;
 import com.sggs.sggs.model.TimeTableModel;
 
@@ -29,11 +30,15 @@ public class Notification extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor preferences;
     RecyclerView recyclerView;
+    LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+
+        loadingDialog = new LoadingDialog(this);
+        loadingDialog.startLoading();
 
         ImageView back = findViewById(R.id.back);
         back.setOnClickListener(v -> onBackPressed());
@@ -84,14 +89,16 @@ public class Notification extends AppCompatActivity {
                                 return 0;
                             });
 
-
+                            loadingDialog.stopLoading();
                             adapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(Notification.this, "Document does not exist", Toast.LENGTH_SHORT).show();
+                            loadingDialog.stopLoading();
                         }
                     })
                     .addOnFailureListener(e -> {
                         Toast.makeText(Notification.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
+                        loadingDialog.stopLoading();
                     });
         } catch (Exception ignored) {}
 

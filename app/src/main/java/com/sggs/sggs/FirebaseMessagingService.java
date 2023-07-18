@@ -38,14 +38,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         v.vibrate(pattern, -1);
 
 
-        String icon = remoteMessage.getNotification().getIcon();
-        int resourceImage;
-        if (icon != null) {
-            resourceImage = getResources().getIdentifier(icon, "drawable", getPackageName());
-        } else {
-            // Provide a default icon resource ID if the icon is not specified
-            resourceImage = R.drawable.icon;
-        }
+        int resourceImage = R.drawable.icon;
 
 
 
@@ -58,7 +51,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             builder.setSmallIcon(resourceImage);
         }
 
-        Intent resultIntent = new Intent(this, Home.class);
+        Intent resultIntent = new Intent(this, com.sggs.sggs.Notification.class);
 
 
 
@@ -103,11 +96,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         // notificationId is a unique int for each notification that you must define
         mNotificationManager.notify(100, builder.build());
 
-    }
-    private String getCurrentTime() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date currentDate = new Date(System.currentTimeMillis());
-        return dateFormat.format(currentDate);
     }
 
 

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.sggs.sggs.adapters.AdmitCardAdapter;
+import com.sggs.sggs.loadingAnimation.LoadingDialog;
 import com.sggs.sggs.model.AdmitCardModel;
 
 import org.checkerframework.checker.units.qual.A;
@@ -36,10 +38,11 @@ import java.util.List;
 public class AdmitCard extends AppCompatActivity {
     String data;
 
-    TextView namev, classs, regv, examname, statusv;
+    TextView namev, classs, regv, examname, statusv, admitcard;
 
     private AdmitCardAdapter adapter;
 
+    LoadingDialog loadingDialog;
 
     RecyclerView recyclerView;
     @Override
@@ -47,6 +50,8 @@ public class AdmitCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admit_card);
 
+        loadingDialog = new LoadingDialog(this);
+        loadingDialog.startLoading();
         recyclerView = findViewById(R.id.recyclerView);
         Intent intent = getIntent();
         data = intent.getStringExtra("dataname");
@@ -58,14 +63,17 @@ public class AdmitCard extends AppCompatActivity {
         namev=findViewById(R.id.name);
         regv=findViewById(R.id.regno);
         statusv=findViewById(R.id.status);
+        admitcard=findViewById(R.id.noAdmit);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
+        data = sharedPreferences.getString("regNum","");
 
         List<AdmitCardModel> dataList = new ArrayList<>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc")
                 .child("AdmitCard")
-                .child("721842942");
+                .child(data);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -77,13 +85,10 @@ public class AdmitCard extends AppCompatActivity {
                     dataList.add(new AdmitCardModel(key, values));
                 }
 
-                Collections.sort(dataList, new Comparator<AdmitCardModel>() {
-                    @Override
-                    public int compare(AdmitCardModel model1, AdmitCardModel model2) {
-                        String key1 = model1.getKey();
-                        String key2 = model2.getKey();
-                        return key1.compareTo(key2);
-                    }
+                Collections.sort(dataList, (model1, model2) -> {
+                    String key1 = model1.getKey();
+                    String key2 = model2.getKey();
+                    return key1.compareTo(key2);
                 });
 
 
@@ -93,6 +98,10 @@ public class AdmitCard extends AppCompatActivity {
                 // Initialize and set the adapter
                 adapter = new AdmitCardAdapter(dataList, AdmitCard.this);
                 recyclerView.setAdapter(adapter);
+                if(adapter.getItemCount()!=0){
+                    admitcard.setVisibility(View.GONE);
+                }
+                loadingDialog.stopLoading();
             }
 
             @Override
@@ -106,7 +115,7 @@ public class AdmitCard extends AppCompatActivity {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         DatabaseReference dbpath = db.child("12n55jC0C4laBANwgTXrkvHgqsCp4o5OYxqYG7YUxYtc")
                 .child("AdmitCard")
-                .child("721842942");
+                .child(data);
         dbpath.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {

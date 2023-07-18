@@ -56,19 +56,13 @@ public class FcmNotificationsSender  {
             mainObj.put("notification", notiObject);
 
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, postUrl, mainObj, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, postUrl, mainObj, response -> {
 
-                    // code run is got response
+                // code run is got response
 
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // code run is got error
+            }, error -> {
+                // code run is got error
 
-                }
             }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {

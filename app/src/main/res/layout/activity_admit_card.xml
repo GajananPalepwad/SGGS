@@ -125,61 +125,23 @@
 
     </androidx.cardview.widget.CardView>
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical" >-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/examname"-->
-<!--                android:layout_width="300dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:textAlignment="center"-->
-<!--                android:paddingTop="75dp"-->
-<!--                android:textSize="18dp"-->
-<!--                android:textColor="#000000"-->
-<!--                android:text="ADMIT CARD" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/name"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:paddingLeft="10dp"-->
-<!--                android:paddingTop="10dp"-->
-<!--                android:text="Name: "-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/classs"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:paddingLeft="10dp"-->
-<!--                android:text="Class: "-->
-<!--                android:textColor="#000000" />-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:paddingBottom="20dp"-->
-<!--                android:orientation="horizontal">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/regno"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:paddingLeft="10dp"-->
-<!--                    android:text="Reg no: "-->
-<!--                    android:textColor="#000000" />-->
-
-<!--                    <TextView-->
-<!--                    android:id="@+id/status"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:gravity="center"-->
-<!--                    android:text="Status: "-->
-<!--                    android:textColor="#000000" />-->
+    <TextView
+        android:id="@+id/noAdmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:elevation="1dp"
+        android:fontFamily="@font/rubik_bold"
+        android:textAlignment="center"
+        android:text="Admit Card\nNot released Yet"
+        android:textColor="#970F254E"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView12" />
 
 
     <androidx.recyclerview.widget.RecyclerView
