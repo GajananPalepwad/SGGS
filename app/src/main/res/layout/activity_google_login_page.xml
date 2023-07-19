@@ -67,7 +67,7 @@
         android:backgroundTint="#FFF3AF"
         android:elevation="7dp"
         android:fontFamily="sans-serif"
-        android:hint="Paasword"
+        android:hint="Password"
         android:inputType="textPassword"
         android:paddingHorizontal="20dp"
         android:textAlignment="textStart"

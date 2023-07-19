@@ -188,8 +188,6 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
     private void chooseDivision() {
 
         division.clear();
-        division.add("Select Division");
-
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         CollectionReference courseCollectionRef = firestore.collection("Course")
                 .document(selectedBranch)
@@ -490,7 +488,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
                 .collection(subject)
                 .document(reg);
 
-        documentReference.set(new HashMap<>()).addOnSuccessListener(aVoid -> {
+        documentReference.update(new HashMap<>()).addOnSuccessListener(aVoid -> {
             finish();
             loadingDialog.startLoading();
         });
