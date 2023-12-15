@@ -113,6 +113,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
 
         AlertDialog dialog = builder.create();
+
         dialog.show();
     }
 
@@ -300,7 +301,6 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
     }
 
     private void makeSemArray(){
-        sem.add("Select Semester of This Year");
         sem.add("Semester-1");
         sem.add("Semester-2");
     }
@@ -464,14 +464,15 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
                     preferences.putString("semester",selectedSem);
                     preferences.apply();
 
-                    for (int i = 0; i < subjects.size(); i++) {
-                        String key = subjects.get(i);
-                        addDocumentToCollection(selectedBranch,selectedYear,selectedDivision,key,sharedPreferences.getString("regNum",""));
-                    }
-
+//                    for (int i = 0; i < subjects.size(); i++) {
+//                        String key = subjects.get(i);
+//                        addDocumentToCollection(selectedBranch,selectedYear,selectedDivision,key,sharedPreferences.getString("regNum",""));
+//                    }
+                    loadingDialog.stopLoading();
                     Toast.makeText(CourseSelecter.this, "Selection Successful", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
+                    loadingDialog.stopLoading();
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 });
     }
@@ -479,6 +480,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
 
     private void addDocumentToCollection(String selectedBranch, String selectedYear, String selectedDivision, String subject, String reg) {
+
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         DocumentReference documentReference = firestore.collection("Teachers")
@@ -488,10 +490,16 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
                 .collection(subject)
                 .document(reg);
 
-        documentReference.update(new HashMap<>()).addOnSuccessListener(aVoid -> {
-            finish();
-            loadingDialog.startLoading();
+// Create a HashMap with the field-value pair you want to update
+        Map<String, Object> data = new HashMap<>();
+        data.put("test", "test");
+
+        documentReference.set(data).addOnSuccessListener(aVoid -> {
+            Toast.makeText(this, "Update successful", Toast.LENGTH_SHORT).show();
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Update failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         });
+
 
     }
 

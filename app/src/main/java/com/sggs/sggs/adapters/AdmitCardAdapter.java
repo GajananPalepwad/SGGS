@@ -72,26 +72,21 @@ public class AdmitCardAdapter extends RecyclerView.Adapter<AdmitCardAdapter.View
 
         if(subString.charAt(0) == 's' && subString.charAt(1) == 'u' && subString.charAt(2) == 'b'){
 
-            String subjectString = model.getValue();
-            String pattern = "\\b([A-Z]{3}\\d{3})\\b";
-            Pattern regex = Pattern.compile(pattern);
-            Matcher matcher = regex.matcher(subjectString);
-            if (matcher.find()) {
-                String extracted = matcher.group(1);
-                holder.subCode.setText(extracted);
+            String input = model.getValue();
 
-                int colonIndex = subjectString.indexOf(':');
-                int openParenIndex = subjectString.indexOf('(');
-                String subject = subjectString.substring(colonIndex + 2, openParenIndex - 1);
-                holder.subject.setText(subject);
+            if (!input.isEmpty()) {
 
-                openParenIndex = subjectString.indexOf('(');
-                String th = subjectString.substring(openParenIndex + 1, openParenIndex + 3);
-                holder.th.setText(th);
+                String year = input.substring(0, input.indexOf('-')).trim();
+                String courseCode = input.substring(input.indexOf('-') + 1, input.indexOf(':')).trim();
+                String subjectString = input.substring(input.indexOf(':') + 1, input.indexOf('(')).trim();
+                String theory = input.substring(input.indexOf('(') + 1, input.indexOf('/')).trim();
+                String practical = input.substring(input.indexOf('/') + 1, input.lastIndexOf(')')).trim();
 
-                openParenIndex = subjectString.indexOf('/');
-                String pr = subjectString.substring(openParenIndex + 1, openParenIndex + 3);
-                holder.pr.setText(pr);
+                holder.subCode.setText(courseCode);
+                holder.subject.setText(subjectString);
+                holder.th.setText(theory);
+                holder.pr.setText(practical);
+
 
                 int colorResId = colorList.get(position % colorList.size());
 

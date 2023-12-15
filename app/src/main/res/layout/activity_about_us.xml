@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="40dp"
-        android:text="App Created by Gajanan Palepwad\n\nContributers : Vikramaditya Khupse, Vedant Pawar, Shantanu Pande, Sushil Bhoybar, Sneha Bichkunde\n\nSWAG Developer’s Club is a community where you convert your creative ideas into projects no matter if you have any prior knowledge about these fields or not, We think it necessary to offer students the option to study and build projects together. SWAG stands for SGGS Web App Game developers Club. This club will provide a proper environment for development."
+        android:text="App Created by Gajanan Palepwad\n\nContributers: \n#Vikrmaditya Khupse\n#Pranav Dhumale\n#Sneha Bichkunde\n\nSWAG Developer’s Club is a community where you convert your creative ideas into projects no matter if you have any prior knowledge about these fields or not, We think it necessary to offer students the option to study and build projects together. SWAG stands for SGGS Web App Game developers Club. This club will provide a proper environment for development."
         android:textColor="@color/black"
         android:textSize="16dp"
         android:textStyle="bold"
