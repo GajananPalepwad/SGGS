@@ -211,6 +211,7 @@ public class GoogleLoginPage extends AppCompatActivity {
                                 preferences.putString("year", document.getString("year"));
                                 preferences.putString("division", document.getString("division"));
                                 preferences.putString("semester", document.getString("sem"));
+                                preferences.putString("academicYear", document.getString("academicYear"));
                                 preferences.apply();
                                 sendNotification();
 //                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();

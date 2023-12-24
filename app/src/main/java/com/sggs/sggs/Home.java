@@ -39,7 +39,7 @@ public class Home extends AppCompatActivity {
 
     Button addCourse;
     TextView name, tvReg;
-    ImageView profile, notificationBtn;
+    ImageView profile, notificationBtn, btnEditCourse;
     String personEmail;
     GoogleSignInClient gsc;
     GoogleSignInOptions gso;
@@ -71,6 +71,7 @@ public class Home extends AppCompatActivity {
         profile = findViewById(R.id.profile);
         recyclerView = findViewById(R.id.recyclerView);
         notificationBtn = findViewById(R.id.notificationBtn);
+        btnEditCourse = findViewById(R.id.BTNeditSub);
         addCourse = findViewById(R.id.addCourseBtn);
         timeTable = findViewById(R.id.classTime);
         examSection = findViewById(R.id.examSection);
@@ -98,6 +99,11 @@ public class Home extends AppCompatActivity {
 
         addCourse.setOnClickListener(v -> {
             Intent intent = new Intent(Home.this, CourseSelecter.class);
+            startActivity(intent);
+        });
+
+        btnEditCourse.setOnClickListener(v -> {
+            Intent intent = new Intent(Home.this, EditCourse.class);
             startActivity(intent);
         });
 
@@ -161,11 +167,13 @@ public class Home extends AppCompatActivity {
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("Students")
-                    .document(sharedPreferences.getString("branch",""))
-                    .collection(sharedPreferences.getString("year",""))
-                    .document(sharedPreferences.getString("division",""))
-                    .collection(sharedPreferences.getString("regNum",""))
-                    .document("Attendance")
+//                    .document(sharedPreferences.getString("branch",""))
+//                    .collection(sharedPreferences.getString("year",""))
+//                    .document(sharedPreferences.getString("division",""))
+//                    .collection(sharedPreferences.getString("regNum",""))
+                    .document(sharedPreferences.getString("regNum",""))
+
+
                     .get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {

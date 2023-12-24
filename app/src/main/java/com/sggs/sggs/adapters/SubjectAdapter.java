@@ -106,8 +106,9 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         String[] words = subName.split(" ");
         StringBuilder result = new StringBuilder();
 
-        for (String word : words) {
-            if (!word.isEmpty()) {
+        for (int i = 1; i < words.length; i++) {
+            String word = words[i];
+            if (!word.isEmpty() && !isIgnoredWord(word)) {
                 result.append(word.charAt(0));
             }
         }
@@ -126,6 +127,17 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
 
         holder.card.setBackgroundTintList(ColorStateList.valueOf(color));
 
+    }
+
+    private boolean isIgnoredWord(String word) {
+        // Add more words to ignore if needed
+        String[] ignoredWords = {"of", "and", "the", "for"};
+        for (String ignoredWord : ignoredWords) {
+            if (ignoredWord.equalsIgnoreCase(word)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

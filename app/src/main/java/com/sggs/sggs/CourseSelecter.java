@@ -4,9 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,14 +34,23 @@ import com.google.firebase.firestore.MetadataChanges;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
+import com.sggs.sggs.adapters.SelectSubjectAdapter;
 import com.sggs.sggs.loadingAnimation.LoadingDialog;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+
+import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
+import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 
 public class CourseSelecter extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -44,21 +58,25 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
     ArrayList<String> year = new ArrayList<>();
     ArrayList<String> division = new ArrayList<>();
     ArrayList<String> sem = new ArrayList<>();
-    List<String> subjects = new ArrayList<>();
+    public static List<String> subjects = new ArrayList<>();
     List<String> elec1 = new ArrayList<>();
     List<String> elec2 = new ArrayList<>();
     List<String> elec3 = new ArrayList<>();
 
+    List<String> subjectListSpinner = new ArrayList<>();
+    RecyclerView rcShowSubject;
     String selectedBranch="", selectedYear="", selectedDivision="A", selectedSem="", selectedElective1="", selectedElective2="", selectedElective3="";
-    Spinner branchSpinner, yearSpinner, divisionSpinner, semSpinner, electiveSpinner1, electiveSpinner2, electiveSpinner3;
+    Spinner branchSpinner, yearSpinner, divisionSpinner, academicYearSelector;
     LinearLayout elect;
     CardView cardEle1, cardEle2, cardEle3;
     ImageView back;
     boolean ele1Present , ele2Present , ele3Present;
 
-    Button submit;
+    Button submit, btnAddSubject;
     SharedPreferences sharedPreferences;
     LoadingDialog loadingDialog;
+    SpinnerDialog spinnerDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,53 +86,61 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
         loadingDialog = new LoadingDialog(this);
         loadingDialog.startLoading();
 
-        elect = findViewById(R.id.elective);
-        elect.setVisibility(View.GONE);
         back = findViewById(R.id.back);
         submit = findViewById(R.id.submitBtn);
-        cardEle1 = findViewById(R.id.card1);
-        cardEle2 = findViewById(R.id.card2);
-        cardEle3 = findViewById(R.id.card3);
+
+        btnAddSubject = findViewById(R.id.btnAddSubject);
+
+
+        rcShowSubject = findViewById(R.id.rcShowSubject);
+
         branchSpinner = findViewById(R.id.branchSelector);
         yearSpinner = findViewById(R.id.yearSelector);
         divisionSpinner = findViewById(R.id.divisionSelector);
-        semSpinner = findViewById(R.id.semSelector);
-        electiveSpinner1 = findViewById(R.id.subjectSelector1);
-        electiveSpinner2 = findViewById(R.id.subjectSelector2);
-        electiveSpinner3 = findViewById(R.id.subjectSelector3);
+        academicYearSelector = findViewById(R.id.academicYearSelector);
+
+        sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
 
         back.setOnClickListener(v -> onBackPressed());
-        submit.setOnClickListener(v -> showConfirmationDialog());
-        showFYConfirmationDialog();
+        submit.setOnClickListener(v ->
+                showConfirmationDialog()
+        );
+
+        String[] subjectstring = getResources().getStringArray(R.array.subjectList);
+        subjectListSpinner = new ArrayList<>(Arrays.asList(subjectstring));
+
+        spinnerDialog=new SpinnerDialog((Activity) CourseSelecter.this, (ArrayList<String>) subjectListSpinner,"Select or Search Subject","Close");// With No Animation
+        spinnerDialog=new SpinnerDialog((Activity) CourseSelecter.this, (ArrayList<String>) subjectListSpinner,"Select or Search Subject",R.style.DialogAnimations_SmileWindow,"Close");// With 	Animation
+
+        spinnerDialog.setCancellable(true); // for cancellable
+        spinnerDialog.setShowKeyboard(false);// for open keyboard by default
+
+
+        spinnerDialog.bindOnSpinerListener((item, position) -> {
+            Toast.makeText(CourseSelecter.this, item + "  " + position+"", Toast.LENGTH_SHORT).show();
+            subjects.add(item);
+            setSubjectAdapter();
+        });
+
+        btnAddSubject.setOnClickListener(v->{
+            spinnerDialog.showSpinerDialog();
+        });
+
         makeYearArray();
         makeSemArray();
         chooseBranch();
-
+        setSubjectAdapter();
     }
 
-    private void showFYConfirmationDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Are you First Year?");
-        builder.setMessage("If you are FY, you don't need to select Branch and Year");
+    private void setSubjectAdapter(){
 
-        builder.setPositiveButton("YES", (dialog, which) -> {
-            // Call the logout function
-            selectedBranch = "FY";
-            selectedYear = "FY";
-            branchSpinner.setEnabled(false);
-            yearSpinner.setEnabled(false);
-            chooseDivision();
-            loadingDialog.startLoading();
-        });
+        // Example in an Activity
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rcShowSubject.setLayoutManager(layoutManager);
 
-        builder.setNegativeButton("NO", ((dialog, which) -> {
-            dialog.dismiss();
-        }));
+        SelectSubjectAdapter adapter = new SelectSubjectAdapter(subjects);
+        rcShowSubject.setAdapter(adapter);
 
-
-        AlertDialog dialog = builder.create();
-
-        dialog.show();
     }
 
 
@@ -152,38 +178,6 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpinner.setAdapter(adapter);
         yearSpinner.setOnItemSelectedListener(CourseSelecter.this);
-    }
-
-    private void chooseSem() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(CourseSelecter.this,
-                android.R.layout.simple_spinner_item, sem);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        semSpinner.setAdapter(adapter);
-        semSpinner.setOnItemSelectedListener(CourseSelecter.this);
-    }
-
-    private void chooseElective1() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(CourseSelecter.this,
-                android.R.layout.simple_spinner_item, elec1);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        electiveSpinner1.setAdapter(adapter);
-        electiveSpinner1.setOnItemSelectedListener(CourseSelecter.this);
-    }
-
-    private void chooseElective2() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(CourseSelecter.this,
-                android.R.layout.simple_spinner_item, elec2);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        electiveSpinner2.setAdapter(adapter);
-        electiveSpinner2.setOnItemSelectedListener(CourseSelecter.this);
-    }
-
-    private void chooseElective3() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(CourseSelecter.this,
-                android.R.layout.simple_spinner_item, elec3);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        electiveSpinner3.setAdapter(adapter);
-        electiveSpinner3.setOnItemSelectedListener(CourseSelecter.this);
     }
 
     private void chooseDivision() {
@@ -244,47 +238,6 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
             // Division spinner selection listener
             selectedDivision = parent.getItemAtPosition(position).toString();
 
-            if(!selectedDivision.equals("Select Division")) {
-                chooseSem();
-            }
-
-        } else if (viewId == R.id.semSelector) {
-
-            // Division spinner selection listener
-            selectedSem = parent.getItemAtPosition(position).toString();
-            electiveSelection();
-            loadingDialog.startLoading();
-
-        } else if (viewId == R.id.subjectSelector1) {
-
-            // Division spinner selection listener
-            if(!selectedElective1.equals("")){
-                subjects.remove(selectedElective1);
-            }
-            selectedElective1 = parent.getItemAtPosition(position).toString();
-            subjects.add(selectedElective1);
-            elec2.remove(selectedElective1);
-            chooseElective2();
-
-        } else if (viewId == R.id.subjectSelector2) {
-
-            // Division spinner selection listener
-            if(!selectedElective2.equals("")){
-                subjects.remove(selectedElective2);
-            }
-            selectedElective2 = parent.getItemAtPosition(position).toString();
-            subjects.add(selectedElective2);
-            elec3.remove(selectedElective2);
-            chooseElective3();
-
-        } else if (viewId == R.id.subjectSelector3) {
-
-            // Division spinner selection listener
-            if(!selectedElective3.equals("")){
-                subjects.remove(selectedElective3);
-            }
-            selectedElective3 = parent.getItemAtPosition(position).toString();
-            subjects.add(selectedElective3);
 
         }
 
@@ -295,6 +248,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
     private void makeYearArray(){
         year.add("Select Year");
+        year.add("FY");
         year.add("SY");
         year.add("TY");
         year.add("Btech");
@@ -305,128 +259,9 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
         sem.add("Semester-2");
     }
 
-    private void electiveSelection() {
-
-        subjects.clear();
-        elec1.clear();
-        elec2.clear();
-        elec3.clear();
-
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        CollectionReference courseCollectionRef = firestore.collection("Course")
-                .document(selectedBranch)
-                .collection(selectedYear)
-                .document(selectedDivision)
-                .collection(selectedSem);
-
-        courseCollectionRef.get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        QuerySnapshot querySnapshot = task.getResult();
-                        if (querySnapshot != null) {
-                            List<DocumentSnapshot> documents = querySnapshot.getDocuments();
-
-                            // Lists to store the results
-                            List<String> emptyDocuments = new ArrayList<>();
-                            List<List<Object>> nonEmptyDocumentsFields = new ArrayList<>();
-
-                            // Process each document
-                            for (DocumentSnapshot documentSnapshot : documents) {
-                                String documentId = documentSnapshot.getId();
-                                if (documentSnapshot.getData() == null) {
-                                    // Document is empty
-                                    emptyDocuments.add(documentId);
-                                } else {
-                                    // Document is not empty
-                                    List<Object> documentFields = new ArrayList<>();
-                                    documentFields.add(documentId);
-                                    documentFields.addAll(documentSnapshot.getData().values());
-                                    nonEmptyDocumentsFields.add(documentFields);
-                                }
-                            }
-                            String subjectString = "";
-                            if(nonEmptyDocumentsFields!=null) {
-                                subjectString = nonEmptyDocumentsFields + "";
-                            }
-
-
-
-                            String[] elements = subjectString.split("\\], \\[");  // Splitting the input string into individual elements
-
-                            for (String element : elements) {
-                                element = element.replaceAll("\\[|\\]", "");  // Removing the square brackets from each element
-
-                                String[] subjectsArray = element.split(", ");
-
-                                if (subjectsArray.length == 1) {
-                                    subjects.add(subjectsArray[0]);
-                                } else if (elec1.isEmpty()) {
-                                    elec1.addAll(List.of(subjectsArray));
-                                } else if (elec2.isEmpty()) {
-                                    elec2.addAll(List.of(subjectsArray));
-                                } else {
-                                    elec3.addAll(List.of(subjectsArray));
-                                }
-                            }
-
-                            ele1Present = false;
-                            ele2Present = false;
-                            ele3Present = false;
-
-                            elect.setVisibility(View.GONE);
-
-
-                            if(elec1.size()>0){
-                                ele1Present = true;
-                            }
-                            if(elec2.size()>0){
-                                ele2Present = true;
-                            }
-                            if(elec3.size()>0){
-                                ele3Present = true;
-                            }
-
-
-                            if(!selectedSem.equals("Select Semester of Year")) {
-                                if(ele1Present || ele2Present || ele3Present){
-                                    elect.setVisibility(View.VISIBLE);
-                                    cardEle1.setVisibility(View.VISIBLE);
-                                    cardEle2.setVisibility(View.VISIBLE);
-                                    cardEle3.setVisibility(View.VISIBLE);
-                                    if (ele1Present && ele2Present && !ele3Present){
-                                        elect.setVisibility(View.VISIBLE);
-                                        cardEle1.setVisibility(View.VISIBLE);
-                                        cardEle2.setVisibility(View.VISIBLE);
-                                        cardEle3.setVisibility(View.GONE);
-                                    } else if (ele1Present&& !ele2Present && !ele3Present) {
-                                        elect.setVisibility(View.VISIBLE);
-                                        cardEle1.setVisibility(View.VISIBLE);
-                                        cardEle2.setVisibility(View.GONE);
-                                        cardEle3.setVisibility(View.GONE);
-                                    }
-
-                                }else{
-                                    elect.setVisibility(View.GONE);
-                                }
-
-                            }else{
-                                elect.setVisibility(View.GONE);
-                            }
-
-                            chooseElective1();
-
-                        }
-                    } else {
-                        Toast.makeText(this, "Error getting documents: " + task.getException(), Toast.LENGTH_SHORT).show();
-                    }
-                    loadingDialog.stopLoading();
-                });
-    }
-
 
     private void sendDataToFireStore(){
 
-        sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
 
         Map<String, Object> data = new HashMap<>();
 
@@ -442,6 +277,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
         dataP.put("year", selectedYear);
         dataP.put("division", selectedDivision);
         dataP.put("sem", selectedSem);
+        dataP.put("academicYear", academicYearSelector.getSelectedItem().toString());
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
         DocumentReference docRef1 = firestore.collection("StudentLogin").document(sharedPreferences.getString("email",""));
@@ -449,12 +285,17 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
 
 
+//        DocumentReference docRef = firestore.collection("Students").
+//                document(selectedBranch).
+//                collection(selectedYear).
+//                document(selectedDivision).
+//                collection(sharedPreferences.getString("regNum","")).
+//                document("Attendance");
+//        docRef.set(data)
+
         DocumentReference docRef = firestore.collection("Students").
-                document(selectedBranch).
-                collection(selectedYear).
-                document(selectedDivision).
-                collection(sharedPreferences.getString("regNum","")).
-                document("Attendance");
+                document(sharedPreferences.getString("regNum",""));
+
         docRef.set(data)
                 .addOnSuccessListener(aVoid -> {
                     SharedPreferences.Editor preferences = sharedPreferences.edit();
@@ -462,6 +303,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
                     preferences.putString("year",selectedYear);
                     preferences.putString("division",selectedDivision);
                     preferences.putString("semester",selectedSem);
+                    preferences.putString("academicYear",academicYearSelector.getSelectedItem().toString());
                     preferences.apply();
 
 //                    for (int i = 0; i < subjects.size(); i++) {
@@ -483,11 +325,18 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+//        DocumentReference documentReference = firestore.collection("Teachers")
+//                .document(selectedBranch)
+//                .collection(selectedYear)
+//                .document(selectedDivision)
+//                .collection(subject)
+//                .document(reg);
+
         DocumentReference documentReference = firestore.collection("Teachers")
-                .document(selectedBranch)
-                .collection(selectedYear)
-                .document(selectedDivision)
+                .document(academicYearSelector.getSelectedItem().toString())
                 .collection(subject)
+                .document(selectedDivision)
+                .collection("students")
                 .document(reg);
 
 // Create a HashMap with the field-value pair you want to update

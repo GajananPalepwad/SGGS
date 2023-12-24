@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="subjectList">
+
+        <item>BSC-101 Physics</item>
+        <item>BSC-103 Mathematics-I</item>
+        <item>BSC-105 Biology for Engineers</item>
+        <item>ESC-101 Basic Electrical Engineering</item>
+        <item>ESC-103 Programming for Problem Solving</item>
+        <item>VSEC-101 Engineering Exploration</item>
+        <item>CC-101 Yoga and Sports</item>
+        <item>BSC-102 Chemistry</item>
+        <item>BSC-104 Mathematics-II</item>
+        <item>ESC-102 Engineering Graphics and Design</item>
+
+    </array>
+
+
+    <array name="year">
+
+        <item>2023-2024</item>
+        <item>2024-2025</item>
+        <item>2025-2026</item>
+        <item>2026-2027</item>
+        <item>2027-2028</item>
+        <item>2028-2029</item>
+
+
+    </array>
+
+</resources>
