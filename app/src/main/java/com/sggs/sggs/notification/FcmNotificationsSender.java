@@ -1,4 +1,4 @@
-package com.sggs.sggs;
+package com.sggs.sggs.notification;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.sggs.sggs.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +29,7 @@ public class FcmNotificationsSender  {
 
     private RequestQueue requestQueue;
     private final String postUrl = "https://fcm.googleapis.com/fcm/send";
-    private final String fcmServerKey ="AAAAvLK0Qiw:APA91bFDbMv8EPeoirrkrbzGZWbAaLm165Re-NVW2oKIqUJb1qWjQ0G5YJtaSWOc8rwnIm_E5ZB_zcV2Ge_JuLkpQwo9WirmBcRfYhOBpGGzLWe3HpPW16WFub2E54MTFv0S8e0Sc_6U";
+    private final String fcmServerKey = "";
 
     public FcmNotificationsSender(String userFcmToken, String title, String body, Context mContext, Activity mActivity) {
         this.userFcmToken = userFcmToken;

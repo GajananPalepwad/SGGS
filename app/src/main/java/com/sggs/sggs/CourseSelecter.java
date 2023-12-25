@@ -312,6 +312,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 //                    }
                     loadingDialog.stopLoading();
                     Toast.makeText(CourseSelecter.this, "Selection Successful", Toast.LENGTH_SHORT).show();
+                    finish();
                 })
                 .addOnFailureListener(e -> {
                     loadingDialog.stopLoading();
@@ -332,11 +333,14 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 //                .collection(subject)
 //                .document(reg);
 
+        if(selectedYear.equals("FY")){
+            selectedBranch = "common";
+        }
         DocumentReference documentReference = firestore.collection("Teachers")
                 .document(academicYearSelector.getSelectedItem().toString())
                 .collection(subject)
-                .document(selectedDivision)
-                .collection("students")
+                .document(selectedBranch)
+                .collection(selectedDivision)
                 .document(reg);
 
 // Create a HashMap with the field-value pair you want to update

@@ -14,7 +14,395 @@
         <item>BSC-104 Mathematics-II</item>
         <item>ESC-102 Engineering Graphics and Design</item>
 
-    </array>
+
+<!--            FY Chemical-->
+            <item>PCC-CH-102 Chemical Process Calculations</item>
+
+<!--            FY Civil-->
+            <item>PCC-CE-102 Elements of Civil Engineering and Mechanics</item>
+
+
+<!--            FY Electrical-->
+            <item>PCC-EC/IN/EE-102 Basic Electronics</item>
+
+<!--            FY ExTC-->
+            <item>PCC-EC/IN/EE-102 Basic Electronics</item>
+
+<!--            FY Instrumentation-->
+            <item>PCC-EC/IN/EE-102 Basic Electronics</item>
+
+<!--            FY IT and CSE-->
+            <item>PCC-IT/CS-102 Computer fundamentals</item>
+
+<!--            FY Mechanical-->
+            <item>PCC-ME/PE-102 Elements of Mechanical and Production Engineering</item>
+
+<!--            FY Production-->
+            <item>PCC-ME/PE-102 Elements of Mechanical and Production Engineering</item>
+
+<!--            FY Textile-->
+            <item>PCC-TT-102 Basics of Textile and Garment Manufacturing</item>
+
+<!--            SY Chemical-->
+            <item>BSC-271 Mathematics-III: Transform Calculus and Differential Equations</item>
+            <item>BSC-262 Organic Chemistry</item>
+            <item>ESC-286 Applied Physical Chemistry</item>
+            <item>PCC-CH201 Chemical Process Calculations</item>
+            <item>PCC-CH202 Fluid Mechanics</item>
+            <item>PCC-CH203 Chemical Engineering Thermodynamics-1</item>
+            <item>HMC-278 Human Values and Professional Ethics</item>
+            <item>BSC-261 Mathematical Foundation for Engineering</item>
+            <item>BSC-274 Mathematics-IV: Statistical and Numerical Methods</item>
+            <item>ESC-287 Fundamentals of Electronics</item>
+            <item>PCC-CH204 Heat Transfer</item>
+            <item>PCC-CH205 Chemical Engineering Thermodynamics-II</item>
+            <item>PCC-CH206 Mass Transfer-I</item>
+            <item>PCC-CH207 Mechanical Operations</item>
+            <item>MAC-277 Indian Constitution</item>
+
+<!--            SY CSE-->
+            <item>BSC-273 Mathematics-III: Applied Linear Algebra</item>
+            <item>ESC-282 Digital Electronics</item>
+            <item>PCC-CS201 Discrete Mathematics</item>
+            <item>PCC-CS202 Data Structure</item>
+            <item>PCC-CS203 Object Oriented Programming with Java</item>
+            <item>PCC-CS204 Numerical and Scientific Computing</item>
+            <item>BSC-261 Mathematical Foundation for Engineers</item>
+            <item>BSC-276 Mathematics-IV: Vector Calculus, Statistical Methods</item>
+            <item>PCC-CS205 Microprocessors and Interfacing</item>
+            <item>PCC-CS206 Computer Organization and Architecture</item>
+            <item>PCC-CS207 Design and Analysis of Algorithms</item>
+            <item>PCC-CS208 Python programming</item>
+
+<!--            SY Civil-->
+            <item>BSC-271 Mathematics-III: Transform Calculus and Differential Equations</item>
+            <item>PCC-CE201 Strength of Materials</item>
+            <item>PCC-CE202 Fluid Mechanics</item>
+            <item>PCC-CE203 Surveying and Geomatics</item>
+            <item>PCC-CE204 Building Construction</item>
+            <item>HMC-279 Civil-Societal and Global Impact</item>
+            <item>BSC-261 Mathematical Foundation for Engineering</item>
+            <item>BSC-274 Mathematics-IV: Statistical and Numerical Methods</item>
+            <item>PCC-CE205 Theory of Structures-I</item>
+            <item>PCC-CE206 Hydraulic Engineering</item>
+            <item>PCC-CE207 Concrete Technology</item>
+            <item>ESC-280 Building Planning and Computer Aided Drawing</item>
+            <item>ESC-281 Basic Electronics</item>
+
+<!--            SY Electrical-->
+            <item>BSC-272 Mathematics-III: Numerical Methods and Differential Equations</item>
+            <item>PCC-EE201 Analog Electronic Circuits</item>
+            <item>PCC-EE202 Electrical Machines-I</item>
+            <item>PCC-EE203 Circuit Theory</item>
+            <item>PCC-EE204 Electromagnetic Fields</item>
+            <item>LAB-EE205 Computer Application in Electrical Engineering</item>
+            <item>BSC-261 Mathematical Foundation for Engineering</item>
+            <item>BSC-274 Mathematics-IV: Statistical and Numerical Methods</item>
+            <item>PCC-EE206 Electrical Machines-II</item>
+            <item>PCC-EE207 Digital Electronics and Logic Design</item>
+            <item>PCC-EE208 Electrical and Electronics Measurements</item>
+            <item>PCC-EE209 Signals and Systems</item>
+
+<!--             SY ExTC-->
+            <item>BSC-271 Mathematics-III: Transform Calculus and Differential Equations</item>
+            <item>ESC-283 Numerical Methods</item>
+            <item>PCC-EC201 Electronic Devices and Circuits</item>
+            <item>PCC-EC202 Digital Electronics and Microprocessors</item>
+            <item>PCC-EC203 Network Theory</item>
+            <item>BSC-261 Mathematical Foundation for Engineering</item>
+            <item>BSC-275 Mathematics-IV: Statistical Methods and Complex Analysis</item>
+            <item>ESC-284 Data Structures</item>
+            <item>PCC-EC204 Communication Engineering Principles</item>
+            <item>PCC-EC205 Analog Circuits and Design</item>
+            <item>PCC-EC206 Microcontrollers and Applications</item>
+
+<!--            SY Instrumentation-->
+            <item>BSC-272 Mathematics-III: Numerical Methods and Differential Equations</item>
+            <item>PCC-IN201 Sensors and Transducers</item>
+            <item>PCC-IN202 Electronics Devices and Circuits</item>
+            <item>PCC-IN203 Circuit Theory</item>
+            <item>PCC-IN204 Electrical Machines</item>
+            <item>BSC261 Mathematical Foundation for Engineering</item>
+            <item>BSC275 Mathematics-IV: Statistical Methods and Complex Analysis</item>
+            <item>PCC-IN205 Linear Integrated Circuits</item>
+            <item>PCC-IN206 Digital Electronics and Logic Design</item>
+            <item>PCC-IN207 Signals and Systems</item>
+            <item>PCC-IN208 Electrical and Electronics Measurements</item>
+            
+
+
+<!--            SY IT-->
+            <item>BSC-273 Mathematics-III: Applied Linear Algebra</item>
+            <item>PCC-IT201 Data Structures</item>
+            <item>PCC-IT202 Object Oriented Programming</item>
+            <item>PCC-IT203 Discrete Mathematics</item>
+            <item>PCC-IT204 Digital Systems Design</item>
+            <item>LAB-IT205 Computer Laboratory - I</item>
+            <item>BSC-261 Mathematical Foundation for Engineering</item>
+            <item>BSC-276 Mathematics-IV: Vector Calculus, Statistical Methods</item>
+            <item>PCC-IT206 Computer Organization and Architecture</item>
+            <item>PCC-IT207 Microprocessors and Interfacing</item>
+            <item>PCC-IT208 Java Programming</item>
+            <item>LAB-IT209 Computer Laboratory – II</item>
+            <item>PEC-IT2** Elective – I</item>
+            <item>LAB-IT214 Soft Skill Development</item>
+            
+
+<!--            SY Mechanical-->
+            <item>BSC271 Mathematics-III: Transform Calculus and differential Equations</item>
+            <item>PCC-ME201 Strength of Materials</item>
+            <item>PCC-ME202 Thermodynamics</item>
+            <item>PCC-ME203 Mechanical Instrumentation</item>
+            <item>PCC-ME205 Materials Engineering</item>
+            
+            <item>BSC-261 Mathematical Foundation for Engineering</item>
+            <item>BSC274 Mathematics-IV: Statistical and Numerical Methods</item>
+            <item>PCC-ME206 Applied Thermodynamics</item>
+            <item>PCC-ME207 Fluid Mechanics &amp; Hydraulic Machines</item>
+            <item>ESC-ME208 Machine Drawing &amp; CADD</item>
+            <item>PCC-ME209 Manufacturing Processes-I</item>
+            <item>PCC-ME210 Kinematics &amp; Theory of Machines</item>
+
+<!--             SY Production-->
+            <item>BSC271 Mathematics-III: Transform Calculus and Differential Equations</item>
+            <item>PCC-PE201 Strength of Materials</item>
+            <item>PCC-PE202 Thermal Engineering- I</item>
+            <item>PCC-PE203 Casting and Welding</item>
+            <item>PCC-PE204 Engineering Metallurgy`</item>
+            <item>PCC-PE205 Machine Drawing and CADD</item>
+            <item>BSC-261 Mathematical Foundation for Engineering</item>
+            <item>BSC274 Mathematics-IV: Statistical and Numerical Methods</item>
+            <item>PCC-PE206 Theory of Machines</item>
+            <item>PCC-PE207 Thermal Engineering- II</item>
+            <item>PCC-PE208 Mechanical Measurement and Metrology</item>
+            <item>PCC-PE209 Machining Processes </item>
+            <item>LAB-PE210 Manufacturing Lab - I</item>
+            
+
+<!--            SY Textile-->
+            <item>PCC-TT201 Fabric Forming Technology – I</item>
+            <item>PCC-TT202 Textile Testing – I</item>
+            <item>PCC-TT203 Textile Wet Processing – I</item>
+            <item>PCC-TT204 Natural Fibres and Fibre Forming Polymers</item>
+            <item>ESC-285 Digital Fundamentals and Transducers</item>
+            
+            <item>BSC-261 Mathematical Foundation for Engineering</item>
+            <item>BSC271 Mathematics-III: Transform Calculus and Differential Equations</item>
+            <item>PCC-TT205 Spun Yarn Technology – I</item>
+            <item>PCC-TT206 Fabric Forming Technology – II</item>
+            <item>PCC-TT207 Textile Testing – II</item>
+            <item>PCC-TT208 Textile Wet Processing - II</item>
+            <item>SII-TT209 Winter/Summer Internship</item>
+
+<!--            TY Chemical-->
+            <item>PCC-CH301 Mass Transfer-II</item>
+            <item>PCC-CH302 Chemical Reaction Engineering-I</item>
+            <item>PCC-CH303 Process Equipment Design &amp; Drawing</item>
+            <item>PCC-CH304 Numerical Methods in Chemical Engineering</item>
+            <item>PEC-CH305 Strength of Materials</item>
+            <item>PEC-CH306 Plant Utility</item>
+            <item>PEC-CH307 Material Science and Engineering</item>
+            <item>PEC-CH308 Advance Fermentation Technology</item>
+            <item>OEC-CH309 Instrumentation and Analytical Techniques</item>
+            <item>OEC-CH310 Air Pollution And Control</item>
+            <item>OEC-CH311 Corrosion Engineering</item>
+            <item>PCC-CH321 Process Dynamics and Control</item>
+            <item>PCC-CH322 Chemical Reaction Engineering-II</item>
+            <item>PCC-CH323 Plant Design &amp; Economics Management</item>
+            <item>PCC-CH324 Chemical Process Industries</item>
+            <item>PEC-CH325 Polymer Technology</item>
+            <item>PEC-CH326 Advance separation Technology</item>
+            <item>PEC-CH327 Membrane Technology</item>
+            <item>PEC-CH328 Fuel Cell Engineering</item>
+            <item>OEC-CH329 Project Planning &amp; Management</item>
+            <item>OEC-CH330 Renewable Energy Sources</item>
+            <item>OEC-CH331 Solid waste Management</item>
+            <item>SII-CH312 In plant training</item>
+
+<!--            TY CSE-->
+            <item>PCC-CS301 Software Engineering</item>
+            <item>PCC-CS302 Database Management Systems</item>
+            <item>PCC-CS303 Formal Language &amp; Automata Theory</item>
+            <item>PCC-CS304 Operating Systems</item>
+            <item>PEC-CS305 Advanced Java Programming</item>
+            <item>PEC-CS306 Digital Signal Processing</item>
+            <item>PEC-CS307 Introduction to Machine Learning</item>
+            <item>PEC-CS308 Advanced C Programming</item>
+            <item>PEC-CS309 Technical Seminar</item>
+            <item>PCC-CS310 Compiler Design</item>
+            <item>PCC-CS311 Data Communication &amp; Networking</item>
+            <item>PCC-CS312 Unix System Programming</item>
+            <item>PCC-CS313 Advanced Algorithms</item>
+            <item>PEC-CS314 Cyber Security</item>
+            <item>PEC-CS315 Digital Image Processing</item>
+            <item>PEC-CS316 Fundamentals of Artificial Neural Networks</item>
+            <item>PEC-CS317 Combinatorics, Probability and Statistics</item>
+
+<!--         TY Civil-->
+            <item>PCC-CE301 Design of Steel Structures</item>
+            <item>PCC-CE302 Environmental Engineering</item>
+            <item>PCC-CE303 Engineering Hydrology</item>
+            <item>PCC-CE304 Transportation Engineering</item>
+            <item>PEC-CE305 Hydro Power Engineering</item>
+            <item>PEC-CE306 Prestressed Concrete</item>
+            <item>PEC-CE307 Remote Sensing &amp; GIS</item>
+            <item>AUD-CE308 Engineering Geology</item>
+            <item>PCC-CE309 Theory of Structures-II</item>
+            <item>PCC-CE310 Geotechnical Engineering</item>
+            <item>PCC-CE311 Reinforced Cement Concrete Structures</item>
+            <item>PCC-CE312 Water Resources Engineering</item>
+            <item>PEC-CE313 Air &amp; Noise Pollution Control</item>
+            <item>PEC-CE314 Earthquake Resistant design of structure</item>
+            <item>PEC-CE315 Advanced Surveying</item>
+            <item>PEC-CE316 Public Transportation Systems</item>
+            <item>PEC-CE317 Hydraulics of free surface flows &amp; Sediment transport</item>
+            <item>PEC-CE318 Building Services</item>
+
+<!--            TY Electrical-->
+            <item>PCC-EE301 Power System Engineering</item>
+            <item>PCC-EE302 Feedback Control System</item>
+            <item>PCC-EE303 Microprocessor and Microcontroller</item>
+            <item>PCC-EE304 Digital Signal Processing </item>
+            <item>PEC-EE305 Basic of Photovoltaic System </item>
+            <item>PEC-EE306 Renewable Energy Technologies</item>
+            <item>PEC-EE307 Electrical Installation and Design</item>
+            <item>PRJ-EE308 Mini Project and Seminar-I</item>
+            <item>PCC-EE309 Power System Analysis and Stability</item>
+            <item>PCC-EE310 Control System Design</item>
+            <item>PCC-EE311 Power Electronics </item>
+            <item>PCC-EE312 Power Plant Engineering</item>
+            <item>PEC-EE313 Energy Audit and Conservation</item>
+            <item>PEC-EE314 Electrical Machine Analysis</item>
+            <item>PEC-EE315 Utilization of Energy and Management</item>
+            <item>PRJ-EE316 Mini Project and Seminar-II</item>
+
+<!--            TY ExTC-->
+            <item>PCC-EC-301 Electromagnetic Engineering</item>
+            <item>PCC-EC-302 Control Systems</item>
+            <item>PCC-EC-303 Communication Systems Theory</item>
+            <item>PCC-EC-304 Signals and Systems</item>
+            <item>PEC-EC-305 Probability and Statistics</item>
+            <item>PEC-EC-306 Computer Organization</item>
+            <item>PEC-EC-307 Bio Medical Signal Processing</item>
+            <item>PEC-EC-308 Microelectronics</item>
+            <item>PEC-EC-309 DSP Processors</item>
+            <item>PEC-EC-310 Linear Algebra</item>
+            <item>PEC-EC-311 Antenna and Wave Propagation</item>
+            <item>PEC-EC-312 Digital Telephony</item>
+            <item>PEC-EC-313 Digital System Design with Verilog</item>
+            <item>PEC-EC-314 Physiology for Engineers</item>
+            <item>HMC392 Industrial Management for Engineers</item>
+            <item>SEM-EC-315 Seminar</item>
+            <item>PCC-EC-316 Linear Integrated Circuits</item>
+            <item>PCC-EC-317 Digital Communication</item>
+            <item>PCC-EC-318 Digital Signal Processing</item>
+            <item>PCC-EC-319 Embedded Systems</item>
+            <item>PEC-EC-320 Machine Learning</item>
+            <item>PEC-EC-321 Computer Security</item>
+            <item>PEC-EC-322 Digital VLSI Design</item>
+            <item>PEC-EC-323 Robotics</item>
+            <item>PEC-EC-324 Satellite Communication</item>
+            <item>PEC-EC-325 Power Electronics</item>
+            <item>PEC-EC-326 Consumer Electronics</item>
+            <item>PEC-EC-327 System Software and Operating Systems</item>
+            <item>PEC-EC-328 Electronic Design Automation Tools</item>
+            <item>PEC-EC-329 Electronic Materials and Devices</item>
+            <item>PRJ-EC-330 Mini Project</item>
+
+<!--            TY Instrumentation-->
+            <item>PCC-IN301 Feedback Control Systems</item>
+            <item>PCC-IN302 Industrial Instrumentation</item>
+            <item>PCC-IN303 Digital Signal Processing</item>
+            <item>PCC-IN304 Microprocessor and Microcontroller</item>
+            <item>PCC-IN305 Industrial Data Communications</item>
+            <item>PCC-IN306 Unit Operations and Instrumentation</item>
+            <item>PCC-IN307 Process Control</item>
+            <item>PCC-IN308 Control System Components</item>
+            <item>PCC-IN309 Distributed Control System</item>
+            <item>PCC-IN310 Power Electronics</item>
+            <item>PEC-IN311 Power Plant Instrumentation</item>
+            <item>PEC-IN312 Digital System Design</item>
+            <item>PEC-IN313 Optical Instrumentation</item>
+            <item>PEC-IN314 Automotive Instrumentation</item>
+            <item>PEC-IN315 Mechatronics</item>
+            <item>PEC-IN316 Material Science</item>
+            <item>PEC-IN317 Microelectronics</item>
+            <item>PEC-IN318 Data Structure and Algorithms</item>
+            <item>SEM-IN319 Seminar</item>
+            <item>AUD-IN320 Indian Ancient Science</item>
+
+<!--            TY IT-->
+            <item>PCC-IT301 Theory of Computation</item>
+            <item>PCC-IT302 Software Engineering</item>
+            <item>PCC-IT303 Operating Systems</item>
+            <item>PCC-IT304 Data Base Management System</item>
+            <item>PCC-IT305 Python Programming</item>
+            <item>SEM-IT306 Seminar - I</item>
+            <item>PCC-IT307 Machine Learning</item>
+            <item>PCC-IT308 Design and Analysis of Algorithms</item>
+            <item>PCC-IT309 Computer Networks</item>
+            <item>PEC-IT310 Cloud Computing</item>
+            <item>PEC-IT311 Big Data Analytics</item>
+            <item>PEC-IT312 Blockchain Technology</item>
+            <item>PCC-IT313 Compiler Design</item>
+            <item>LAB-IT314 Computer Laboratory – III: Full Stack Development</item>
+
+<!--            TY Mechanical-->
+            <item>PCC-ME301 Heat Transfer</item>
+            <item>PCC-ME302 Dynamics of Machines</item>
+            <item>PCC-ME303 Design of Machine Elements</item>
+            <item>PCC-ME304 Manufacturing Processes-II</item>
+            <item>PEC-ME305 Power Plant Engineering</item>
+            <item>PEC-ME306 Product Design Engineering </item>
+            <item>PEC-ME307 Advanced Welding Techniques</item>
+            <item>PCC-ME308 Machine Design</item>
+            <item>PCC-ME309 Refrigeration &amp; Air Conditioning</item>
+            <item>PEC-ME311 Internal Combustion Engines</item>
+            <item>PEC-ME312 Costing &amp; Estimation</item>
+            <item>PEC-ME313 Advance Manufacturing Technology</item>
+            <item>PEC-ME314 Automobile Engineering</item>
+            <item>PEC-ME315 Pressure Vessel Design</item>
+            <item>PEC-ME316 Productivity Improvement Techniques</item>
+            <item>PCC-ME310 Automation in Manufacturing</item>
+
+<!--            TY Production-->
+            <item>PCC-PE301 Mechanical Working of Metals</item>
+            <item>PCC-PE302 Machine Design</item>
+            <item>PCC-PE303 Production Planning and Control</item>
+            <item>PCC-PE304 Tool Design</item>
+            <item>PCC-PE305 Operations Research</item>
+            <item>LAB-PE306 Computational Lab</item>
+            <item>LAB-PE307 Manufacturing Lab-II</item>
+            <item>PCC-PE311 Fluid Mechanics &amp; Hydraulics Machines</item>
+            <item>PCC-PE312 Heat Transfer</item>
+            <item>PCC-PE313 Quality and Reliability</item>
+            <item>PEC-PE316 Finite Element Analysis</item>
+            <item>PEC-PE317 Product Design and Development</item>
+            <item>PEC-PE318 Plastics and Composites</item>
+            <item>PEC-PE319 Renewable Energy Sources</item>
+            <item>PEC-PE320 Mechatronics</item>
+            <item>PEC-PE321 Automobile engineering</item>
+            <item>PEC-PE322 Object Oriented Programming</item>
+            <item>PEC-PE323 Maintenance Management</item>
+
+<!--            TY Textile-->
+            <item>PCC-TT301 Spun Yarn Technology - II</item>
+            <item>PCC-TT302 Fabric Forming Technology - III</item>
+            <item>PCC-TT303 Man Made Fibres</item>
+            <item>ESC-385 C++ and Computer Graphics</item>
+            <item>BSC-371 Mathematics IV: Numerical and Statistical Methods</item>
+            <item>PCC-TT304 Spun Yarn Technology - III</item>
+            <item>PCC-TT305 Post Spinning and Texturing</item>
+            <item>HMC-391 Costing and Financial Management</item>
+            <item>SII-TT306 Winter/Summer Internship</item>
+            <item>PEC-TT307 Fibres for Composites</item>
+            <item>PEC-TT308 Theory of Textile Structures</item>
+            <item>PEC-TT307 Fibres for Composites</item>
+            <item>PEC-TT308 Theory of Textile Structures</item>
+            <item>PEC-TT309 Garment Technology</item>
+            <item>PEC-TT310 Data Science with Python</item>
+
+        </array>
 
 
     <array name="year">

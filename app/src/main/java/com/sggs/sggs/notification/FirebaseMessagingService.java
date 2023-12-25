@@ -1,4 +1,4 @@
-package com.sggs.sggs;
+package com.sggs.sggs.notification;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -12,6 +12,7 @@ import android.os.Vibrator;
 import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.RemoteMessage;
+import com.sggs.sggs.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

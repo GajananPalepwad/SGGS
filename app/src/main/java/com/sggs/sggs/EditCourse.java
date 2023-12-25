@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +41,7 @@ public class EditCourse extends AppCompatActivity {
     List<String> subjectListSpinner = new ArrayList<>();
     Button btnAddSub, btnNewCourse;
     SpinnerDialog spinnerDialog;
-
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,8 @@ public class EditCourse extends AppCompatActivity {
         tvDiv = findViewById(R.id.divisionSelector);
         tvYear = findViewById(R.id.yearSelector);
         tvAcademicYear = findViewById(R.id.academicYearSelector);
+        back = findViewById(R.id.back);
+        back.setOnClickListener(v -> onBackPressed());
 
         sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
 
@@ -79,15 +82,13 @@ public class EditCourse extends AppCompatActivity {
 
         spinnerDialog.bindOnSpinerListener((item, position) -> {
             Toast.makeText(EditCourse.this, item + "  " + position+"", Toast.LENGTH_SHORT).show();
-
             addDocumentToCollection(item);
         });
 
         btnAddSub.setOnClickListener(v->showConfirmationDialog());
 
         btnNewCourse.setOnClickListener(v->{
-            Intent intent = new Intent(EditCourse.this, CourseSelecter.class);
-            startActivity(intent);
+            showConfirmationDialogToAddNewCourse();
         });
         loadSubject();
     }
@@ -172,15 +173,21 @@ public class EditCourse extends AppCompatActivity {
 
     private void addDocumentToCollection(String subject) {
 
+        String branch = "common";
 
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
+        if(sharedPreferences.getString("year","").equals("FY")){
+            branch = "common";
+        }else {
+            branch = sharedPreferences.getString("branch","");
+        }
 
         DocumentReference documentReference = firestore.collection("Teachers")
                 .document(sharedPreferences.getString("academicYear",""))
                 .collection(subject)
-                .document(sharedPreferences.getString("division",""))
-                .collection("students")
+                .document(branch)
+                .collection(sharedPreferences.getString("division",""))
                 .document(sharedPreferences.getString("regNum",""));
 
 // Create a HashMap with the field-value pair you want to update
@@ -215,6 +222,24 @@ public class EditCourse extends AppCompatActivity {
         });
     }
 
+    private void showConfirmationDialogToAddNewCourse() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Warning!!!");
+        builder.setMessage("By doing this current course will delete for permanent\nDo you want to do that?");
 
+        builder.setPositiveButton("Yes", (dialog, which) -> {
+            Intent intent = new Intent(EditCourse.this, CourseSelecter.class);
+            startActivity(intent);
+            finish();
+        });
+
+        builder.setNegativeButton("No", (dialog, which) -> {
+            // Dismiss the dialog
+            dialog.dismiss();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
 }

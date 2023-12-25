@@ -131,7 +131,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
 
     private boolean isIgnoredWord(String word) {
         // Add more words to ignore if needed
-        String[] ignoredWords = {"of", "and", "the", "for"};
+        String[] ignoredWords = {"of", "and", "the", "for", "&"};
         for (String ignoredWord : ignoredWords) {
             if (ignoredWord.equalsIgnoreCase(word)) {
                 return true;

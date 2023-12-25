@@ -73,9 +73,6 @@
             android:name=".AboutUs"
             android:exported="false" />
         <activity
-            android:name=".NotificationSender"
-            android:exported="false" />
-        <activity
             android:name=".StudentResult"
             android:exported="false" />
         <activity
@@ -98,7 +95,7 @@
         </activity>
 
         <service
-            android:name=".FirebaseMessagingService"
+            android:name=".notification.FirebaseMessagingService"
             android:exported="true"
             android:permission="TODO"
             tools:ignore="ExportedService">

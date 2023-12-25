@@ -19,8 +19,8 @@ android {
         applicationId "com.sggs.sggs"
         minSdk 24
         targetSdk 33
-        versionCode 11
-        versionName "1.8"
+        versionCode 15
+        versionName "2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

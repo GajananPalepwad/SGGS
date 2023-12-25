@@ -1,6 +1,5 @@
 package com.sggs.sggs;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -22,23 +21,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.sggs.sggs.loadingAnimation.LoadingDialog;
-
-import java.util.HashMap;
-import java.util.Map;
+//import com.sggs.sggs.notification.FcmNotificationsSender;
 
 public class GoogleLoginPage extends AppCompatActivity {
 
@@ -165,17 +156,17 @@ public class GoogleLoginPage extends AppCompatActivity {
         });
     }
 
-    private void sendNotification(){
-        FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
-                tokenString,
-                "SGGS",
-                "Login Successful",
-                getApplicationContext(),
-                GoogleLoginPage.this
-        );
-
-        notificationsSender.SendNotifications();
-    }
+//    private void sendNotification(){
+//        FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+//                tokenString,
+//                "SGGS",
+//                "Login Successful",
+//                getApplicationContext(),
+//                GoogleLoginPage.this
+//        );
+//
+//        notificationsSender.SendNotifications();
+//    }
 
 
 
@@ -213,7 +204,7 @@ public class GoogleLoginPage extends AppCompatActivity {
                                 preferences.putString("semester", document.getString("sem"));
                                 preferences.putString("academicYear", document.getString("academicYear"));
                                 preferences.apply();
-                                sendNotification();
+//                                sendNotification();
 //                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(GoogleLoginPage.this, Home.class);
                                 startActivity(intent);

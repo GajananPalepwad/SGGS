@@ -79,6 +79,8 @@ public class Home extends AppCompatActivity {
         calendar = findViewById(R.id.calendar);
         qBank = findViewById(R.id.Qbank);
 
+
+        btnEditCourse.setVisibility(View.GONE);
         checkForAppUpdate();
 
 
@@ -153,6 +155,7 @@ public class Home extends AppCompatActivity {
         super.onRestart();
         if(numberOfSubject==0){
             loadSubjectAttendance();
+
         }
     }
 
@@ -189,6 +192,7 @@ public class Home extends AppCompatActivity {
                             }
                             if(subjectList.size()!=0){
                                 addCourse.setVisibility(View.GONE);
+                                btnEditCourse.setVisibility(View.VISIBLE);
                             }
                             numberOfSubject = adapter.getItemCount();
                             loadingDialog.stopLoading();
