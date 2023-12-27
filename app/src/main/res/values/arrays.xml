@@ -13,6 +13,9 @@
         <item>BSC-102 Chemistry</item>
         <item>BSC-104 Mathematics-II</item>
         <item>ESC-102 Engineering Graphics and Design</item>
+        <item>AES-102 Professional Communication</item>
+        <item>IKS-102 Introduction to Indian Knowledge System</item>
+        <item>CC-102 (A) Photography (B) Dtamatics</item>
 
 
 <!--            FY Chemical-->
@@ -22,13 +25,7 @@
             <item>PCC-CE-102 Elements of Civil Engineering and Mechanics</item>
 
 
-<!--            FY Electrical-->
-            <item>PCC-EC/IN/EE-102 Basic Electronics</item>
-
-<!--            FY ExTC-->
-            <item>PCC-EC/IN/EE-102 Basic Electronics</item>
-
-<!--            FY Instrumentation-->
+<!--            FY Electrical, ExTC, Instrumentation-->
             <item>PCC-EC/IN/EE-102 Basic Electronics</item>
 
 <!--            FY IT and CSE-->
@@ -67,7 +64,6 @@
             <item>PCC-CS202 Data Structure</item>
             <item>PCC-CS203 Object Oriented Programming with Java</item>
             <item>PCC-CS204 Numerical and Scientific Computing</item>
-            <item>BSC-261 Mathematical Foundation for Engineers</item>
             <item>BSC-276 Mathematics-IV: Vector Calculus, Statistical Methods</item>
             <item>PCC-CS205 Microprocessors and Interfacing</item>
             <item>PCC-CS206 Computer Organization and Architecture</item>
@@ -81,7 +77,6 @@
             <item>PCC-CE203 Surveying and Geomatics</item>
             <item>PCC-CE204 Building Construction</item>
             <item>HMC-279 Civil-Societal and Global Impact</item>
-            <item>BSC-261 Mathematical Foundation for Engineering</item>
             <item>BSC-274 Mathematics-IV: Statistical and Numerical Methods</item>
             <item>PCC-CE205 Theory of Structures-I</item>
             <item>PCC-CE206 Hydraulic Engineering</item>
@@ -96,7 +91,6 @@
             <item>PCC-EE203 Circuit Theory</item>
             <item>PCC-EE204 Electromagnetic Fields</item>
             <item>LAB-EE205 Computer Application in Electrical Engineering</item>
-            <item>BSC-261 Mathematical Foundation for Engineering</item>
             <item>BSC-274 Mathematics-IV: Statistical and Numerical Methods</item>
             <item>PCC-EE206 Electrical Machines-II</item>
             <item>PCC-EE207 Digital Electronics and Logic Design</item>
@@ -109,7 +103,6 @@
             <item>PCC-EC201 Electronic Devices and Circuits</item>
             <item>PCC-EC202 Digital Electronics and Microprocessors</item>
             <item>PCC-EC203 Network Theory</item>
-            <item>BSC-261 Mathematical Foundation for Engineering</item>
             <item>BSC-275 Mathematics-IV: Statistical Methods and Complex Analysis</item>
             <item>ESC-284 Data Structures</item>
             <item>PCC-EC204 Communication Engineering Principles</item>
@@ -138,7 +131,6 @@
             <item>PCC-IT203 Discrete Mathematics</item>
             <item>PCC-IT204 Digital Systems Design</item>
             <item>LAB-IT205 Computer Laboratory - I</item>
-            <item>BSC-261 Mathematical Foundation for Engineering</item>
             <item>BSC-276 Mathematics-IV: Vector Calculus, Statistical Methods</item>
             <item>PCC-IT206 Computer Organization and Architecture</item>
             <item>PCC-IT207 Microprocessors and Interfacing</item>
@@ -154,8 +146,6 @@
             <item>PCC-ME202 Thermodynamics</item>
             <item>PCC-ME203 Mechanical Instrumentation</item>
             <item>PCC-ME205 Materials Engineering</item>
-            
-            <item>BSC-261 Mathematical Foundation for Engineering</item>
             <item>BSC274 Mathematics-IV: Statistical and Numerical Methods</item>
             <item>PCC-ME206 Applied Thermodynamics</item>
             <item>PCC-ME207 Fluid Mechanics &amp; Hydraulic Machines</item>
@@ -170,7 +160,6 @@
             <item>PCC-PE203 Casting and Welding</item>
             <item>PCC-PE204 Engineering Metallurgy`</item>
             <item>PCC-PE205 Machine Drawing and CADD</item>
-            <item>BSC-261 Mathematical Foundation for Engineering</item>
             <item>BSC274 Mathematics-IV: Statistical and Numerical Methods</item>
             <item>PCC-PE206 Theory of Machines</item>
             <item>PCC-PE207 Thermal Engineering- II</item>
@@ -185,8 +174,6 @@
             <item>PCC-TT203 Textile Wet Processing – I</item>
             <item>PCC-TT204 Natural Fibres and Fibre Forming Polymers</item>
             <item>ESC-285 Digital Fundamentals and Transducers</item>
-            
-            <item>BSC-261 Mathematical Foundation for Engineering</item>
             <item>BSC271 Mathematics-III: Transform Calculus and Differential Equations</item>
             <item>PCC-TT205 Spun Yarn Technology – I</item>
             <item>PCC-TT206 Fabric Forming Technology – II</item>

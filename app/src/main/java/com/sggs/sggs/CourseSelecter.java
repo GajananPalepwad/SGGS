@@ -336,6 +336,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
         if(selectedYear.equals("FY")){
             selectedBranch = "common";
         }
+
         DocumentReference documentReference = firestore.collection("Teachers")
                 .document(academicYearSelector.getSelectedItem().toString())
                 .collection(subject)
