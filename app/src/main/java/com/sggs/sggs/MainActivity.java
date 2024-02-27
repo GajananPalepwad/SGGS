@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                             sharedPreferences.getString("email","").isEmpty() ||
                             sharedPreferences.getString("img","").isEmpty()) {
 
-                        Intent intent = new Intent(MainActivity.this,GoogleLoginPage.class);
+                        Intent intent = new Intent(MainActivity.this, LoginPage.class);
                         startActivity(intent);
                         finish();
 

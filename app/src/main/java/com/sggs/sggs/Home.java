@@ -32,7 +32,6 @@ import com.sggs.sggs.loadingAnimation.LoadingDialog;
 import com.sggs.sggs.model.SubjectModel;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Map;
 
 public class Home extends AppCompatActivity {
@@ -174,7 +173,7 @@ public class Home extends AppCompatActivity {
 //                    .collection(sharedPreferences.getString("year",""))
 //                    .document(sharedPreferences.getString("division",""))
 //                    .collection(sharedPreferences.getString("regNum",""))
-                    .document(sharedPreferences.getString("regNum",""))
+                    .document(sharedPreferences.getString("regNum","").trim())
 
 
                     .get()
@@ -238,7 +237,7 @@ public class Home extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(Home.this, "SIGN OUT SUCCESSFUL", Toast.LENGTH_SHORT).show();
                 finish();
-                startActivity(new Intent(Home.this,GoogleLoginPage.class));
+                startActivity(new Intent(Home.this, LoginPage.class));
             }
         });
 

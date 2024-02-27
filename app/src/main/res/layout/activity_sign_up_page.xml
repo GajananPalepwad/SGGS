@@ -49,7 +49,6 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#DCFFC9"
-                android:elevation="5dp"
                 android:fontFamily="sans-serif"
                 android:hint="Password"
                 android:inputType="textPassword"
@@ -70,7 +69,6 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#C9DBFF"
-                android:elevation="5dp"
                 android:fontFamily="sans-serif"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
@@ -108,7 +106,6 @@
                 android:layout_marginTop="45dp"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#FFC9D3"
-                android:elevation="7dp"
                 android:fontFamily="sans-serif"
                 android:hint="Full Name"
                 android:inputType="text"
@@ -127,8 +124,6 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#FFF3AF"
-                android:elevation="7dp"
-                android:focusable="false"
                 android:fontFamily="sans-serif"
                 android:hint="College Email"
                 android:inputType="textEmailAddress"
@@ -147,7 +142,6 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#FFEBC5"
-                android:elevation="7dp"
                 android:fontFamily="sans-serif"
                 android:hint="Registration Number"
                 android:inputType="none"
@@ -166,7 +160,6 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#C9F5FF"
-                android:elevation="5dp"
                 android:fontFamily="sans-serif"
                 android:hint="Mobile Number"
                 android:inputType="number"
@@ -184,8 +177,7 @@
                 android:layout_marginTop="25dp"
                 android:background="@drawable/textviewbackground"
                 android:backgroundTint="#0E2146"
-                android:elevation="7dp"
-                android:text="sign up"
+                android:text="Next"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -203,18 +195,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/college_logo" />
+                app:srcCompat="@drawable/sggs" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="148dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="20dp"
-                android:elevation="7dp"
-                android:text="Account already exist?"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/passwordConfirm"
-                app:layout_constraintTop_toBottomOf="@+id/continueBtn" />
+<!--            <TextView-->
+<!--                android:id="@+id/textView"-->
+<!--                android:layout_width="148dp"-->
+<!--                android:layout_height="15dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:elevation="7dp"-->
+<!--                android:text="Account already exist?"-->
+<!--                android:textStyle="bold"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/passwordConfirm"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/continueBtn" />-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

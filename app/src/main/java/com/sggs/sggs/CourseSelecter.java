@@ -65,7 +65,7 @@ public class CourseSelecter extends AppCompatActivity implements AdapterView.OnI
 
     List<String> subjectListSpinner = new ArrayList<>();
     RecyclerView rcShowSubject;
-    String selectedBranch="", selectedYear="", selectedDivision="A", selectedSem="", selectedElective1="", selectedElective2="", selectedElective3="";
+    String selectedBranch="", selectedYear="FY", selectedDivision="A", selectedSem="", selectedElective1="", selectedElective2="", selectedElective3="";
     Spinner branchSpinner, yearSpinner, divisionSpinner, academicYearSelector;
     LinearLayout elect;
     CardView cardEle1, cardEle2, cardEle3;

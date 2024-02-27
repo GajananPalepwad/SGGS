@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,15 +31,27 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.sggs.sggs.loadingAnimation.LoadingDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class SignUpPage extends AppCompatActivity {
     EditText ETemail;
     Button continueBtn;
-
     String fullname ;
     String email;
     String regnum;
@@ -83,7 +98,7 @@ public class SignUpPage extends AppCompatActivity {
 
             fullname = fullnameEditText.getText().toString();
             email = emailEditText.getText().toString();
-            regnum = regnumEditText.getText().toString();
+            regnum = regnumEditText.getText().toString().replaceAll("\\s", "");
             mobileNum = mobileNumEditText.getText().toString();
             password = passwordEditText.getText().toString();
             passwordConfirm = passwordConfirmEditText.getText().toString();
@@ -108,97 +123,62 @@ public class SignUpPage extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        signOut();
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        signOut();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        signOut();
-    }
-
+    @SuppressLint("StaticFieldLeak")
     private void checkAndDataToFireStore(){
 
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference studentLoginRef = db.collection("StudentLogin");
-
-// Check if the email already exists
-        studentLoginRef
-                .whereEqualTo("email", email)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        QuerySnapshot querySnapshot = task.getResult();
-                        if (querySnapshot != null && !querySnapshot.isEmpty()) {
-                            // Email already exists
-                            Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Email is unique, proceed to store the data in Firestore
-                            DocumentReference documentRef = studentLoginRef.document(email);
-
-                            Map<String, Object> user = new HashMap<>();
-                            user.put("fullName", fullname.toUpperCase());
-                            user.put("img", selectedImage);
-                            user.put("email", email);
-                            user.put("regNum", regnum.toUpperCase());
-                            user.put("mobileNum", mobileNum);
-                            user.put("password", password);
-
-                            documentRef
-                                    .set(user)
-                                    .addOnSuccessListener(documentReference -> {
-                                        Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-                                        signOut();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                    });
-                        }
-                    } else {
-                        // Error occurred while checking for email existence
-                        Toast.makeText(this, "Error occurred while checking email", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-    }
-
-    public void signOut(){
-        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+        new AsyncTask<Void, Void, String>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                finish();
-                startActivity(new Intent(SignUpPage.this,GoogleLoginPage.class));
+            protected String doInBackground(Void... voids) {
+                try {
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .build();
+                    MediaType mediaType = MediaType.parse("text/plain");
+                    RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                            .addFormDataPart("email_id",email.trim())
+                            .addFormDataPart("full_name",fullname.trim())
+                            .addFormDataPart("reg_id",regnum.trim().toUpperCase())
+                            .addFormDataPart("mobile_no",mobileNum.trim())
+                            .addFormDataPart("password",password.trim())
+                            .addFormDataPart("Image",selectedImage)
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(getString(R.string.api_link)+"register.php")
+                            .method("POST", body)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    return response.body().string();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
             }
-        });
 
-    }
-
-    public void signOut1(){
-        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(SignUpPage.this, "PLEASE LOGIN WITH SGGS EMAIL ONLY", Toast.LENGTH_SHORT).show();
-                finish();
-                startActivity(new Intent(SignUpPage.this,GoogleLoginPage.class));
+            protected void onPostExecute(String result) {
+                if (result != null) {
+                    Gson gson = new Gson();
+                    JsonObject jsonObject = gson.fromJson(result, JsonObject.class);
+
+                    String status = jsonObject.get("Status").getAsString();
+                    String message = jsonObject.get("message").getAsString();
+
+                    Toast.makeText(SignUpPage.this, message, Toast.LENGTH_SHORT).show();
+                    loadingDialog.stopLoading();
+                    onBackPressed();
+                }else {
+                    loadingDialog.stopLoading();
+                }
             }
-        });
+        }.execute();
+
 
     }
+
+
     ImageView selectedImageView = null;
     private void showSettingsBottomSheetDialog() {
-
-
-        // Inflate the layout for the BottomSheetDialog
         View bottomSheetView = getLayoutInflater().inflate(R.layout.avatar_bottomsheet, (ConstraintLayout) findViewById(R.id.setting_sheet));
 
         ImageView boy1 = bottomSheetView.findViewById(R.id.boy1);
@@ -213,14 +193,12 @@ public class SignUpPage extends AppCompatActivity {
 
         boy1.setOnClickListener(view -> {
             selectedImage = "boy1";
-
             if (selectedImageView != null) {
                 selectedImageView.setColorFilter(null);
             }
             selectedImageView = boy1;
             int highlightColor = Color.parseColor("#330000FF");
             boy1.setColorFilter(highlightColor);
-
         });
 
         boy2.setOnClickListener(view -> {
@@ -276,34 +254,13 @@ public class SignUpPage extends AppCompatActivity {
         signup.setOnClickListener(view -> {
             if(!selectedImage.isEmpty()) {
                 loadingDialog.startLoading();
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("StudentLogin").document(email)
-                        .get()
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document != null && document.exists()) {
-                                    Toast.makeText(this, "Account Already Exits", Toast.LENGTH_SHORT).show();
-
-                                } else {
-                                    // Input does not match database
-                                    checkAndDataToFireStore();
-                                    bottomSheetDialog.dismiss();
-                                }
-                            } else {
-                                // Error occurred while querying the database
-                                Toast.makeText(this, "Error occurred while logging in", Toast.LENGTH_SHORT).show();
-                            }
-                            loadingDialog.stopLoading();
-                        });
-
+                checkAndDataToFireStore();
+                bottomSheetDialog.dismiss();
             }else{
                 Toast.makeText(this, "Choose any Avatar", Toast.LENGTH_SHORT).show();
             }
         });
 
-
-        // Create the BottomSheetDialog
         bottomSheetDialog = new BottomSheetDialog(SignUpPage.this,R.style.AppBottomSheetDialogTheme);
         bottomSheetDialog.setContentView(bottomSheetView);
         bottomSheetDialog.show();

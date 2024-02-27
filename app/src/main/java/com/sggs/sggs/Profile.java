@@ -49,7 +49,7 @@ public class Profile extends AppCompatActivity {
             preferences.putString("division","");
             preferences.putString("semester","");
             preferences.apply();
-            Intent intent = new Intent(Profile.this, GoogleLoginPage.class);
+            Intent intent = new Intent(Profile.this, LoginPage.class);
             startActivity(intent);
             finish();
 

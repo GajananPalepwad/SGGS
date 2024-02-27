@@ -85,7 +85,7 @@ public class HomeForStudents extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(HomeForStudents.this, "SIGN OUT SUCCESSFUL", Toast.LENGTH_SHORT).show();
                 finish();
-                startActivity(new Intent(HomeForStudents.this,GoogleLoginPage.class));
+                startActivity(new Intent(HomeForStudents.this, LoginPage.class));
             }
         });
 

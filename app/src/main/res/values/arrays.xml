@@ -15,7 +15,8 @@
         <item>ESC-102 Engineering Graphics and Design</item>
         <item>AES-102 Professional Communication</item>
         <item>IKS-102 Introduction to Indian Knowledge System</item>
-        <item>CC-102 (A) Photography (B) Dtamatics</item>
+        <item>CC-102 (A) Photography</item>
+        <item>CC-102 (B) Dramatics</item>
 
 
 <!--            FY Chemical-->
@@ -26,16 +27,16 @@
 
 
 <!--            FY Electrical, ExTC, Instrumentation-->
-            <item>PCC-EC/IN/EE-102 Basic Electronics</item>
+            <item>PCC-EC-IN-EE-102 Basic Electronics</item>
 
 <!--            FY IT and CSE-->
-            <item>PCC-IT/CS-102 Computer fundamentals</item>
+            <item>PCC-IT-CS-102 Computer fundamentals</item>
 
 <!--            FY Mechanical-->
-            <item>PCC-ME/PE-102 Elements of Mechanical and Production Engineering</item>
+            <item>PCC-ME-PE-102 Elements of Mechanical and Production Engineering</item>
 
 <!--            FY Production-->
-            <item>PCC-ME/PE-102 Elements of Mechanical and Production Engineering</item>
+            <item>PCC-ME-PE-102 Elements of Mechanical and Production Engineering</item>
 
 <!--            FY Textile-->
             <item>PCC-TT-102 Basics of Textile and Garment Manufacturing</item>
@@ -179,7 +180,7 @@
             <item>PCC-TT206 Fabric Forming Technology – II</item>
             <item>PCC-TT207 Textile Testing – II</item>
             <item>PCC-TT208 Textile Wet Processing - II</item>
-            <item>SII-TT209 Winter/Summer Internship</item>
+            <item>SII-TT209 Winter-Summer Internship</item>
 
 <!--            TY Chemical-->
             <item>PCC-CH301 Mass Transfer-II</item>
@@ -381,7 +382,7 @@
             <item>PCC-TT304 Spun Yarn Technology - III</item>
             <item>PCC-TT305 Post Spinning and Texturing</item>
             <item>HMC-391 Costing and Financial Management</item>
-            <item>SII-TT306 Winter/Summer Internship</item>
+            <item>SII-TT306 Winter-Summer Internship</item>
             <item>PEC-TT307 Fibres for Composites</item>
             <item>PEC-TT308 Theory of Textile Structures</item>
             <item>PEC-TT307 Fibres for Composites</item>

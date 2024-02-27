@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">SGGS Student</string>
+    <string name="api_link">https://sggsapp.co.in/api/</string>
     <string name="fcmServerKey" translatable="false">AAAAvLK0Qiw:APA91bFDbMv8EPeoirrkrbzGZWbAaLm165Re-NVW2oKIqUJb1qWjQ0G5YJtaSWOc8rwnIm_E5ZB_zcV2Ge_JuLkpQwo9WirmBcRfYhOBpGGzLWe3HpPW16WFub2E54MTFv0S8e0Sc_6U</string>
     <string name="title_activity_login_for_teacher">LoginForTeacher</string>
     <string name="prompt_email">Email</string>
@@ -12,4 +13,5 @@
     <string name="login_failed">"Login failed"</string>
     <string name="scanner_banner_ad">"ca-app-pub-9690208356370050/8841572922"</string>
     <string name="branch">"Branch"</string>
+    <string name="verify">Verify</string>
 </resources>
