@@ -52,7 +52,7 @@
             android:name=".Profile"
             android:exported="false" />
         <activity
-            android:name=".CourseSelecter"
+            android:name=".AttendanceCalender"
             android:exported="false" />
         <activity
             android:name=".BackLogResult"

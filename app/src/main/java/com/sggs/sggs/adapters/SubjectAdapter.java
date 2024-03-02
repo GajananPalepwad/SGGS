@@ -1,6 +1,7 @@
 package com.sggs.sggs.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sggs.sggs.AttendanceCalender;
 import com.sggs.sggs.R;
 import com.sggs.sggs.model.SubjectModel;
 
@@ -69,7 +71,10 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
             if (position != RecyclerView.NO_POSITION) {
                 // Perform the desired action for the clicked item
                 SubjectModel subject = subjectList.get(position);
-                showConfirmationDialog(subject.getSubjectName());
+//                showConfirmationDialog(subject.getSubjectName());
+                Intent intent = new Intent(context, AttendanceCalender.class);
+                intent.putExtra("sub", subject.getSubjectName());
+                context.startActivity(intent);
             }
         }
 
@@ -115,7 +120,7 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
 
         String abbreviation = result.toString();
 
-        holder.subject.setText(abbreviation);
+        holder.subject.setText(subName);
 
         holder.marks.setText(String.valueOf(subject.getMarks() + "%"));
         holder.progressBar.setProgress(subject.getMarks());

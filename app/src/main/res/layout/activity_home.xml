@@ -166,33 +166,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/BTNeditSub"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView10"
-                    app:srcCompat="@drawable/edit_ic" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/addCourseBtn"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/textviewbackground"
-                    android:backgroundTint="#0E2146"
-                    android:elevation="7dp"
-                    android:text="Add Program"
-                    android:visibility="gone"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/recyclerView"
-                    app:layout_constraintStart_toStartOf="@+id/recyclerView"
-                    app:layout_constraintTop_toTopOf="@+id/recyclerView" />
 
                 <TextView
+                    android:id="@+id/addCourseBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#0E2146"

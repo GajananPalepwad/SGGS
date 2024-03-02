@@ -6,13 +6,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,19 +27,29 @@ import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.sggs.sggs.adapters.SubjectAdapter;
 import com.sggs.sggs.loadingAnimation.LoadingDialog;
 import com.sggs.sggs.model.SubjectModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class Home extends AppCompatActivity {
 
-    Button addCourse;
+    TextView addCourse;
     TextView name, tvReg;
-    ImageView profile, notificationBtn, btnEditCourse;
+    ImageView profile, notificationBtn;
     String personEmail;
     GoogleSignInClient gsc;
     GoogleSignInOptions gso;
@@ -50,18 +61,19 @@ public class Home extends AppCompatActivity {
     CardView notes, examSection, timeTable, events, calendar, qBank;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor preferences;
-    int numberOfSubject=0;
+    int numberOfSubject = 0;
+    static String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         subjectList = new ArrayList<>();
-        loadingDialog  = new LoadingDialog(this);
+        loadingDialog = new LoadingDialog(this);
         loadingDialog.startLoading();
 
 
-        sharedPreferences = getSharedPreferences("LoginData",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("LoginData", MODE_PRIVATE);
         preferences = sharedPreferences.edit();
 
         notes = findViewById(R.id.notes);
@@ -70,7 +82,6 @@ public class Home extends AppCompatActivity {
         profile = findViewById(R.id.profile);
         recyclerView = findViewById(R.id.recyclerView);
         notificationBtn = findViewById(R.id.notificationBtn);
-        btnEditCourse = findViewById(R.id.BTNeditSub);
         addCourse = findViewById(R.id.addCourseBtn);
         timeTable = findViewById(R.id.classTime);
         examSection = findViewById(R.id.examSection);
@@ -79,16 +90,14 @@ public class Home extends AppCompatActivity {
         qBank = findViewById(R.id.Qbank);
 
 
-        btnEditCourse.setVisibility(View.GONE);
         checkForAppUpdate();
 
-
-
-        String personName = sharedPreferences.getString("fullName","");
-        personEmail = sharedPreferences.getString("email","");
+        id = sharedPreferences.getString("regNum", "");
+        String personName = sharedPreferences.getString("fullName", "");
+        personEmail = sharedPreferences.getString("email", "");
         name.setText(personName);
-        tvReg.setText(sharedPreferences.getString("regNum",""));
-        int selectedImageResource = getResources().getIdentifier(sharedPreferences.getString("img",""), "drawable", getPackageName());
+        tvReg.setText(sharedPreferences.getString("regNum", ""));
+        int selectedImageResource = getResources().getIdentifier(sharedPreferences.getString("img", ""), "drawable", getPackageName());
         profile.setImageResource(selectedImageResource);
 
 
@@ -99,14 +108,10 @@ public class Home extends AppCompatActivity {
 
 
         addCourse.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, CourseSelecter.class);
+            Intent intent = new Intent(Home.this, AttendanceCalender.class);
             startActivity(intent);
         });
 
-        btnEditCourse.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, EditCourse.class);
-            startActivity(intent);
-        });
 
         notes.setOnClickListener(v -> {
 //            Intent intent = new Intent(Home.this, NotesSubjectList.class);
@@ -152,64 +157,80 @@ public class Home extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        if(numberOfSubject==0){
+        if (numberOfSubject == 0) {
             loadSubjectAttendance();
 
         }
     }
 
-    private void loadSubjectAttendance(){
+    @SuppressLint("StaticFieldLeak")
+    private void loadSubjectAttendance() {
 
 
         adapter = new SubjectAdapter(subjectList, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        try {
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... voids) {
+                try {
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .build();
+                    MediaType mediaType = MediaType.parse("text/plain");
+                    RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                            .addFormDataPart("reg_no", sharedPreferences.getString("regNum", ""))
+                            .addFormDataPart("academic_year", sharedPreferences.getString("academicYear", ""))
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(getString(R.string.api_link) + "get_subject_and_pre.php")
+                            .method("POST", body)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    return response.body().string();
 
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("Students")
-//                    .document(sharedPreferences.getString("branch",""))
-//                    .collection(sharedPreferences.getString("year",""))
-//                    .document(sharedPreferences.getString("division",""))
-//                    .collection(sharedPreferences.getString("regNum",""))
-                    .document(sharedPreferences.getString("regNum","").trim())
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
 
+            @Override
+            protected void onPostExecute(String result) {
+                if (result != null) {
 
-                    .get()
-                    .addOnSuccessListener(documentSnapshot -> {
-                        if (documentSnapshot.exists()) {
-                            Map<String, Object> documentData = documentSnapshot.getData();
+                    JSONArray jsonArray = null;
+                    try {
+                        jsonArray = new JSONArray(result);
 
-                            // Access the data in the document
-                            for (Map.Entry<String, Object> entry : documentData.entrySet()) {
-                                String key = entry.getKey();
-                                String value = entry.getValue().toString();
-                                int v = Integer.parseInt(value);
-                                subjectList.add(new SubjectModel(key, v));
+                        for (int i = 0; i < jsonArray.length(); i++) {
 
-                            }
-                            if(subjectList.size()!=0){
-                                addCourse.setVisibility(View.GONE);
-                                btnEditCourse.setVisibility(View.VISIBLE);
-                            }
-                            numberOfSubject = adapter.getItemCount();
-                            loadingDialog.stopLoading();
-                            adapter.notifyDataSetChanged();
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                        } else {
-                            loadingDialog.stopLoading();
+                            String subject = jsonObject.getString("subject");
+                            String percentage = jsonObject.getString("percentage");
+                            subjectList.add(new SubjectModel(subject, (int) Double.parseDouble(percentage)));
+
                         }
 
-                    })
-                    .addOnFailureListener(e -> {
+                        if (subjectList.size() != 0) {
+                            addCourse.setVisibility(View.GONE);
+                        }
+                        numberOfSubject = adapter.getItemCount();
                         loadingDialog.stopLoading();
-                        Toast.makeText(Home.this, "Error getting document" + e, Toast.LENGTH_SHORT).show();
-                    });
+                        adapter.notifyDataSetChanged();
 
-        }catch (Exception ignored){
-            loadingDialog.stopLoading();
-        }
+                    } catch (JSONException e) {
+                        loadingDialog.stopLoading();
+                    }
+                } else {
+                    loadingDialog.stopLoading();
+                }
+            }
+        }.execute();
+
+
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -219,19 +240,19 @@ public class Home extends AppCompatActivity {
 
     }
 
-    public void web(View view){
+    public void web(View view) {
         Uri uri = Uri.parse("https://swagdev.vercel.app/");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
 
 
-    public void logout(View view){
+    public void logout(View view) {
         signOut();
     }
 
 
-    public void signOut(){
+    public void signOut() {
         gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -244,7 +265,7 @@ public class Home extends AppCompatActivity {
     }
 
 
-    private void checkForAppUpdate(){
+    private void checkForAppUpdate() {
         AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
 
 // Returns an intent object that you use to check for an update.
@@ -270,8 +291,8 @@ public class Home extends AppCompatActivity {
                 } catch (IntentSender.SendIntentException e) {
                     throw new RuntimeException(e);
                 }
-            }else{
-              //  Toast.makeText(this, "NOT", Toast.LENGTH_SHORT).show();
+            } else {
+                //  Toast.makeText(this, "NOT", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.sggs.sggs.CourseSelecter;
+import com.sggs.sggs.AttendanceCalender;
 import com.sggs.sggs.R;
 
 import java.util.List;
@@ -60,7 +60,7 @@ public class SelectSubjectAdapter extends RecyclerView.Adapter<SelectSubjectAdap
                     // Check if the position is valid
                     if (position != RecyclerView.NO_POSITION) {
                         // Remove the item from the subjects list
-                        CourseSelecter.subjects.remove(position);
+//                        AttendanceCalender.subjects.remove(position);
 
                         // Notify the adapter about the item removal
                         notifyItemRemoved(position);

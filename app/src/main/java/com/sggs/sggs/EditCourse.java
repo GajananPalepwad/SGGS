@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,10 +17,7 @@ import android.widget.Toast;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sggs.sggs.adapters.EditSubjectAdapter;
-import com.sggs.sggs.adapters.SelectSubjectAdapter;
-import com.sggs.sggs.adapters.SubjectAdapter;
 import com.sggs.sggs.loadingAnimation.LoadingDialog;
-import com.sggs.sggs.model.SubjectModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -228,7 +224,7 @@ public class EditCourse extends AppCompatActivity {
         builder.setMessage("By doing this current course will delete for permanent\nDo you want to do that?");
 
         builder.setPositiveButton("Yes", (dialog, which) -> {
-            Intent intent = new Intent(EditCourse.this, CourseSelecter.class);
+            Intent intent = new Intent(EditCourse.this, AttendanceCalender.class);
             startActivity(intent);
             finish();
         });
