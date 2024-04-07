@@ -6,6 +6,8 @@ import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -78,19 +80,6 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
             }
         }
 
-        private void showConfirmationDialog(String subject) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle(subject);
-
-            builder.setPositiveButton("Ok", (dialog, which) -> {
-                // Call the logout function
-                dialog.dismiss();
-            });
-
-
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }
 
     }
 
@@ -131,6 +120,8 @@ public class SubjectAdapter extends RecyclerView.Adapter<SubjectAdapter.ViewHold
         int color = ContextCompat.getColor(context, colorResId);
 
         holder.card.setBackgroundTintList(ColorStateList.valueOf(color));
+
+        holder.subject.setSelected(true);
 
     }
 

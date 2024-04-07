@@ -160,7 +160,7 @@ public class LoginPage extends AppCompatActivity {
                         preferences.putString("year", "TY");
                         preferences.putString("division", "A");
                         preferences.putString("semester", "sem");
-                        preferences.putString("academicYear", "2023-2024");
+                        preferences.putString("academicYear", getString(R.string.academic_year));
                         preferences.apply();
 //                                sendNotification();
 //                                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();

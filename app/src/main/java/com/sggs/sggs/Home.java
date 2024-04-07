@@ -52,7 +52,6 @@ public class Home extends AppCompatActivity {
     ImageView profile, notificationBtn;
     String personEmail;
     GoogleSignInClient gsc;
-    GoogleSignInOptions gso;
     RecyclerView recyclerView;
     ArrayList<SubjectModel> subjectList;
     SubjectAdapter adapter;
@@ -103,12 +102,6 @@ public class Home extends AppCompatActivity {
 
         profile.setOnClickListener(v -> {
             Intent intent = new Intent(Home.this, Profile.class);
-            startActivity(intent);
-        });
-
-
-        addCourse.setOnClickListener(v -> {
-            Intent intent = new Intent(Home.this, AttendanceCalender.class);
             startActivity(intent);
         });
 
@@ -179,8 +172,8 @@ public class Home extends AppCompatActivity {
                             .build();
                     MediaType mediaType = MediaType.parse("text/plain");
                     RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                            .addFormDataPart("reg_no", sharedPreferences.getString("regNum", ""))
-                            .addFormDataPart("academic_year", sharedPreferences.getString("academicYear", ""))
+                            .addFormDataPart("reg_no", id)
+                            .addFormDataPart("academic_year", getString(R.string.academic_year))
                             .build();
                     Request request = new Request.Builder()
                             .url(getString(R.string.api_link) + "get_subject_and_pre.php")
@@ -246,66 +239,35 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-    public void logout(View view) {
-        signOut();
-    }
-
-
-    public void signOut() {
-        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(Home.this, "SIGN OUT SUCCESSFUL", Toast.LENGTH_SHORT).show();
-                finish();
-                startActivity(new Intent(Home.this, LoginPage.class));
-            }
-        });
-
-    }
-
-
     private void checkForAppUpdate() {
         AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
 
-// Returns an intent object that you use to check for an update.
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
-// Checks that the platform will allow the specified type of update.
         appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    // This example applies an immediate update. To apply a flexible update
-                    // instead, pass in AppUpdateType.FLEXIBLE
+
                     && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                // Request the update.
                 try {
                     appUpdateManager.startUpdateFlowForResult(
-                            // Pass the intent that is returned by 'getAppUpdateInfo()'.
                             appUpdateInfo,
-                            // an activity result launcher registered via registerForActivityResult
                             AppUpdateType.IMMEDIATE,
-                            // Or pass 'AppUpdateType.FLEXIBLE' to newBuilder() for
                             this,
-                            // flexible updates.
                             MY_REQUEST_CODE);
                 } catch (IntentSender.SendIntentException e) {
                     throw new RuntimeException(e);
                 }
             } else {
-                //  Toast.makeText(this, "NOT", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // handle callback
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode != MY_REQUEST_CODE) {
             if (resultCode != RESULT_OK) {
                 Toast.makeText(this, requestCode + "\n" + resultCode, Toast.LENGTH_SHORT).show();
-                // If the update is cancelled or fails,
-                // you can request to start the update again.
             }
         }
     }

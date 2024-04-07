@@ -96,7 +96,7 @@
         android:adjustViewBounds="true"
         android:background="@drawable/topcornerround"
         android:clipToOutline="true"
-        android:elevation="10dp"
+        android:elevation="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

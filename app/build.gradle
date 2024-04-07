@@ -91,9 +91,9 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
 
     implementation("com.github.MdFarhanRaja:SearchableSpinner:2.0")
+    implementation 'com.applandeo:material-calendar-view:1.9.0-rc04'// not worked
 
-
-
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
 }
 
 

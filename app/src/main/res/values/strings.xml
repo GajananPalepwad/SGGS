@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SGGS Student</string>
     <string name="api_link">https://sggsapp.co.in/api/</string>
+    <string name="academic_year">2023-2024</string>
     <string name="fcmServerKey" translatable="false">AAAAvLK0Qiw:APA91bFDbMv8EPeoirrkrbzGZWbAaLm165Re-NVW2oKIqUJb1qWjQ0G5YJtaSWOc8rwnIm_E5ZB_zcV2Ge_JuLkpQwo9WirmBcRfYhOBpGGzLWe3HpPW16WFub2E54MTFv0S8e0Sc_6U</string>
     <string name="title_activity_login_for_teacher">LoginForTeacher</string>
     <string name="prompt_email">Email</string>

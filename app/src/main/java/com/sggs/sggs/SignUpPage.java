@@ -1,45 +1,31 @@
 package com.sggs.sggs;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.app.Dialog;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.chaos.view.PinView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.sggs.sggs.loadingAnimation.LoadingDialog;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.MediaType;
@@ -52,7 +38,7 @@ import okhttp3.Response;
 public class SignUpPage extends AppCompatActivity {
     EditText ETemail;
     Button continueBtn;
-    String fullname ;
+    String fullname , otp;
     String email;
     String regnum;
     String mobileNum;
@@ -125,7 +111,8 @@ public class SignUpPage extends AppCompatActivity {
 
 
     @SuppressLint("StaticFieldLeak")
-    private void checkAndDataToFireStore(){
+    private void checkAndAddDataToDB(){
+        loadingDialog.startLoading();
 
         new AsyncTask<Void, Void, String>() {
             @Override
@@ -140,7 +127,7 @@ public class SignUpPage extends AppCompatActivity {
                             .addFormDataPart("reg_id",regnum.trim().toUpperCase())
                             .addFormDataPart("mobile_no",mobileNum.trim())
                             .addFormDataPart("password",password.trim())
-                            .addFormDataPart("Image",selectedImage)
+                            .addFormDataPart("image",selectedImage)
                             .build();
                     Request request = new Request.Builder()
                             .url(getString(R.string.api_link)+"register.php")
@@ -162,7 +149,7 @@ public class SignUpPage extends AppCompatActivity {
                     JsonObject jsonObject = gson.fromJson(result, JsonObject.class);
 
                     String status = jsonObject.get("Status").getAsString();
-                    String message = jsonObject.get("message").getAsString();
+                    String message = jsonObject.get("Message").getAsString();
 
                     Toast.makeText(SignUpPage.this, message, Toast.LENGTH_SHORT).show();
                     loadingDialog.stopLoading();
@@ -253,8 +240,7 @@ public class SignUpPage extends AppCompatActivity {
 
         signup.setOnClickListener(view -> {
             if(!selectedImage.isEmpty()) {
-                loadingDialog.startLoading();
-                checkAndDataToFireStore();
+                otpPopup();
                 bottomSheetDialog.dismiss();
             }else{
                 Toast.makeText(this, "Choose any Avatar", Toast.LENGTH_SHORT).show();
@@ -266,6 +252,88 @@ public class SignUpPage extends AppCompatActivity {
         bottomSheetDialog.show();
     }
 
+    Dialog dialog;
+    public void otpPopup(){
+        sendEmailOTP();
+        dialog = new Dialog(this, R.style.AppBottomSheetDialogTheme);
+        dialog.setContentView(R.layout.otp_popup);
+
+        PinView tvOtp = dialog.findViewById(R.id.tvOtp);
+        Button btnVerify = dialog.findViewById(R.id.verify);
+        TextView btnResend = dialog.findViewById(R.id.resendOTP);
+
+        btnResend.setOnClickListener(view1 -> {
+            if(!email.isEmpty()) {
+                sendEmailOTP();
+            } else {
+                Toast.makeText(this, "Please fill the email box", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnVerify.setOnClickListener(view1 -> {
+            String otpEntered = tvOtp.getText().toString();
+            if(otpEntered.equals(otp)) {
+                checkAndAddDataToDB();
+            } else {
+                Toast.makeText(this, "Please enter valid OTP", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.setCancelable(true);
+        dialog.show();
+
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    private void sendEmailOTP() {
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... voids) {
+                try {
+
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .build();
+                    MediaType mediaType = MediaType.parse("text/plain");
+                    RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                            .addFormDataPart("email_id", email)
+                            .build();
+                    Request request = new Request.Builder()
+                            .url(getString(R.string.api_link)+"otp_sender.php")
+                            .method("POST", body)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    return response.body().string();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                if (result != null) {
+                    // Handle the result and update UI
+
+                    Gson gson = new Gson();
+                    Map<String, Object> jsonObject = gson.fromJson(result, Map.class);
+
+                    if(jsonObject.get("Error").toString().equals("200")){
+                        otp = jsonObject.get("OTP").toString();
+                        Toast.makeText(SignUpPage.this, jsonObject.get("Message").toString(), Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(SignUpPage.this, jsonObject.get("Message").toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    // Handle the error
+
+                }
+            }
+        }.execute();
+
+    }
 
 
 }
