@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,8 +17,6 @@ import com.sggs.sggs.model.AdmitCardModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AdmitCardAdapter extends RecyclerView.Adapter<AdmitCardAdapter.ViewHolder> {
 
@@ -49,7 +46,7 @@ public class AdmitCardAdapter extends RecyclerView.Adapter<AdmitCardAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admit_card_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admit_card_item, parent, false);
         return new ViewHolder(view);
     }
 

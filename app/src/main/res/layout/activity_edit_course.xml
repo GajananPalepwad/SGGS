@@ -187,7 +187,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="20dp"
                     android:textColor="@color/black"
-                    android:text="2023-2024"/>
+                    android:text="@string/academic_year"/>
             </androidx.cardview.widget.CardView>
 
 
