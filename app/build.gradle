@@ -13,14 +13,14 @@ android {
         }
     }
     namespace 'com.sggs.sggs'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.sggs.sggs"
         minSdk 24
-        targetSdk 33
-        versionCode 21
-        versionName "2.7"
+        targetSdk 34
+        versionCode 23
+        versionName "2.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

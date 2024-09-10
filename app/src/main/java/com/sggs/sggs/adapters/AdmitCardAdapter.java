@@ -67,7 +67,9 @@ public class AdmitCardAdapter extends RecyclerView.Adapter<AdmitCardAdapter.View
         }
 
 
-        if(subString.charAt(0) == 's' && subString.charAt(1) == 'u' && subString.charAt(2) == 'b'){
+//        if(subString.charAt(0) == 's' && subString.charAt(1) == 'u' && subString.charAt(2) == 'b'){
+
+        try {
 
             String input = model.getValue();
 
@@ -76,13 +78,13 @@ public class AdmitCardAdapter extends RecyclerView.Adapter<AdmitCardAdapter.View
                 String year = input.substring(0, input.indexOf('-')).trim();
                 String courseCode = input.substring(input.indexOf('-') + 1, input.indexOf(':')).trim();
                 String subjectString = input.substring(input.indexOf(':') + 1, input.indexOf('(')).trim();
-                String theory = input.substring(input.indexOf('(') + 1, input.indexOf('/')).trim();
-                String practical = input.substring(input.indexOf('/') + 1, input.lastIndexOf(')')).trim();
+//                String theory = input.substring(input.indexOf('(') + 1, input.indexOf('/')).trim();
+//                String practical = input.substring(input.indexOf('/') + 1, input.lastIndexOf(')')).trim();
 
                 holder.subCode.setText(courseCode);
                 holder.subject.setText(subjectString);
-                holder.th.setText(theory);
-                holder.pr.setText(practical);
+                holder.th.setText("--");
+                holder.pr.setText("--");
 
 
                 int colorResId = colorList.get(position % colorList.size());
@@ -95,8 +97,8 @@ public class AdmitCardAdapter extends RecyclerView.Adapter<AdmitCardAdapter.View
 
             }
 
+        }catch (Exception e){
 
-        }else {
             ViewGroup.LayoutParams layoutParams = holder.card.getLayoutParams();
             layoutParams.height = 0;
             holder.card.setLayoutParams(layoutParams);
@@ -105,8 +107,20 @@ public class AdmitCardAdapter extends RecyclerView.Adapter<AdmitCardAdapter.View
             layoutParams1.topMargin = 0;
             layoutParams1.bottomMargin = 0;
             holder.card.setLayoutParams(layoutParams1);
-
         }
+
+
+//        }else {
+//            ViewGroup.LayoutParams layoutParams = holder.card.getLayoutParams();
+//            layoutParams.height = 0;
+//            holder.card.setLayoutParams(layoutParams);
+//
+//            ViewGroup.MarginLayoutParams layoutParams1 = (ViewGroup.MarginLayoutParams) holder.card.getLayoutParams();
+//            layoutParams1.topMargin = 0;
+//            layoutParams1.bottomMargin = 0;
+//            holder.card.setLayoutParams(layoutParams1);
+//
+//        }
 
     }
 
